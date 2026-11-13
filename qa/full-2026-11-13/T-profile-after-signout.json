@@ -1,0 +1,14 @@
+{
+  "label": "T-profile-after-signout",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/user/profile",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59be68a1e964e7c-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:38.159345+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

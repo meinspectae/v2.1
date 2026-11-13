@@ -1,0 +1,14 @@
+{
+  "label": "route-19",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/upload/pdf",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd93c8925cb90-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.263125+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

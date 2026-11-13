@@ -1,0 +1,14 @@
+{
+  "label": "T-admin-post-set-tester",
+  "actor": "T",
+  "method": "POST",
+  "path": "/api/admin/set-tester",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf6a6b4d2d7c-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:55.682096+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

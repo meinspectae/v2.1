@@ -1,0 +1,14 @@
+{
+  "label": "route-47",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/notifications/welcome",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd942986c5f03-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:34.219828+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

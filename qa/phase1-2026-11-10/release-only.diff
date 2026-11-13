@@ -1,0 +1,12 @@
+--- package.json (before)
++++ package.json (after)
+@@ devDependencies @@
+-    "@edgespark/cli": "0.0.23",
++    "@edgespark/cli": "0.0.12",
+--- backend/package.json (before)
++++ backend/package.json (after release-only repair)
+@@ devDependencies @@
++    "@edgespark/cli": "0.0.12",
+
+Entry exports and wrangler.toml: unchanged for release repair
+Root/backend lockfiles pinned consistently

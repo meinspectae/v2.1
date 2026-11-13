@@ -1,0 +1,18 @@
+{
+  "label": "tester-checkout",
+  "actor": "T",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf746fcb96ba-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:57.591015+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "tester_1794551637256_0sk1sbcxkh3",
+    "orderId": 89,
+    "status": "paid",
+    "message": "Tester payment processed successfully (Free)"
+  }
+}

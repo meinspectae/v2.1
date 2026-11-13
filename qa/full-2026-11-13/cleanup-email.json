@@ -1,0 +1,14 @@
+{
+  "label": "cleanup-email",
+  "actor": "B",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261113-email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be66ad91eaee3-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:33.450676+00:00",
+  "response": {
+    "success": true
+  }
+}

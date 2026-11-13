@@ -1,0 +1,11 @@
+{
+  "source": "Nov 10 live Email Report request capture",
+  "sha256": "80469bd44f7c5a6094ea3ff3e001ac7a54cb8f86e90c8077121fffe4b70d51e8",
+  "format": [
+    "html",
+    "subject",
+    "to"
+  ],
+  "recipientCount": 1,
+  "note": "Historical captured request replay; not fresh browser/device acceptance. Signed PDF link may have expired."
+}

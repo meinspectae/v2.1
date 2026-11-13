@@ -1,0 +1,14 @@
+{
+  "label": "final-delete",
+  "actor": "N",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261113-final",
+  "status": 409,
+  "requestId": null,
+  "cfRay": "a59bd06b2f7c148b-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:45:32.179785+00:00",
+  "response": {
+    "error": "Paid or finalised inspections cannot be deleted. Keep the report for your records."
+  }
+}

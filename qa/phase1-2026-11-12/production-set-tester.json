@@ -1,0 +1,13 @@
+{
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/admin/set-tester",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a5949390dcc8d82e-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:39 GMT",
+  "observedAt": "2026-11-12T09:40:39.318975+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

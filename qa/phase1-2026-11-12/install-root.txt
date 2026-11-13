@@ -1,0 +1,87 @@
+Seeded pnpm store into /cache/pnpm-store
+Lockfile is up to date, resolution step is skipped
+
+   ╭──────────────────────────────────────────╮
+   │                                          │
+   │   Update available! 10.33.0 → 12.18.0.   │
+   │   Changelog: https://pnpm.io/v/12.18.0   │
+   │     To update, run: pnpm add -g pnpm     │
+   │                                          │
+   ╰──────────────────────────────────────────╯
+
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +591
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 591, reused 105, downloaded 38, added 10
+Progress: resolved 591, reused 105, downloaded 61, added 16
+Progress: resolved 591, reused 105, downloaded 61, added 17
+Progress: resolved 591, reused 105, downloaded 122, added 33
+Progress: resolved 591, reused 105, downloaded 142, added 38
+Progress: resolved 591, reused 105, downloaded 205, added 58
+Progress: resolved 591, reused 105, downloaded 336, added 106
+Progress: resolved 591, reused 105, downloaded 462, added 148
+Progress: resolved 591, reused 105, downloaded 486, added 214
+Progress: resolved 591, reused 105, downloaded 486, added 230
+Progress: resolved 591, reused 105, downloaded 486, added 247
+Progress: resolved 591, reused 105, downloaded 486, added 248
+Progress: resolved 591, reused 105, downloaded 486, added 454
+Progress: resolved 591, reused 105, downloaded 486, added 535
+Progress: resolved 591, reused 105, downloaded 486, added 568
+Progress: resolved 591, reused 105, downloaded 486, added 591, done
+
+dependencies:
++ @capacitor/android 8.5.3
++ @capacitor/app 8.1.0
++ @capacitor/browser 8.0.4
++ @capacitor/camera 8.2.0
++ @capacitor/cli 8.5.3
++ @capacitor/core 8.5.3
++ @capacitor/filesystem 8.1.2
++ @capacitor/geolocation 8.2.0
++ @capacitor/ios 8.5.3
++ @capacitor/share 8.0.1
++ @capacitor/splash-screen 8.0.1
++ @capacitor/status-bar 8.0.2
++ @edgespark/client 1.0.4
++ @fontsource/noto-naskh-arabic 5.3.0
++ @headlessui/react 1.7.19
++ @jsquash/jpeg 1.6.0
++ @revenuecat/purchases-capacitor 13.4.0
++ clsx 2.1.1
++ framer-motion 11.18.2
++ html2canvas 1.4.1
++ html2pdf.js 0.14.0
++ jspdf 4.2.1
++ lucide-react 0.533.0
++ pdf-lib 1.17.1
++ qrcode 1.5.4
++ react 18.3.1
++ react-dom 18.3.1
++ react-router-dom 6.30.4
++ zustand 4.5.7
+
+devDependencies:
++ @capacitor/assets 3.0.5
++ @edgespark/cli 0.0.12
++ @types/node 24.13.2
++ @types/qrcode 1.5.6
++ @types/react 18.3.31
++ @types/react-dom 18.3.7
++ @vitejs/plugin-react 4.7.0
++ @youware/vite-plugin-react 1.0.3
++ autoprefixer 10.5.2
++ postcss 8.5.16
++ sharp 0.35.3
++ tailwindcss 3.4.19
++ typescript 5.8.3
++ vite 7.3.6
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: core-js@3.49.0, esbuild@0.27.7, esbuild@0.28.1,     │
+│   sharp@0.32.6.                                                              │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 17.6s using pnpm v10.33.0

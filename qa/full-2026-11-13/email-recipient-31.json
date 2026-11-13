@@ -1,0 +1,14 @@
+{
+  "label": "email-recipient-31",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/send-email",
+  "status": 429,
+  "requestId": null,
+  "cfRay": "a59bcb598d6fefa4-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:42:04.686604+00:00",
+  "response": {
+    "error": "Email limit reached. You can send at most 30 emails per hour."
+  }
+}

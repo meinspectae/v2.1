@@ -1,0 +1,22 @@
+{
+  "noteLength": 5000,
+  "signatureCount": 3,
+  "photoCount": 3,
+  "photoDownloads": [
+    {
+      "id": "qa-1793778867-main-photo-1",
+      "status": "200",
+      "sha256Matches": true
+    },
+    {
+      "id": "qa-1793778867-main-photo-2",
+      "status": "200",
+      "sha256Matches": true
+    },
+    {
+      "id": "qa-1793778867-main-photo-3",
+      "status": "200",
+      "sha256Matches": true
+    }
+  ]
+}

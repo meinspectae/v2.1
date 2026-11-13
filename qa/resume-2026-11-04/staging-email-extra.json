@@ -1,0 +1,10 @@
+{
+  "status": 400,
+  "time": "2026-11-04T07:53:54.463389+00:00",
+  "date": "Wed, 04 Nov 2026 07:53:54 GMT",
+  "cfRay": "a5520c32cc11c4ac-PDX",
+  "requestId": null,
+  "body": {
+    "error": "inspectionId is required and is the only accepted field"
+  }
+}

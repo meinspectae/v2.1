@@ -1,0 +1,14 @@
+{
+  "label": "route-31",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/public/payments/client-error",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd93f4f0fd74d-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.694594+00:00",
+  "response": {
+    "received": true
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "label": "pay-invalid-expire",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout/cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS/expire",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf6f0f46147f-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:56.524111+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS",
+    "status": "expired",
+    "stripeRequestId": "req_EkEBKvtJUzfMm9"
+  }
+}

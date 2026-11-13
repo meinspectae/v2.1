@@ -1,0 +1,15 @@
+{
+  "label": "photo1-put",
+  "actor": "N",
+  "method": "PUT",
+  "path": "[signed storage URL]",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf7e89b1debd-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:59.164387+00:00",
+  "response": {
+    "nonJson": true,
+    "bytes": 0
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "cfRay": "a59bcd4fac511571-PDX",
+  "id": "qa-20261113-final",
+  "loadingStuck": true,
+  "paid": true,
+  "result": "FAIL",
+  "scope": "real staging through QA browser bridge",
+  "status": 200
+}

@@ -1,0 +1,67 @@
+{
+  "alerts": [],
+  "calls": [
+    {
+      "cfRay": "a59bcf52ec73817f-PDX",
+      "method": "PUT",
+      "path": "/api/inspections/qa-20261113-final",
+      "requestId": null,
+      "status": 200
+    },
+    {
+      "cfRay": "a59bcf555914c8da-PDX",
+      "method": "POST",
+      "path": "/api/upload/pdf",
+      "requestId": null,
+      "status": 200
+    },
+    {
+      "cfRay": "a59bcf552ebeb395-PDX",
+      "method": "PUT",
+      "path": "/api/inspections/qa-20261113-final",
+      "requestId": null,
+      "status": 200
+    },
+    {
+      "cfRay": "a59bcf5838b71509-PDX",
+      "method": "PUT",
+      "path": "/api/inspections/qa-20261113-final",
+      "requestId": null,
+      "status": 200
+    },
+    {
+      "cfRay": null,
+      "method": "PUT",
+      "path": "[storage]",
+      "requestId": null,
+      "status": 200
+    },
+    {
+      "cfRay": "a59bcf5ed9789314-PDX",
+      "method": "POST",
+      "path": "/api/inspections/qa-20261113-final/finalise",
+      "requestId": null,
+      "result": {
+        "contentHash": "0ea7f42773d3c24569cfc4e52439e0ef5f158a69519150ac8266332fdb371c82",
+        "path": "reports/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-final/final/qa-20261113-final-0ea7f42773d3c245-4d227fbb-1e9e-4a49-b97a-1c6fcdeb281f.pdf",
+        "pdfHash": "da61a14eb25390d26ca09a0c874a1309f1bd7872cf2976abe6861b4acc24b20f",
+        "reportId": "qa-20261113-final-0ea7f42773d3c245"
+      },
+      "status": 200
+    },
+    {
+      "cfRay": "a59bcf652be28f7a-PDX",
+      "method": "PUT",
+      "path": "/api/inspections/qa-20261113-final",
+      "requestId": null,
+      "status": 200
+    },
+    {
+      "cfRay": "a59bcf699ad63741-PDX",
+      "method": "PUT",
+      "path": "/api/inspections/qa-20261113-final",
+      "requestId": null,
+      "status": 200
+    }
+  ]
+}

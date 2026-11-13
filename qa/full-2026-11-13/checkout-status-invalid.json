@@ -1,0 +1,32 @@
+{
+  "label": "checkout-status-invalid",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/checkout/cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be4398d053e6d-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:03.538674+00:00",
+  "response": {
+    "data": {
+      "id": 88,
+      "environment": "staging",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "inspectionId": "qa-20261113-pay-invalid",
+      "priceId": null,
+      "amount": 199,
+      "currency": "AED",
+      "status": "pending",
+      "type": "one_time",
+      "provider": "stripe",
+      "providerSessionId": "cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS",
+      "providerPaymentId": null,
+      "discountCode": "QA_INVALID_20261113",
+      "discountAmount": 0,
+      "metadata": null,
+      "paidAt": null,
+      "createdAt": 1794551636
+    }
+  }
+}

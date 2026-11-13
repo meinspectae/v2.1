@@ -1,0 +1,29 @@
+{
+  "scope": "executed actual frontend email template in local harness",
+  "results": [
+    {
+      "payload": "<script>alert(1)</script>",
+      "result": "PASS"
+    },
+    {
+      "payload": "\"><img src=x onerror=alert(1)>",
+      "result": "PASS"
+    },
+    {
+      "payload": "{\"__proto__\":{\"x\":1}}",
+      "result": "PASS"
+    },
+    {
+      "payload": "5000 characters",
+      "result": "PASS"
+    },
+    {
+      "payload": "مرحبا بالعالم",
+      "result": "PASS"
+    },
+    {
+      "payload": "🏠🔑😀",
+      "result": "PASS"
+    }
+  ]
+}

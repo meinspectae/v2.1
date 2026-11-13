@@ -1,0 +1,14 @@
+{
+  "label": "C-auth-name",
+  "actor": "C",
+  "method": "POST",
+  "path": "/api/_es/auth/update-user",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbb72fec4cf48-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:31:13.384847+00:00",
+  "response": {
+    "status": true
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "reportSha256": "e77e2dec0ca99c318c5f1f69804df5206ad9762c34132d0818c2dc090d9101bf",
+  "summarySha256": "596c5401dc2318b84f0308ad4f95baa7b26a73b3814f3bb20bc6d30a22eb9091",
+  "sourceMatchesStaging": true,
+  "bundleMatchesStaging": true,
+  "schemaByteIdentical": true,
+  "privateArtifactsRemoved": true,
+  "published": false
+}

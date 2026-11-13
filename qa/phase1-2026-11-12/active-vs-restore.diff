@@ -1,0 +1,206 @@
+--- restore
++++ active
+@@ -68,6 +68,17 @@
+       return { paid: false, reportId, alreadyPaid: false };
+     }
+ 
++    const inspectionRows = await db.select().from(tables.inspections)
++      .where(eq(tables.inspections.id, reportId));
++    const inspection = inspectionRows[0];
++    if (!inspection) {
++      if (source === 'webhook') {
++        console.warn(`[PAYMENT_CONFIRM] source=webhook session=${session.id} report=${reportId} action=missing_report_acknowledged`);
++        return { paid: false, reportId, alreadyPaid: false };
++      }
++      throw new Error(`Report ${reportId} not found for Stripe session ${session.id}`);
++    }
++
+     const orderRows = await db.select().from(tables.orders)
+       .where(eq(tables.orders.providerSessionId, session.id));
+     const order = orderRows[0];
+@@ -76,10 +87,6 @@
+       throw new Error(`Stripe session ${session.id} report metadata does not match pending order`);
+     }
+ 
+-    const inspectionRows = await db.select().from(tables.inspections)
+-      .where(eq(tables.inspections.id, reportId));
+-    const inspection = inspectionRows[0];
+-    if (!inspection) throw new Error(`Report ${reportId} not found for Stripe session ${session.id}`);
+     if (order.userId !== inspection.userId) {
+       throw new Error(`Stripe session ${session.id} owner does not match report ${reportId}`);
+     }
+@@ -190,9 +197,9 @@
+   const app = new Hono();
+ 
+   // Register before every admin route, including routes declared in other sections.
+-  // Tester flags, emails, and the legacy users.is_admin column confer no access.
++  // Only the configured IDs or the existing server-managed admin flag grant access.
+   app.use('/api/admin/*', async (c, next) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     await next();
+   });
+ 
+@@ -1095,34 +1102,47 @@
+     // before charging Stripe.
+     if (freeCredits > 0) {
+       const sessionId = `credit_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+-      const order = await db.insert(tables.orders).values({
+-        environment: getEnv(),
+-        userId,
+-        inspectionId: inspectionId || null,
+-        amount: 0,
+-        currency,
+-        status: 'paid',
+-        paidAt: Math.floor(Date.now() / 1000),
+-        type: 'one_time',
+-        provider: 'admin_credit',
+-        providerSessionId: sessionId,
+-        discountCode: 'ADMIN_CREDIT',
+-        discountAmount: amount || 199,
+-      }).returning();
+-
+-      // Deduct one credit
+-      await db.update(tables.users)
+-        .set({ freeInspections: freeCredits - 1 })
+-        .where(eq(tables.users.id, userId));
+-
+-      console.log(`[CHECKOUT] Used 1 admin credit for user ${userId}. Remaining: ${freeCredits - 1}`);
+-
+-      // Mark inspection as paid immediately
+-      if (inspectionId) {
+-        await db.update(tables.inspections)
++      // D1 batches are atomic: debit, order and unlock commit together, or all
++      // roll back. The conditional debit is the sole credit-consumption authority.
++      // changes() in the immediately following INSERT refers to that debit,
++      // not an earlier SELECT or a value read into application memory.
++      const [debited, order, unlocked] = await db.batch([
++        db.update(tables.users)
++          .set({ freeInspections: sql`${tables.users.freeInspections} - 1` })
++          .where(and(
++            eq(tables.users.id, userId),
++            sql`${tables.users.freeInspections} > 0`,
++            sql`EXISTS (SELECT 1 FROM ${tables.inspections}
++              WHERE ${tables.inspections.id} = ${inspectionId}
++              AND ${tables.inspections.userId} = ${userId}
++              AND COALESCE(json_extract(CASE WHEN json_valid(${tables.inspections.paymentData}) THEN ${tables.inspections.paymentData} ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true'))`,
++            sql`NOT EXISTS (SELECT 1 FROM ${tables.orders}
++              WHERE ${tables.orders.inspectionId} = ${inspectionId} AND ${tables.orders.status} = 'paid')`
++          )).returning({ balance: tables.users.freeInspections }),
++        db.insert(tables.orders).select(sql`SELECT NULL, ${getEnv()}, ${userId}, ${inspectionId}, NULL,
++          0, ${currency}, 'paid', 'one_time', 'admin_credit', ${sessionId}, NULL,
++          'ADMIN_CREDIT', ${amount || 199}, NULL, ${Math.floor(Date.now() / 1000)}, ${Math.floor(Date.now() / 1000)}
++          WHERE changes() = 1`).returning(),
++        db.update(tables.inspections)
+           .set({ paymentData: JSON.stringify({ paid: true, sessionId, provider: 'admin_credit' }) })
+-          .where(eq(tables.inspections.id, inspectionId));
+-      }
++          .where(and(
++            eq(tables.inspections.id, inspectionId),
++            eq(tables.inspections.userId, userId),
++            sql`EXISTS (SELECT 1 FROM ${tables.orders} WHERE ${tables.orders.providerSessionId} = ${sessionId}
++              AND ${tables.orders.inspectionId} = ${inspectionId} AND ${tables.orders.userId} = ${userId})`
++          )).returning({ id: tables.inspections.id }),
++      ]);
++      if (debited.length !== 1) {
++        const latest = await requireOwnership(userId, inspectionId);
++        if (tryParse(latest?.paymentData)?.paid === true) {
++          return c.json({ success: true, status: 'paid', alreadyPaid: true });
++        }
++        return c.json({ error: 'No credit was used. Your credit balance or report access changed; refresh and try again.' }, 409);
++      }
++      if (order.length !== 1 || unlocked.length !== 1) {
++        throw new Error('Credit payment could not be confirmed');
++      }
++      console.log(`[CHECKOUT] Used 1 admin credit for user ${userId}. Remaining: ${debited[0].balance}`);
+ 
+       return c.json({
+         success: true,
+@@ -1401,7 +1421,7 @@
+   // caller-supplied list of successful Stripe sessions with authoritative
+   // report payment state; it never updates or refunds anything.
+   app.post('/api/admin/audit-stripe-unlocks', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     const { payments } = await c.req.json().catch(() => ({ payments: [] }));
+     if (!Array.isArray(payments) || payments.length > 1000) return c.json({ error: 'payments array required' }, 400);
+ 
+@@ -1792,19 +1812,23 @@
+       .filter(Boolean)
+   );
+ 
+-  const requireAdmin = (): boolean => {
++  const requireAdmin = async (): Promise<boolean> => {
+     const userId = auth.user?.id;
+-    return !!userId && adminUserIds().has(userId);
++    if (!userId) return false;
++    if (adminUserIds().has(userId)) return true;
++    const rows = await db.select({ isAdmin: tables.users.isAdmin }).from(tables.users)
++      .where(eq(tables.users.id, userId)).limit(1);
++    return rows[0]?.isAdmin === 1;
+   };
+ 
+-  app.get('/api/admin/access', (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++  app.get('/api/admin/access', async (c) => {
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     return c.json({ isAdmin: true });
+   });
+ 
+   // Create payment price
+   app.post('/api/admin/prices', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     
+     const { name, amount, currency = 'AED', type = 'one_time' } = await c.req.json();
+     const env = getEnv();
+@@ -1823,7 +1847,7 @@
+ 
+   // List payment prices
+   app.get('/api/admin/prices', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     
+     const env = getEnv();
+     const prices = await db.select().from(tables.paymentPrices)
+@@ -1833,7 +1857,7 @@
+ 
+   // Set user as tester
+   app.post('/api/admin/set-tester', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     
+     const { email, isTester } = await c.req.json();
+     await db.update(tables.users)
+@@ -1843,11 +1867,11 @@
+   });
+ 
+   // ==================== ADMIN CREDIT ENDPOINTS ====================
+-  // Admin access is session-based and restricted to ADMIN_USER_IDS.
++  // Admin access is session-based: ADMIN_USER_IDS or the existing is_admin flag.
+ 
+   // GET /api/admin/users — list all users with their free inspection credits
+   app.get('/api/admin/users', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     const q = c.req.query('q') || '';
+     let rows;
+     if (q) {
+@@ -1881,7 +1905,7 @@
+ 
+   // POST /api/admin/grant-credits — grant N free inspection credits to a user
+   app.post('/api/admin/grant-credits', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     const { email, count = 1 } = await c.req.json();
+     if (!email) return c.json({ error: 'email is required' }, 400);
+     const n = Math.max(1, Math.min(100, parseInt(count, 10) || 1));
+@@ -1908,7 +1932,7 @@
+ 
+   // POST /api/admin/revoke-credits — remove N credits from a user
+   app.post('/api/admin/revoke-credits', async (c) => {
+-    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    if (!await requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
+     const { email, count = 1 } = await c.req.json();
+     if (!email) return c.json({ error: 'email is required' }, 400);
+     const n = Math.max(1, parseInt(count, 10) || 1);

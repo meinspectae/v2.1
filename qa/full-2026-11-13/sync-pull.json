@@ -1,0 +1,460 @@
+{
+  "label": "sync-pull",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/sync/inspections",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be40debd0fef6-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:58:56.469924+00:00",
+  "response": {
+    "data": [
+      {
+        "id": "qa-20261113-pay-normal",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:48.265Z",
+        "updatedAt": "2026-11-13T06:33:48.265Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-pay-welcome20",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:49.831Z",
+        "updatedAt": "2026-11-13T06:33:49.831Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-main",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "Edited QA notes\n<script>alert(1)</script>\n\"><img src=x onerror=alert(1)>\n{\"__proto__\":{\"x\":1}}\nxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nمرحبا بالعالم\n🏠🔑😀",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:50.688Z",
+        "updatedAt": "2026-11-13T06:34:03.918Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "<script>alert(1)</script>",
+          "area": "\"><img src=x onerror=alert(1)>",
+          "city": "Dubai"
+        },
+        "tenant": {
+          "name": "{\"__proto__\":{\"x\":1}}",
+          "email": "delivered@resend.dev"
+        },
+        "landlord": {
+          "name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        },
+        "agent": {
+          "name": "مرحبا بالعالم🏠🔑😀"
+        },
+        "tenancy": {},
+        "rooms": [
+          {
+            "id": "room1",
+            "name": "QA Test Living room",
+            "overallComments": "QA notes",
+            "overallCondition": "good",
+            "items": [
+              {
+                "id": "item1",
+                "name": "Walls",
+                "condition": "fair",
+                "comments": "QA scuff",
+                "checked": true,
+                "photos": [
+                  {
+                    "id": "qa-20261113-photo1",
+                    "cloudPath": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo1.png",
+                    "url": "",
+                    "timestamp": "2026-11-13T06:32:00Z",
+                    "caption": "QA Test photo 1",
+                    "backupStatus": "backed_up"
+                  },
+                  {
+                    "id": "qa-20261113-photo2",
+                    "cloudPath": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo2.png",
+                    "url": "",
+                    "timestamp": "2026-11-13T06:32:00Z",
+                    "caption": "QA Test photo 2",
+                    "backupStatus": "backed_up"
+                  },
+                  {
+                    "id": "qa-20261113-photo3",
+                    "cloudPath": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo3.png",
+                    "url": "",
+                    "timestamp": "2026-11-13T06:32:00Z",
+                    "caption": "QA Test photo 3",
+                    "backupStatus": "backed_up"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "propertyItems": [],
+        "signatures": [
+          {
+            "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEElEQVR4nGMwStkCRwzEcQAQchShKUFvnAAAAABJRU5ErkJggg==",
+            "signedAt": "2026-11-13T06:32:00Z",
+            "role": "tenant",
+            "name": "QA Test tenant"
+          },
+          {
+            "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEElEQVR4nGNISdkCRwzEcQBk0hfB5ZJKtQAAAABJRU5ErkJggg==",
+            "signedAt": "2026-11-13T06:32:00Z",
+            "role": "landlord",
+            "name": "QA Test landlord"
+          },
+          {
+            "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEUlEQVR4nGOYlrIFjhiI4wAAuTIa4UvOaXIAAAAASUVORK5CYII=",
+            "signedAt": "2026-11-13T06:32:00Z",
+            "role": "inspector",
+            "name": "QA Test inspector"
+          }
+        ],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {
+          "meta": {
+            "inspectorName": "QA Test",
+            "inspectorEmail": ""
+          },
+          "utilityMeters": {
+            "electricity": {
+              "reading": "123.4"
+            },
+            "water": {
+              "reading": "0"
+            },
+            "gas": {
+              "reading": ""
+            }
+          },
+          "moveInReference": {
+            "keys": "2 keys",
+            "cards": "1 card",
+            "defects": "Old scratch",
+            "newDefects": "None"
+          }
+        }
+      },
+      {
+        "id": "qa-20261113-pay-launch50",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:51.282Z",
+        "updatedAt": "2026-11-13T06:33:51.282Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-pay-meinspect10",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:51.892Z",
+        "updatedAt": "2026-11-13T06:33:51.892Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-pay-inspector",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:53.035Z",
+        "updatedAt": "2026-11-13T06:33:53.035Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-pay-free",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:54.282Z",
+        "updatedAt": "2026-11-13T06:33:54.282Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": true,
+          "sessionId": "free_1794551634701_9e65kkid77u",
+          "provider": "discount",
+          "amount": 0,
+          "currency": "AED",
+          "paidAt": 1794551634,
+          "confirmationEmailSentAt": 1794551634
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-pay-invalid",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "draft",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 0,
+        "pdfUrl": "",
+        "createdAt": "2026-11-13T06:33:55.407Z",
+        "updatedAt": "2026-11-13T06:33:55.407Z",
+        "completedAt": null,
+        "property": {
+          "buildingName": "QA Test",
+          "unitNumber": "13",
+          "city": "Dubai"
+        },
+        "tenant": {},
+        "landlord": {},
+        "agent": {},
+        "tenancy": {},
+        "rooms": [],
+        "propertyItems": [],
+        "signatures": [],
+        "overallPhotos": [],
+        "payment": {
+          "paid": false
+        },
+        "extra": {}
+      },
+      {
+        "id": "qa-20261113-final",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "propertyType": "apartment",
+        "status": "completed",
+        "generalNotes": "QA Test disposable inspection",
+        "reportGenerated": 1,
+        "pdfUrl": "reports/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-final/final/qa-20261113-final-0ea7f42773d3c245-4d227fbb-1e9e-4a49-b97a-1c6fcdeb281f.pdf",
+        "createdAt": "2026-11-13T06:42:35.564Z",
+        "updatedAt": "2026-11-13T06:48:21.719Z",
+        "completedAt": "2026-11-13T06:44:47.114Z",
+        "property": {
+          "type": "apartment",
+          "buildingName": "QA Test",
+          "area": "Dubai Marina",
+          "city": "Dubai",
+          "unitNumber": "13",
+          "makaniNumber": "QA",
+          "furnished": false,
+          "specialFeatures": []
+        },
+        "tenant": {
+          "name": "QA Test tenant",
+          "email": "delivered@resend.dev",
+          "phone": ""
+        },
+        "landlord": {
+          "name": "QA Test landlord",
+          "phone": "",
+          "email": ""
+        },
+        "agent": {
+          "name": "",
+          "phone": "",
+          "email": ""
+        },
+        "tenancy": {
+          "contractNumber": "QA",
+          "leaseStartDate": "2026-11-13",
+          "leaseEndDate": "2027-11-13"
+        },
+        "rooms": [
+          {
+            "id": "r",
+            "type": "living",
+            "name": "QA Test room",
+            "icon": "",
+            "overallComments": "QA Test notes عربي 😀",
+            "overallCondition": "good",
+            "items": [
+              {
+                "id": "i",
+                "name": "Walls",
+                "condition": "fair",
+                "checked": true,
+                "category": "general",
+                "comments": "QA Test note",
+                "photos": []
+              }
+            ]
+          }
+        ],
+        "propertyItems": [],
+        "signatures": [
+          {
+            "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEElEQVR4nGMwStkCRwzEcQAQchShKUFvnAAAAABJRU5ErkJggg==",
+            "signedAt": "2026-11-13T06:32:00Z",
+            "role": "tenant",
+            "name": "QA Test tenant"
+          },
+          {
+            "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEElEQVR4nGNISdkCRwzEcQBk0hfB5ZJKtQAAAABJRU5ErkJggg==",
+            "signedAt": "2026-11-13T06:32:00Z",
+            "role": "landlord",
+            "name": "QA Test landlord"
+          },
+          {
+            "dataUrl": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAEUlEQVR4nGOYlrIFjhiI4wAAuTIa4UvOaXIAAAAASUVORK5CYII=",
+            "signedAt": "2026-11-13T06:32:00Z",
+            "role": "inspector",
+            "name": "QA Test inspector"
+          }
+        ],
+        "overallPhotos": [],
+        "payment": {
+          "paid": true,
+          "sessionId": "free_1794552156081_3ntew7c9t2x",
+          "provider": "discount",
+          "amount": 0,
+          "currency": "AED",
+          "paidAt": 1794552156,
+          "confirmationEmailSentAt": 1794552156
+        },
+        "extra": {
+          "meta": {
+            "inspectorId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+            "inspectorName": "QA Test",
+            "inspectorEmail": "",
+            "deviceInfo": "QA browser",
+            "appVersion": "3.5",
+            "ipAddress": "35.155.180.115"
+          },
+          "pdfSize": 1147796,
+          "utilityMeters": {
+            "water": {
+              "reading": "13"
+            }
+          },
+          "moveInReference": {
+            "keys": "2",
+            "cards": "1",
+            "defects": "None",
+            "newDefects": "None"
+          }
+        }
+      }
+    ],
+    "count": 9
+  }
+}

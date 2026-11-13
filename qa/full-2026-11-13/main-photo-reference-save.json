@@ -1,0 +1,14 @@
+{
+  "label": "main-photo-reference-save",
+  "actor": "N",
+  "method": "PUT",
+  "path": "/api/inspections/qa-20261113-main",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf9e4afc3abd-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:04.107536+00:00",
+  "response": {
+    "success": true
+  }
+}

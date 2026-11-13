@@ -1,0 +1,14 @@
+{
+  "label": "webhook-wrong-signature",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/webhooks/stripe",
+  "status": 500,
+  "requestId": null,
+  "cfRay": "a59bbfa3fa025f03-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:04.855834+00:00",
+  "response": {
+    "error": "Webhook not configured"
+  }
+}

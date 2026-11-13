@@ -1,0 +1,14 @@
+{
+  "label": "route-08",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261113-missing",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd9384dbdbd22-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.684179+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

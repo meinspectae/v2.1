@@ -1,0 +1,19 @@
+MeInspect
+Verify a report
+
+Report ID: qa-20261113-final-0ea7f42773d3c245
+
+The printed hash identifies report content; selecting a PDF checks its final-file hash against the server’s registered copy.
+
+Select the report PDF
+
+Your PDF stays on your device. Only its fingerprint is sent for comparison.
+
+Or paste the full printed content hash
+Verify hash
+Not verified
+No matching registered report was found. Check the report ID and file or hash.
+📱 Install MeInspect
+Add to home screen for the best experience
+Later
+Install

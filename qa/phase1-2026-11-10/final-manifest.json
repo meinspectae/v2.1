@@ -1,0 +1,9 @@
+{
+  "backend/src/index.ts": "b8842f6ee9bc742c25b2666a1b368846282a883178545b01ae11d50711120aad",
+  "backend/src/email-safety.ts": "d62978f90a2e3486f07a021213becb5811c993fe52360ddf9082406700bb561d",
+  "backend/dist/bundle.js": "996ccd19a66213c09f3025b20b88547b7748e52da8d533fd7b5b5d4f48c00c8d",
+  "backend/wrangler.toml": "526b6db3eddc8bc72937f386aa8d8ab51e6d48fecac3d327884ad5c1c5a584b6",
+  "src/components/EmailReportModal.tsx": "434d1e8abbc3ac90d4f8d3e99d0b0e4334c8ed2d016234fa41462168f6534a39",
+  "package.json": "7164fc476916a98445ee6e497b84a5d2e79362a914425a16026920c7c1c123d7",
+  "backend/package.json": "bfd5c3ba57cd56979878f118c259595fed4c0165f77aa1be3294ed0ec7fe5e28"
+}

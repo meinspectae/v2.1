@@ -1,0 +1,32 @@
+{
+  "label": "checkout-status-inspector",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/checkout/cs_live_acT2EOqMvaH8Cc8tCJnD105leNyjV4hDv05tLpS3sLHk5LenjUs3Lxvjgk",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be4374b7723a3-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:03.165666+00:00",
+  "response": {
+    "data": {
+      "id": 86,
+      "environment": "staging",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "inspectionId": "qa-20261113-pay-inspector",
+      "priceId": null,
+      "amount": 99,
+      "currency": "AED",
+      "status": "pending",
+      "type": "one_time",
+      "provider": "stripe",
+      "providerSessionId": "cs_live_acT2EOqMvaH8Cc8tCJnD105leNyjV4hDv05tLpS3sLHk5LenjUs3Lxvjgk",
+      "providerPaymentId": null,
+      "discountCode": "INSPECTOR",
+      "discountAmount": 100,
+      "metadata": null,
+      "paidAt": null,
+      "createdAt": 1794551633
+    }
+  }
+}

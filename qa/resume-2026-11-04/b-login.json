@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:54:33.238639+00:00",
+  "date": "Wed, 04 Nov 2026 07:54:33 GMT",
+  "cfRay": "a5520d227ad5962a-PDX",
+  "requestId": null,
+  "body": {
+    "user": {
+      "id": "ttonmiBlLxJroxL6mAlvEFsKXlhFL0Df",
+      "email": "temp@7xvejmp0vuolckxwgt2eo45lgsvzwcg7.com",
+      "emailVerified": false,
+      "name": "Anonymous",
+      "createdAt": "2026-11-04T07:54:32.761Z",
+      "updatedAt": "2026-11-04T07:54:32.761Z"
+    }
+  }
+}

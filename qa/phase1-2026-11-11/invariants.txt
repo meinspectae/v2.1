@@ -1,0 +1,5 @@
+PASS discount_and_stripe_checkout_creation_unchanged
+PASS stripe_key_selection_unchanged
+PASS email_endpoint_unchanged
+PASS delete_endpoint_unchanged
+PASS schema_generated_files_lockfiles_config_and_frontend_unchanged

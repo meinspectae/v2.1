@@ -1,0 +1,15 @@
+{
+  "label": "live-js-36",
+  "actor": "public",
+  "method": "GET",
+  "path": "[signed storage URL]",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bdb4ebc86816e-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:52:58.437613+00:00",
+  "response": {
+    "nonJson": true,
+    "bytes": 428589
+  }
+}

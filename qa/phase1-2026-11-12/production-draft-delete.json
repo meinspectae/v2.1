@@ -1,0 +1,13 @@
+{
+  "environment": "production",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261112-production-draft",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59494335cca5ed2-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:41:05 GMT",
+  "observedAt": "2026-11-12T09:41:05.413573+00:00",
+  "response": {
+    "success": true
+  }
+}

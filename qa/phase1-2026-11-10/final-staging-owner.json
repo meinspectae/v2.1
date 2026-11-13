@@ -1,0 +1,12 @@
+{
+  "status": 403,
+  "time": "2026-11-10T06:38:38.928755+00:00",
+  "environment": "staging",
+  "method": "GET",
+  "path": "/api/admin/access",
+  "cfRay": "a5830e333a4558c2-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Admin access required"
+  }
+}

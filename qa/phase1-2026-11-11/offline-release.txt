@@ -1,0 +1,2 @@
+PASS offline bundle contract: createApp/tables/buckets/drizzleSchema; no schema operation
+PASS offline route analysis: 50 routes

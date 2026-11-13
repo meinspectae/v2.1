@@ -1,0 +1,49 @@
+{"type": "anonymous account", "actor": "N", "id": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry", "name": "QA Test", "state": "created"}
+{"type": "anonymous account", "actor": "B", "id": "I9x4jTX29wRiTIum0mYmjbSEzLfXQZX2", "name": "QA Test", "state": "created"}
+{"type": "anonymous account", "actor": "T", "id": "ngpPitm0v8x6HZJEtcCNiCz9BqBD7ZcS", "name": "QA Test", "state": "created"}
+{"type": "anonymous account", "actor": "C", "id": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB", "name": "QA Test", "state": "created"}
+{"type": "inspection", "id": "qa-20261113-pay-normal", "actor": "N", "state": "created"}
+{"type": "order", "id": 83, "inspectionId": "qa-20261113-pay-normal", "sessionId": "cs_live_acsRMaSnvspIPl6YSSlj1H710cLcQqL8CHL1rnk7FSgxlxjlHzdRwVJbgH", "state": "retained", "code": null}
+{"type": "inspection", "id": "qa-20261113-pay-welcome20", "actor": "N", "state": "created"}
+{"type": "order", "id": 84, "inspectionId": "qa-20261113-pay-welcome20", "sessionId": "cs_live_acS2KrmimKp9lNDCaTNj2H5tJZ7hb7hCrbrEcMwuXmvfw8X41J4YhoG8bs", "state": "retained", "code": "WELCOME20"}
+{"type": "inspection", "id": "qa-20261113-main", "actor": "N", "state": "created"}
+{"type": "inspection", "id": "qa-20261113-pay-launch50", "actor": "N", "state": "created"}
+{"type": "inspection", "id": "qa-20261113-pay-meinspect10", "actor": "N", "state": "created"}
+{"type": "inspection", "id": "qa-20261113-empty", "actor": "N", "state": "created"}
+{"type": "order", "id": 85, "inspectionId": "qa-20261113-pay-meinspect10", "sessionId": "cs_live_acaGK9iBoKoJ4WLiXI0xPBhMyHAImOuOK2tBSWUw1Pts6l5m8uDruA0EZs", "state": "retained", "code": "MEINSPECT10"}
+{"type": "inspection", "id": "qa-20261113-empty", "state": "deleted"}
+{"type": "inspection", "id": "qa-20261113-pay-inspector", "actor": "N", "state": "created"}
+{"type": "order", "id": 86, "inspectionId": "qa-20261113-pay-inspector", "sessionId": "cs_live_acT2EOqMvaH8Cc8tCJnD105leNyjV4hDv05tLpS3sLHk5LenjUs3Lxvjgk", "state": "retained", "code": "INSPECTOR"}
+{"type": "inspection", "id": "qa-20261113-pay-free", "actor": "N", "state": "created"}
+{"type": "order", "id": 87, "inspectionId": "qa-20261113-pay-free", "sessionId": "free_1794551634701_9e65kkid77u", "state": "retained", "code": "FREE_REPORT"}
+{"type": "inspection", "id": "qa-20261113-pay-invalid", "actor": "N", "state": "created"}
+{"type": "order", "id": 88, "inspectionId": "qa-20261113-pay-invalid", "sessionId": "cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS", "state": "retained", "code": "QA_INVALID_20261113"}
+{"type": "inspection", "id": "qa-20261113-tester", "actor": "T", "state": "created"}
+{"type": "order", "id": 89, "inspectionId": "qa-20261113-tester", "provider": "tester", "state": "retained"}
+{"type": "inspection", "id": "qa-20261113-credit-1", "actor": "C", "state": "created"}
+{"type": "inspection", "id": "qa-20261113-credit-2", "actor": "C", "state": "created"}
+{"type": "photo backup", "id": "qa-20261113-photo1", "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo1.png", "inspectionId": "qa-20261113-main"}
+{"type": "order", "id": 90, "inspectionId": "qa-20261113-credit-1", "provider": "admin_credit", "state": "retained"}
+{"type": "photo backup", "id": "qa-20261113-photo2", "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo2.png", "inspectionId": "qa-20261113-main"}
+{"type": "photo backup", "id": "qa-20261113-photo3", "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo3.png", "inspectionId": "qa-20261113-main"}
+{"type": "order", "id": 91, "inspectionId": "qa-20261113-pay-launch50", "sessionId": "cs_live_acvde6So6R8TA7HfuwVU9KHpQ8dPZcvOrD1PSdrYDWip7s69upNkaZycUv", "state": "retained"}
+{"type": "inspection", "id": "qa-20261113-email", "actor": "B", "state": "created"}
+{"type": "inspection", "id": "qa-20261113-final", "actor": "N", "state": "created"}
+{"type": "order", "id": 92, "inspectionId": "qa-20261113-final", "state": "retained", "provider": "discount"}
+{"type": "report verification", "id": "qa-20261113-final-0ea7f42773d3c245", "inspectionId": "qa-20261113-final", "path": "reports/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-final/final/qa-20261113-final-0ea7f42773d3c245-4d227fbb-1e9e-4a49-b97a-1c6fcdeb281f.pdf", "state": "retained"}
+{"type": "storage final PDF", "id": "reports/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-final/final/qa-20261113-final-0ea7f42773d3c245-4d227fbb-1e9e-4a49-b97a-1c6fcdeb281f.pdf", "inspectionId": "qa-20261113-final", "state": "retained"}
+{"type": "inspection", "id": "qa-20261113-pdf-access-probe", "actor": "B", "state": "created"}
+{"type": "anonymous account", "id": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB", "actor": "C", "state": "retained"}
+{"type": "storage reference PDF", "id": "references/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/ee32be7c-df6c-4110-acbc-26fed80c1e73.pdf", "inspectionId": "qa-20261113-main", "state": "retained"}
+{"type": "inspection", "id": "qa-20261113-email", "state": "deleted"}
+{"type": "inspection", "id": "qa-20261113-pdf-access-probe", "state": "deleted"}
+{"type": "order", "id": 83, "inspectionId": "qa-20261113-pay-normal", "state": "retained", "status": "pending"}
+{"type": "order", "id": 84, "inspectionId": "qa-20261113-pay-welcome20", "state": "retained", "status": "pending"}
+{"type": "order", "id": 85, "inspectionId": "qa-20261113-pay-meinspect10", "state": "retained", "status": "pending"}
+{"type": "order", "id": 86, "inspectionId": "qa-20261113-pay-inspector", "state": "retained", "status": "pending"}
+{"type": "order", "id": 87, "inspectionId": "qa-20261113-pay-free", "state": "retained", "status": "paid"}
+{"type": "order", "id": 88, "inspectionId": "qa-20261113-pay-invalid", "state": "retained", "status": "pending"}
+{"type": "order", "id": 91, "inspectionId": "qa-20261113-pay-launch50", "state": "retained", "status": "pending"}
+{"type": "order", "id": 92, "inspectionId": "qa-20261113-final", "state": "retained", "status": "paid"}
+{"type": "order", "id": 89, "inspectionId": "qa-20261113-tester", "state": "retained", "status": "paid"}
+{"type": "order", "id": 90, "inspectionId": "qa-20261113-credit-1", "state": "retained", "status": "paid"}

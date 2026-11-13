@@ -1,0 +1,203 @@
+{"area": "Auth", "test": "N anonymous sign up", "result": "PASS", "evidence": "N-signup", "detail": ""}
+{"area": "Auth", "test": "B anonymous sign up", "result": "PASS", "evidence": "B-signup", "detail": ""}
+{"area": "Auth", "test": "T anonymous sign up", "result": "PASS", "evidence": "T-signup", "detail": ""}
+{"area": "Auth", "test": "C anonymous sign up", "result": "PASS", "evidence": "C-signup", "detail": ""}
+{"area": "Auth", "test": "N persisted session", "result": "PASS", "evidence": "N-session", "detail": ""}
+{"area": "Inspections", "test": "pay-normal create", "result": "PASS", "evidence": "pay-normal-create", "detail": ""}
+{"area": "Accounts", "test": "N profile and initial balance", "result": "PASS", "evidence": "N-profile", "detail": ""}
+{"area": "Auth", "test": "B persisted session", "result": "PASS", "evidence": "B-session", "detail": ""}
+{"area": "Accounts", "test": "B profile and initial balance", "result": "PASS", "evidence": "B-profile", "detail": ""}
+{"area": "Auth", "test": "T persisted session", "result": "PASS", "evidence": "T-session", "detail": ""}
+{"area": "Accounts", "test": "T profile and initial balance", "result": "PASS", "evidence": "T-profile", "detail": ""}
+{"area": "Payments", "test": "normal session expired", "result": "PASS", "evidence": "pay-normal-expire", "detail": ""}
+{"area": "Payments", "test": "normal real Stripe session request id", "result": "PASS", "evidence": "pay-normal-checkout", "detail": "req_mg2IWxaSA7fc1f"}
+{"area": "Payments", "test": "normal checkout", "result": "PASS", "evidence": "pay-normal-checkout", "detail": ""}
+{"area": "Auth", "test": "C persisted session", "result": "PASS", "evidence": "C-session", "detail": ""}
+{"area": "Inspections", "test": "pay-welcome20 create", "result": "PASS", "evidence": "pay-welcome20-create", "detail": ""}
+{"area": "Accounts", "test": "C profile and initial balance", "result": "PASS", "evidence": "C-profile", "detail": ""}
+{"area": "Auth", "test": "wrong password rejected", "result": "PASS", "evidence": "wrong-password", "detail": "Anonymous identity has no password; real supplied-account wrong password NOT RUN"}
+{"area": "Auth", "test": "supplied A password sign in and admin access", "result": "NOT RUN", "evidence": "credential-availability", "detail": "QA_EMAIL and QA_PASSWORD absent; no retained supplied A session located"}
+{"area": "Inspections", "test": "main create", "result": "PASS", "evidence": "main-create", "detail": ""}
+{"area": "Inspections", "test": "open rooms ratings notes", "result": "PASS", "evidence": "main-open", "detail": ""}
+{"area": "Fields", "test": "keys meters move-in round trip", "result": "PASS", "evidence": "main-open", "detail": ""}
+{"area": "Payments", "test": "welcome20 session expired", "result": "PASS", "evidence": "pay-welcome20-expire", "detail": ""}
+{"area": "Signatures", "test": "all three signatures round trip", "result": "PASS", "evidence": "main-open", "detail": ""}
+{"area": "Payments", "test": "welcome20 real Stripe session request id", "result": "PASS", "evidence": "pay-welcome20-checkout", "detail": "req_R4TDiQx3w8HAyI"}
+{"area": "Input safety", "test": "six adversarial strings stored literally", "result": "PASS", "evidence": "main-open", "detail": ""}
+{"area": "Payments", "test": "welcome20 checkout", "result": "PASS", "evidence": "pay-welcome20-checkout", "detail": ""}
+{"area": "Inspections", "test": "pay-launch50 create", "result": "PASS", "evidence": "pay-launch50-create", "detail": ""}
+{"area": "Inspections", "test": "edit inspection", "result": "PASS", "evidence": "main-edit", "detail": ""}
+{"area": "Payments", "test": "launch50 checkout", "result": "FAIL", "evidence": "pay-launch50-checkout", "detail": ""}
+{"area": "Inspections", "test": "list includes new inspection", "result": "PASS", "evidence": "main-list", "detail": ""}
+{"area": "Inspections", "test": "pay-meinspect10 create", "result": "PASS", "evidence": "pay-meinspect10-create", "detail": ""}
+{"area": "Inspections", "test": "empty create", "result": "PASS", "evidence": "empty-create", "detail": ""}
+{"area": "Fields", "test": "empty optional fields", "result": "PASS", "evidence": "empty-open", "detail": ""}
+{"area": "Delete rules", "test": "draft delete returns 200", "result": "PASS", "evidence": "empty-delete", "detail": ""}
+{"area": "Payments", "test": "meinspect10 session expired", "result": "FAIL", "evidence": "pay-meinspect10-expire", "detail": ""}
+{"area": "Payments", "test": "meinspect10 real Stripe session request id", "result": "PASS", "evidence": "pay-meinspect10-checkout", "detail": "req_LpDAv4yVV447NW"}
+{"area": "Payments", "test": "meinspect10 checkout", "result": "PASS", "evidence": "pay-meinspect10-checkout", "detail": ""}
+{"area": "Delete rules", "test": "deleted draft returns 404", "result": "PASS", "evidence": "empty-gone", "detail": ""}
+{"area": "Access control", "test": "N POST /api/admin/audit-stripe-unlocks denied", "result": "PASS", "evidence": "N-admin-post-audit-stripe-unlocks", "detail": ""}
+{"area": "Inspections", "test": "pay-inspector create", "result": "PASS", "evidence": "pay-inspector-create", "detail": ""}
+{"area": "Access control", "test": "N GET /api/admin/access denied", "result": "PASS", "evidence": "N-admin-get-access", "detail": ""}
+{"area": "Access control", "test": "N POST /api/admin/prices denied", "result": "PASS", "evidence": "N-admin-post-prices", "detail": ""}
+{"area": "Access control", "test": "N GET /api/admin/prices denied", "result": "PASS", "evidence": "N-admin-get-prices", "detail": ""}
+{"area": "Access control", "test": "N POST /api/admin/set-tester denied", "result": "PASS", "evidence": "N-admin-post-set-tester", "detail": ""}
+{"area": "Payments", "test": "inspector session expired", "result": "PASS", "evidence": "pay-inspector-expire", "detail": ""}
+{"area": "Payments", "test": "inspector real Stripe session request id", "result": "PASS", "evidence": "pay-inspector-checkout", "detail": "req_rrUmihZ1tO4Xfg"}
+{"area": "Payments", "test": "inspector checkout", "result": "PASS", "evidence": "pay-inspector-checkout", "detail": ""}
+{"area": "Access control", "test": "N GET /api/admin/users denied", "result": "PASS", "evidence": "N-admin-get-users", "detail": ""}
+{"area": "Access control", "test": "N POST /api/admin/grant-credits denied", "result": "PASS", "evidence": "N-admin-post-grant-credits", "detail": ""}
+{"area": "Inspections", "test": "pay-free create", "result": "PASS", "evidence": "pay-free-create", "detail": ""}
+{"area": "Access control", "test": "N POST /api/admin/revoke-credits denied", "result": "PASS", "evidence": "N-admin-post-revoke-credits", "detail": ""}
+{"area": "Access control", "test": "T POST /api/admin/audit-stripe-unlocks denied", "result": "PASS", "evidence": "T-admin-post-audit-stripe-unlocks", "detail": ""}
+{"area": "Access control", "test": "T GET /api/admin/access denied", "result": "PASS", "evidence": "T-admin-get-access", "detail": ""}
+{"area": "Access control", "test": "T POST /api/admin/prices denied", "result": "PASS", "evidence": "T-admin-post-prices", "detail": ""}
+{"area": "Payments", "test": "free session expiry", "result": "NOT RUN", "evidence": "pay-free-checkout", "detail": "Free discount does not create a Stripe session; no session to expire"}
+{"area": "Payments", "test": "free checkout", "result": "PASS", "evidence": "pay-free-checkout", "detail": ""}
+{"area": "Access control", "test": "T GET /api/admin/prices denied", "result": "PASS", "evidence": "T-admin-get-prices", "detail": ""}
+{"area": "Inspections", "test": "pay-invalid create", "result": "PASS", "evidence": "pay-invalid-create", "detail": ""}
+{"area": "Access control", "test": "T POST /api/admin/set-tester denied", "result": "PASS", "evidence": "T-admin-post-set-tester", "detail": ""}
+{"area": "Access control", "test": "T GET /api/admin/users denied", "result": "PASS", "evidence": "T-admin-get-users", "detail": ""}
+{"area": "Access control", "test": "T POST /api/admin/grant-credits denied", "result": "PASS", "evidence": "T-admin-post-grant-credits", "detail": ""}
+{"area": "Access control", "test": "T POST /api/admin/revoke-credits denied", "result": "PASS", "evidence": "T-admin-post-revoke-credits", "detail": ""}
+{"area": "Access control", "test": "second account GET /api/inspections/qa-20261113-main", "result": "PASS", "evidence": "B-denied-0", "detail": ""}
+{"area": "Payments", "test": "invalid session expired", "result": "PASS", "evidence": "pay-invalid-expire", "detail": ""}
+{"area": "Payments", "test": "invalid real Stripe session request id", "result": "PASS", "evidence": "pay-invalid-checkout", "detail": "req_nNKCvevSju0pis"}
+{"area": "Payments", "test": "invalid checkout", "result": "PASS", "evidence": "pay-invalid-checkout", "detail": ""}
+{"area": "Access control", "test": "second account PUT /api/inspections/qa-20261113-main", "result": "PASS", "evidence": "B-denied-1", "detail": ""}
+{"area": "Payments", "test": "normal actual price AED 199", "result": "PASS", "evidence": "N-orders", "detail": ""}
+{"area": "Payments", "test": "welcome20 actual price AED 159", "result": "PASS", "evidence": "N-orders", "detail": ""}
+{"area": "Payments", "test": "launch50 actual price AED 149", "result": "FAIL", "evidence": "N-orders", "detail": ""}
+{"area": "Payments", "test": "meinspect10 actual price AED 179", "result": "PASS", "evidence": "N-orders", "detail": ""}
+{"area": "Payments", "test": "inspector actual price AED 99", "result": "PASS", "evidence": "N-orders", "detail": ""}
+{"area": "Payments", "test": "free actual price AED 0", "result": "PASS", "evidence": "N-orders", "detail": ""}
+{"area": "Payments", "test": "invalid actual price AED 199", "result": "PASS", "evidence": "N-orders", "detail": ""}
+{"area": "Access control", "test": "second account DELETE /api/inspections/qa-20261113-main", "result": "PASS", "evidence": "B-denied-2", "detail": ""}
+{"area": "Inspections", "test": "tester create", "result": "PASS", "evidence": "tester-create", "detail": ""}
+{"area": "Access control", "test": "second account GET /api/download/pdf/qa-20261113-main", "result": "PASS", "evidence": "B-denied-3", "detail": ""}
+{"area": "Access control", "test": "second account GET /api/inspections/qa-20261113-main/photos", "result": "PASS", "evidence": "B-denied-4", "detail": ""}
+{"area": "Access control", "test": "second account POST /api/upload/pdf", "result": "PASS", "evidence": "B-denied-5", "detail": ""}
+{"area": "Payments", "test": "tester free checkout", "result": "PASS", "evidence": "tester-checkout", "detail": ""}
+{"area": "Access control", "test": "second account POST /api/upload/photo", "result": "PASS", "evidence": "B-denied-6", "detail": ""}
+{"area": "Delete rules", "test": "paid inspection delete 409", "result": "PASS", "evidence": "tester-paid-delete", "detail": ""}
+{"area": "Access control", "test": "second account POST /api/inspections/qa-20261113-main/finalise", "result": "PASS", "evidence": "B-denied-7", "detail": ""}
+{"area": "Payments", "test": "paid report never asks again", "result": "PASS", "evidence": "tester-repeat-checkout", "detail": ""}
+{"area": "Access control", "test": "second account POST /api/checkout", "result": "PASS", "evidence": "B-denied-8", "detail": ""}
+{"area": "Access control", "test": "second account POST /api/send-email", "result": "PASS", "evidence": "B-denied-9", "detail": ""}
+{"area": "Inspections", "test": "credit-1 create", "result": "PASS", "evidence": "credit-1-create", "detail": ""}
+{"area": "Inspections", "test": "credit-2 create", "result": "PASS", "evidence": "credit-2-create", "detail": ""}
+{"area": "Photos", "test": "photo 1 upload route", "result": "PASS", "evidence": "photo1-presign", "detail": ""}
+{"area": "Payments", "test": "last credit parallel requests exactly one unlock", "result": "PASS", "evidence": "credit-parallel-1 and credit-parallel-2", "detail": ""}
+{"area": "Photos", "test": "photo 1 binary upload", "result": "PASS", "evidence": "photo1-put", "detail": ""}
+{"area": "Payments", "test": "credit used only once", "result": "PASS", "evidence": "credit-repeat", "detail": ""}
+{"area": "Accounts", "test": "credit balance exactly zero never negative", "result": "PASS", "evidence": "credit-balance", "detail": ""}
+{"area": "Photos", "test": "photo 1 confirmed", "result": "PASS", "evidence": "photo1-confirm", "detail": ""}
+{"area": "Accounts", "test": "one credit order only", "result": "PASS", "evidence": "credit-orders", "detail": ""}
+{"area": "Photos", "test": "photo 1 hash matches", "result": "PASS", "evidence": "photo1-download", "detail": ""}
+{"area": "Access control", "test": "second account photo 1 denied", "result": "PASS", "evidence": "B-photo1", "detail": ""}
+{"area": "Photos", "test": "photo 2 upload route", "result": "PASS", "evidence": "photo2-presign", "detail": ""}
+{"area": "Photos", "test": "photo 2 binary upload", "result": "PASS", "evidence": "photo2-put", "detail": ""}
+{"area": "Photos", "test": "photo 2 confirmed", "result": "PASS", "evidence": "photo2-confirm", "detail": ""}
+{"area": "Photos", "test": "photo 2 hash matches", "result": "PASS", "evidence": "photo2-download", "detail": ""}
+{"area": "Access control", "test": "second account photo 2 denied", "result": "PASS", "evidence": "B-photo2", "detail": ""}
+{"area": "Photos", "test": "photo 3 upload route", "result": "PASS", "evidence": "photo3-presign", "detail": ""}
+{"area": "Photos", "test": "photo 3 binary upload", "result": "PASS", "evidence": "photo3-put", "detail": ""}
+{"area": "Photos", "test": "photo 3 confirmed", "result": "PASS", "evidence": "photo3-confirm", "detail": ""}
+{"area": "Photos", "test": "photo 3 hash matches", "result": "PASS", "evidence": "photo3-download", "detail": ""}
+{"area": "Access control", "test": "second account photo 3 denied", "result": "PASS", "evidence": "B-photo3", "detail": ""}
+{"area": "Photos", "test": "three saved photo references restored", "result": "PASS", "evidence": "main-photo-list", "detail": ""}
+{"area": "Webhook", "test": "unsigned returns 400", "result": "FAIL", "evidence": "webhook-unsigned", "detail": "Webhook not configured"}
+{"area": "Webhook", "test": "wrong-signature returns 400", "result": "FAIL", "evidence": "webhook-wrong-signature", "detail": "Webhook not configured"}
+{"area": "Payments", "test": "pay-meinspect10 session expired retry", "result": "PASS", "evidence": "pay-meinspect10-expire-retry", "detail": "Initial 401 caused by QA cookie-jar race; client corrected, app unchanged"}
+{"area": "Payments", "test": "launch50 checkout retry", "result": "PASS", "evidence": "pay-launch50-checkout-retry", "detail": "Initial QA cookie-jar race resolved"}
+{"area": "Payments", "test": "launch50 session expired", "result": "PASS", "evidence": "pay-launch50-expire", "detail": ""}
+{"area": "Payments", "test": "launch50 actual price AED 149 retry", "result": "PASS", "evidence": "N-orders-retry", "detail": ""}
+{"area": "Inspections", "test": "email create", "result": "PASS", "evidence": "email-create", "detail": ""}
+{"area": "Email", "test": "legacy format real provider 200", "result": "PASS", "evidence": "email-legacy", "detail": ""}
+{"area": "Email", "test": "inspectionId format real provider 200", "result": "PASS", "evidence": "email-new", "detail": "Anonymous auth email may be nondeliverable; inbox not claimed"}
+{"area": "Email", "test": "unsafe HTML request accepted after sanitizer", "result": "PASS", "evidence": "email-unsafe-html", "detail": "Actual outgoing HTML validated separately by executed provider harness; remote inbox content NOT RUN"}
+{"area": "Email", "test": "31st recipient in hour returns 429", "result": "PASS", "evidence": "email-recipient-31", "detail": ""}
+{"area": "Inspections", "test": "final create", "result": "PASS", "evidence": "final-create", "detail": ""}
+{"area": "Payments", "test": "final report free unlock", "result": "PASS", "evidence": "final-free-checkout", "detail": ""}
+{"area": "Finalisation", "test": "actual browser PDF generated uploaded finalised", "result": "PASS", "evidence": "browser-finalise", "detail": "Real app renderer, not synthetic PDF; da61a14eb25390d26ca09a0c874a1309f1bd7872cf2976abe6861b4acc24b20f"}
+{"area": "Verification", "test": "unknown", "result": "PASS", "evidence": "verify-unknown", "detail": ""}
+{"area": "Verification", "test": "registered-pdf", "result": "PASS", "evidence": "verify-registered-pdf", "detail": ""}
+{"area": "Verification", "test": "registered-content", "result": "PASS", "evidence": "verify-registered-content", "detail": ""}
+{"area": "PDF", "test": "registered PDF downloaded hash matches", "result": "PASS", "evidence": "final-pdf-download", "detail": ""}
+{"area": "Access control", "test": "second account actual final PDF denied", "result": "PASS", "evidence": "B-final-pdf-denied", "detail": ""}
+{"area": "Delete rules", "test": "finalised inspection returns 409", "result": "PASS", "evidence": "final-delete", "detail": ""}
+{"area": "Inspections", "test": "pdf-access-probe create", "result": "PASS", "evidence": "pdf-access-probe-create", "detail": ""}
+{"area": "Access control", "test": "own report cannot reference another account PDF", "result": "FAIL", "evidence": "B-own-report-foreign-pdf", "detail": "Real QA-only cross-account path probe"}
+{"area": "Access control", "test": "foreign PDF bytes blocked", "result": "FAIL", "evidence": "B-foreign-pdf-bytes", "detail": "Matched victim hash: True"}
+{"area": "Access control", "test": "foreign pdfUrl denied after fix", "result": "PASS", "evidence": "fix3-foreign-pdf-denied", "detail": ""}
+{"area": "Access control", "test": "owner final PDF still allowed after fix", "result": "PASS", "evidence": "fix3-owner-pdf-allowed", "detail": ""}
+{"area": "Verification", "test": "browser negative", "result": "FAIL", "evidence": "verify-page-negative", "detail": ""}
+{"area": "Verification", "test": "browser positive", "result": "FAIL", "evidence": "verify-page-positive", "detail": ""}
+{"area": "Verification", "test": "browser pdf", "result": "FAIL", "evidence": "verify-page-pdf", "detail": ""}
+{"area": "Release", "test": "live frontend production address once no staging", "result": "PASS", "evidence": "live-bundle-counts", "detail": "36 actual live JS chunks"}
+{"area": "Android", "test": "release source settings", "result": "FAIL", "evidence": "android-static", "detail": ""}
+{"area": "Accounts", "test": "disposable account deletion", "result": "FAIL", "evidence": "delete-account", "detail": ""}
+{"area": "Accounts", "test": "deleted account session invalid", "result": "FAIL", "evidence": "deleted-account-session", "detail": ""}
+{"area": "Verification", "test": "browser negative completed", "result": "PASS", "evidence": "verify-browser-negative-final", "detail": ""}
+{"area": "Verification", "test": "browser positive completed", "result": "PASS", "evidence": "verify-browser-positive-final", "detail": ""}
+{"area": "Verification", "test": "browser PDF verification completed", "result": "PASS", "evidence": "verify-browser-pdf-final", "detail": ""}
+{"area": "Frontend", "test": "/history opens", "result": "PASS", "evidence": "browser-history", "detail": ""}
+{"area": "Frontend", "test": "/settings opens", "result": "PASS", "evidence": "browser-settings", "detail": ""}
+{"area": "Frontend", "test": "/new opens", "result": "PASS", "evidence": "browser-new", "detail": ""}
+{"area": "Input safety", "test": "stored malicious names rendered as text", "result": "PASS", "evidence": "browser-input-safety", "detail": ""}
+{"area": "Frontend", "test": "unknown report does not spin forever", "result": "PASS", "evidence": "browser-missing-report", "detail": ""}
+{"area": "Sync", "test": "full inspection sync", "result": "PASS", "evidence": "sync-pull", "detail": ""}
+{"area": "Sync", "test": "push QA inspection", "result": "PASS", "evidence": "sync-push", "detail": ""}
+{"area": "Photos", "test": "owner batch download URLs", "result": "PASS", "evidence": "photos-batch", "detail": ""}
+{"area": "Access control", "test": "second account batch denied per item", "result": "PASS", "evidence": "B-photos-batch", "detail": ""}
+{"area": "Fields", "test": "empty reference attachment returns 404", "result": "PASS", "evidence": "reference-empty", "detail": ""}
+{"area": "Fields", "test": "reference PDF upload", "result": "PASS", "evidence": "reference-upload", "detail": ""}
+{"area": "Fields", "test": "saved move-in PDF returned", "result": "PASS", "evidence": "reference-download", "detail": ""}
+{"area": "Access control", "test": "second account reference PDF denied", "result": "PASS", "evidence": "B-reference-denied", "detail": ""}
+{"area": "Payments", "test": "T paid access reconciliation", "result": "PASS", "evidence": "T-reconcile", "detail": ""}
+{"area": "Payments", "test": "C paid access reconciliation", "result": "PASS", "evidence": "C-reconcile", "detail": ""}
+{"area": "Payments", "test": "tester order receipt returned", "result": "FAIL", "evidence": "tester-order-invoice", "detail": ""}
+{"area": "Access control", "test": "second account invoice denied", "result": "PASS", "evidence": "B-order-invoice-denied", "detail": ""}
+{"area": "Payments", "test": "normal expired session does not unlock", "result": "PASS", "evidence": "checkout-status-normal", "detail": ""}
+{"area": "Payments", "test": "welcome20 expired session does not unlock", "result": "PASS", "evidence": "checkout-status-welcome20", "detail": ""}
+{"area": "Payments", "test": "meinspect10 expired session does not unlock", "result": "PASS", "evidence": "checkout-status-meinspect10", "detail": ""}
+{"area": "Payments", "test": "inspector expired session does not unlock", "result": "PASS", "evidence": "checkout-status-inspector", "detail": ""}
+{"area": "Payments", "test": "invalid expired session does not unlock", "result": "PASS", "evidence": "checkout-status-invalid", "detail": ""}
+{"area": "Payments", "test": "launch50 expired session does not unlock", "result": "PASS", "evidence": "checkout-status-launch50", "detail": ""}
+{"area": "Cleanup", "test": "delete own QA email draft", "result": "PASS", "evidence": "cleanup-email", "detail": ""}
+{"area": "Cleanup", "test": "delete own QA pdf-access-probe draft", "result": "PASS", "evidence": "cleanup-pdf-access-probe", "detail": ""}
+{"area": "Accounts", "test": "N final nonnegative balance", "result": "PASS", "evidence": "N-final-profile", "detail": ""}
+{"area": "Auth", "test": "N sign out", "result": "PASS", "evidence": "N-signout", "detail": ""}
+{"area": "Auth", "test": "N session cleared", "result": "PASS", "evidence": "N-session-after-signout", "detail": ""}
+{"area": "Auth", "test": "N protected route after logout", "result": "PASS", "evidence": "N-profile-after-signout", "detail": ""}
+{"area": "Accounts", "test": "B final nonnegative balance", "result": "PASS", "evidence": "B-final-profile", "detail": ""}
+{"area": "Auth", "test": "B sign out", "result": "PASS", "evidence": "B-signout", "detail": ""}
+{"area": "Auth", "test": "B session cleared", "result": "PASS", "evidence": "B-session-after-signout", "detail": ""}
+{"area": "Auth", "test": "B protected route after logout", "result": "PASS", "evidence": "B-profile-after-signout", "detail": ""}
+{"area": "Accounts", "test": "T final nonnegative balance", "result": "PASS", "evidence": "T-final-profile", "detail": ""}
+{"area": "Auth", "test": "T sign out", "result": "PASS", "evidence": "T-signout", "detail": ""}
+{"area": "Auth", "test": "T session cleared", "result": "PASS", "evidence": "T-session-after-signout", "detail": ""}
+{"area": "Auth", "test": "T protected route after logout", "result": "PASS", "evidence": "T-profile-after-signout", "detail": ""}
+{"area": "Auth", "test": "C sign out", "result": "PASS", "evidence": "C-signout", "detail": ""}
+{"area": "Auth", "test": "C session cleared", "result": "PASS", "evidence": "C-session-after-signout", "detail": ""}
+{"area": "Auth", "test": "C protected route after logout", "result": "PASS", "evidence": "C-profile-after-signout", "detail": ""}
+{"area": "Release", "test": "protected release invariants", "result": "PASS", "evidence": "final-invariants", "detail": ""}
+{"area": "Android", "test": "release source settings corrected test", "result": "PASS", "evidence": "android-static-final", "detail": "Original permission allowlist omitted required Android <=9 documents permission; no app change"}
+{"area": "Accounts", "test": "paid report and order survive failed account deletion", "result": "PASS", "evidence": "account-deletion-retention", "detail": "Fresh database read: report qa-20261113-credit-1 and order 90 retained; auth identity remains; profile and draft credit-2 removed"}
+{"area": "Payments", "test": "tester invoice unavailable by design", "result": "PASS", "evidence": "tester-order-invoice", "detail": "HTTP 400 expected for non-Stripe free order; not a failed purchase or code defect"}
+{"area": "Auth", "test": "supplied account password login", "result": "NOT RUN", "evidence": "credential-availability", "detail": "Previously supplied login secret/session unavailable in this session; no passwords requested or reset"}
+{"area": "Access control", "test": "admin A staging 200", "result": "NOT RUN", "evidence": "credential-availability", "detail": "No usable supplied A session; existing admin role not modified"}
+{"area": "Real phone", "test": "camera capture on real phone", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Requires actual device or recipient inbox; no substitute claimed"}
+{"area": "Real phone", "test": "PDF device save share print", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Requires actual device or recipient inbox; no substitute claimed"}
+{"area": "Real phone", "test": "drafts after device restart offline", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Requires actual device or recipient inbox; no substitute claimed"}
+{"area": "Real phone", "test": "email inbox delivery", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Requires actual device or recipient inbox; no substitute claimed"}
+{"area": "Real phone", "test": "Stripe return to installed app", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Requires actual device or recipient inbox; no substitute claimed"}
+{"area": "Real phone", "test": "Android signed build install permissions", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Requires actual device or recipient inbox; no substitute claimed"}
+{"area": "Release", "test": "native Android compile signing", "result": "NOT RUN", "evidence": "manual-device-checks", "detail": "Static settings only; no native build or credentials requested"}
+{"area": "Email", "test": "custom sender ignored and unsafe markup stripped", "result": "PASS", "evidence": "fix4-compatibility", "detail": "Executed real backend handlers with captured provider request; live sends 200, actual provider HTML inspection NOT RUN"}
+{"area": "Webhook", "test": "signed duplicate missing-report dummy harness", "result": "PASS", "evidence": "fix4-safety", "detail": "33 local handler assertions; signed and duplicate 200; missing report 200; no live signed event used"}
+{"area": "Email", "test": "actual modal delivery accepted", "result": "PASS", "evidence": "browser-email", "detail": "HTTP 200; provider accepted 1 recipient, 0 failures; no inbox claim"}
+{"area": "Input safety", "test": "email literal input escaping regression", "result": "PASS", "evidence": "email-escaping-fix4", "detail": "See before/after evidence; local/browser scope stated in artifact"}
+{"area": "Frontend", "test": "cloud-only report loading repaired", "result": "PASS", "evidence": "report-load-after", "detail": "See before/after evidence; local/browser scope stated in artifact"}
+{"area": "Access control", "test": "shared offline API cache leakage repaired", "result": "PASS", "evidence": "sw-access-after", "detail": "See before/after evidence; local/browser scope stated in artifact"}

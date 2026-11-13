@@ -1,0 +1,17 @@
+Email Report frontend request
+method: POST
+path: /api/send-email
+content-type: application/json
+body fields (exact): inspectionId
+body: {"inspectionId":"<reportId>"}
+Server agreement: accepts exactly one field named inspectionId; rejects extras with 400
+Recipients are server-derived: tenant, landlord, agent, extra.meta inspector, signed-in user; deduplicated case-insensitively
+Response fields: success, sentCount, failedCount, results[{email,success,id?,error?}], optional error
+Rate cap: 30 recipients per user per rolling hour
+Other /api/send-email frontend consumers: none
+Welcome: /api/public/notifications/welcome
+Password changed: /api/public/notifications/password-changed
+Payment: server-side unlock email plus /api/notifications/payment-success for IAP/legacy
+Report-complete route exists but no current frontend caller
+Receipts/invoices: /api/orders/:id/invoice; no /api/send-email use
+PDF attachments: no email attachment path; report email sends an authenticated link

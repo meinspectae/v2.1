@@ -1,0 +1,14 @@
+{
+  "label": "route-37",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/orders/qa-20261113-missing/invoice",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd9405aa29976-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.857950+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

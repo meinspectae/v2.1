@@ -1,0 +1,16 @@
+{
+  "label": "verify-registered-pdf",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/public/verify/qa-20261113-final-0ea7f42773d3c245",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd0626c485d68-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:45:30.749225+00:00",
+  "response": {
+    "verified": true,
+    "reportId": "qa-20261113-final-0ea7f42773d3c245",
+    "registeredAt": "2026-11-13T06:44:49.716Z"
+  }
+}

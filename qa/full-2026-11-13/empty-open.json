@@ -1,0 +1,39 @@
+{
+  "label": "empty-open",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261113-empty",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf561b9e054d-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:52.441149+00:00",
+  "response": {
+    "data": {
+      "id": "qa-20261113-empty",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "propertyType": "apartment",
+      "status": "draft",
+      "generalNotes": "",
+      "propertyData": "{}",
+      "tenantData": "{}",
+      "landlordData": "{}",
+      "agentData": "{}",
+      "tenancyData": "{}",
+      "roomsData": "[]",
+      "propertyItems": "[]",
+      "signatures": "[]",
+      "overallPhotos": "[]",
+      "paymentData": "{\"paid\":false}",
+      "reportGenerated": 0,
+      "createdAt": "2026-11-13T06:33:52.036Z",
+      "updatedAt": "2026-11-13T06:33:52.036Z",
+      "completedAt": null,
+      "pdfUrl": "",
+      "extraData": "{\"utilityMeters\":{},\"moveInReference\":{\"keys\":\"\",\"cards\":\"\",\"defects\":\"\",\"newDefects\":\"\"}}",
+      "shareToken": "[REDACTED]",
+      "shareRevokedAt": null,
+      "deletedAt": null
+    }
+  }
+}

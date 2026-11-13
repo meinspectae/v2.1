@@ -1,0 +1,27 @@
+Usage: edgespark [options] [command]
+
+EdgeSpark CLI - Create and manage your EdgeSpark projects
+
+EdgeSpark is a platform for deploying backend applications with built-in
+database (Drizzle ORM) and storage capabilities. This CLI helps you create
+and manage EdgeSpark projects.
+
+Options:
+  -v, --version                  Display CLI version number
+  -h, --help                     Display help for command
+
+Commands:
+  init [options] <project-name>  Initialize a new EdgeSpark project
+  db                             Database operations
+  storage                        Storage operations
+  pull                           Pull schemas and types from EdgeSpark
+  deploy [options]               Deploy your project
+  secret                         Manage project secrets
+  help [command]                 display help for command
+
+Examples:
+  $ edgespark init my-app
+      Create a new project named "my-app" with AGENTS.md agent file
+
+  $ edgespark init my-app --agent claude
+      Create a new project named "my-app" with CLAUDE.md agent file

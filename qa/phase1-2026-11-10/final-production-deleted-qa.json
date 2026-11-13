@@ -1,0 +1,12 @@
+{
+  "status": 404,
+  "time": "2026-11-10T06:38:40.239311+00:00",
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261110-production-paid",
+  "cfRay": "a5830e3cb87ede1d-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Not found"
+  }
+}

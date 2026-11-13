@@ -1,0 +1,27 @@
+{
+  "data": {
+    "id": "qa-1793778867-completed-guard",
+    "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+    "propertyType": "apartment",
+    "status": "completed",
+    "generalNotes": "QA completion deletion guard only; no final PDF",
+    "propertyData": "{}",
+    "tenantData": "{}",
+    "landlordData": "{}",
+    "agentData": "{}",
+    "tenancyData": "{}",
+    "roomsData": "[]",
+    "propertyItems": "[]",
+    "signatures": "[]",
+    "overallPhotos": "[]",
+    "paymentData": "{\"paid\":false}",
+    "reportGenerated": 1,
+    "createdAt": "2026-11-04T07:54:36.054Z",
+    "updatedAt": "2026-11-04T07:54:36.054Z",
+    "completedAt": null,
+    "pdfUrl": "",
+    "extraData": "{}",
+    "shareToken": null,
+    "shareRevokedAt": null
+  }
+}

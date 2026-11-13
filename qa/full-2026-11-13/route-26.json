@@ -1,0 +1,14 @@
+{
+  "label": "route-26",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd93ddbb98e6c-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.449947+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

@@ -1,0 +1,1739 @@
+import React, { useState, useMemo, useCallback, useEffect, useRef } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Capacitor } from '@capacitor/core';
+import { useInspectionStore } from '../store/inspectionStore';
+import { getPropertyTypeLabel, dedupeRoomItems } from '../data/propertyTemplates';
+import { capturePhoto, getIPAddress, safeGoBack, notifyPaymentSuccess } from '../utils/helpers';
+import { client } from '../api/client';
+import { retryPhotoBackups, saveInspection } from '../utils/draftBackup';
+import { useAuthStore } from '../store/authStore';
+import BackupNotice from '../components/BackupNotice';
+import PortraitCapture from '../components/PortraitCapture';
+import { inspectionSummary, isRated } from '../utils/inspectionData';
+import SignaturePad from '../components/SignaturePad';
+import { UtilityMeters, MoveInReference } from '../components/OptionalInspectionDetails';
+import { reportLegal } from '../config/reportLegal';
+import PhoneInput from '../components/PhoneInput';
+import PaymentModal from '../components/PaymentModal';
+import PhotoPreflightModal from '../components/PhotoPreflightModal';
+import { excludePhotos, runPhotoPreflight, type PhotoDiagnostic } from '../utils/photoPreflight';
+import {
+  identifyReport,
+  hasPurchasedReport,
+  purchaseReport,
+} from '../utils/revenuecat';
+import type { ConditionRating, Photo, Room, InspectionItem } from '../types';
+
+const conditionOptions: { value: ConditionRating; label: string; color: string; activeColor: string }[] = [
+  { value: 'very_good', label: 'Very Good', color: 'border-emerald-200 text-emerald-600', activeColor: 'bg-emerald-500 text-white border-emerald-500' },
+  { value: 'good', label: 'Good', color: 'border-green-200 text-green-600', activeColor: 'bg-green-500 text-white border-green-500' },
+  { value: 'fair', label: 'Fair', color: 'border-amber-200 text-amber-600', activeColor: 'bg-amber-500 text-white border-amber-500' },
+  { value: 'poor', label: 'Issue', color: 'border-red-200 text-red-600', activeColor: 'bg-red-500 text-white border-red-500' },
+];
+
+type WizardStep = 'details' | string;
+
+// Steps are built dynamically based on rooms
+
+const roomIcons = ['🏠', '🛋️', '🍳', '🛏️', '🚿', '🚗', '🌅', '🌿', '📺', '🍽️', '💼', '🏊', '🧺', '👔', '🏛️', '🖥️', '☕'];
+
+export default function InspectionForm() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const retakeItemId = (location.state as { retakePhotoId?: string; itemId?: string } | null)?.itemId;
+  const authUser = useAuthStore((s) => s.user);
+  const {
+    currentInspection,
+    currentStep,
+    currentRoomIndex,
+    setCurrentStep,
+    setCurrentRoomIndex,
+    setCurrentInspection,
+    updateProperty,
+    updateTenant,
+    updateLandlord,
+    updateTenancy,
+    updateGeneralNotes,
+    updateItemCondition,
+    updateItemComments,
+    toggleItemChecked,
+    addPhotoToItem,
+    removePhotoFromItem,
+    updateRoomComments,
+    addOverallPhoto,
+    removeOverallPhoto,
+    addRoom,
+    removeRoom,
+    addItem,
+    removeItem,
+    setRooms,
+    addSignature,
+    removeSignature,
+    completeInspection,
+    saveDraft,
+    syncCurrentInspection,
+    updatePropertyItem,
+    addPhotoToPropertyItem,
+    removePhotoFromPropertyItem,
+  } = useInspectionStore();
+
+  // All useState hooks MUST be declared before any early returns (React Rules of Hooks)
+  const REPORT_PRICE = 199;
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentCompleted, setPaymentCompleted] = useState(currentInspection?.payment?.paid || false);
+  const [paymentCheckState, setPaymentCheckState] = useState<'idle' | 'checking' | 'error'>('idle');
+  const [paymentCheckError, setPaymentCheckError] = useState('');
+  const [photoFailures, setPhotoFailures] = useState<PhotoDiagnostic[]>([]);
+  const [photoCheckBusy, setPhotoCheckBusy] = useState(false);
+
+  // iOS native in-app purchase state (RevenueCat). Web/Android are untouched
+  // and continue to use the Stripe PaymentModal flow below. This mirrors the
+  // exact same platform-gated pattern used in ReportPage.tsx so the report
+  // unlock triggered from this wizard's "Payment" step can never fall through
+  // to Stripe on iOS (Guideline 3.1.1).
+  const isIOSNative = Capacitor.getPlatform() === 'ios';
+  const [iapState, setIapState] = useState<'idle' | 'checking' | 'purchasing' | 'confirming' | 'error'>('idle');
+  const [iapError, setIapError] = useState('');
+  const pollTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Build steps dynamically: Property → Parties → Tenancy → Room1..RoomN → Keys & Utility → Signatures → Review
+  // NOTE: All hooks MUST be declared before any early returns (React Rules of Hooks)
+  const roomSteps = useMemo(() => (currentInspection?.rooms ?? []).map((r: any, i: number) => ({
+    key: `room_${i}`,
+    label: r.name,
+    icon: r.icon,
+  })), [currentInspection?.rooms]);
+
+  const steps: { key: WizardStep; label: string; icon: string }[] = useMemo(() => [
+    { key: 'details', label: 'Details', icon: '📋' },
+    ...roomSteps,
+    { key: 'keys', label: 'Keys & Utility', icon: '🔑' },
+    { key: 'reference', label: 'Move-in reference', icon: '📄' },
+    { key: 'signatures', label: 'Signatures', icon: '✍️' },
+    { key: 'payment', label: 'Payment', icon: '💳' },
+    { key: 'review', label: 'Review', icon: '✅' },
+  ], [roomSteps]);
+
+  const currentStepKey = steps[currentStep]?.key || 'details';
+  const allSignaturesCollected = (currentInspection?.signatures?.length ?? 0) >= 3;
+  const isRoomStep = typeof currentStepKey === 'string' && currentStepKey.startsWith('room_');
+  const currentRoomIdx = isRoomStep ? parseInt(currentStepKey.split('_')[1]) : -1;
+
+  // --- iOS RevenueCat purchase confirmation polling ---
+  // Same trust model as ReportPage.tsx: the backend webhook
+  // (/api/webhooks/revenuecat) is the ONLY thing that ever flips
+  // paymentData.paid for an in-app purchase. This never unlocks the report
+  // itself — it just asks the backend for the authoritative status.
+  const pollBackendForUnlock = useCallback((maxAttempts = 20, intervalMs = 3000) => {
+    if (!currentInspection?.id) return;
+    let attempts = 0;
+
+    // Helper that unlocks the report locally once the backend confirms payment.
+    const markPaid = (paymentStatus: any) => {
+      const { recordPayment } = useInspectionStore.getState();
+      recordPayment(currentInspection.id, {
+        paid: true,
+        amount: paymentStatus.amount || REPORT_PRICE,
+        currency: paymentStatus.currency || 'AED',
+        method: 'apple_pay',
+        paidAt: paymentStatus.paidAt,
+      });
+      setPaymentCompleted(true);
+      setIapState('idle');
+      setIapError('');
+      // Fire the payment-success confirmation email (iOS RevenueCat/IAP path).
+      // Idempotent + best-effort; never blocks the unlock.
+      notifyPaymentSuccess({
+        email: authUser?.email || '',
+        name: authUser?.name || '',
+        amount: paymentStatus.amount || REPORT_PRICE,
+        currency: paymentStatus.currency || 'AED',
+        reportId: currentInspection.id,
+      });
+    };
+
+    // SAFETY NET: if the webhook never flips paymentData.paid (delayed/missed
+    // webhook, or an event type it didn't handle), ask the backend to reconcile
+    // directly against RevenueCat's own record of this purchase. If RevenueCat
+    // confirms a valid purchase, the report unlocks without depending on the
+    // webhook having run at all — so the user is never permanently stuck.
+    const reconcileWithRevenueCat = async () => {
+      try {
+        const res = await client.api.fetch(`/api/inspections/${currentInspection.id}/reconcile-purchase`, {
+          method: 'POST',
+        });
+        if (res.ok) {
+          const data = await res.json().catch(() => ({}));
+          if (data?.paid === true) {
+            markPaid({ amount: REPORT_PRICE, currency: 'AED', paidAt: new Date().toISOString() });
+            return true;
+          }
+        }
+      } catch (e) {
+        console.warn('[InspectionForm] RevenueCat reconciliation failed:', e);
+      }
+      return false;
+    };
+
+    const tick = async () => {
+      attempts += 1;
+      try {
+        const res = await client.api.fetch(`/api/inspections/${currentInspection.id}`);
+        if (res.ok) {
+          const { data } = await res.json();
+          let paymentStatus: any = {};
+          if (data.paymentData && typeof data.paymentData === 'string') {
+            try { paymentStatus = JSON.parse(data.paymentData); } catch {}
+          } else if (data.payment && typeof data.payment === 'object') {
+            paymentStatus = data.payment;
+          }
+          if (paymentStatus?.paid === true) {
+            markPaid(paymentStatus);
+            return;
+          }
+        }
+      } catch (e) {
+        console.warn('[InspectionForm] Backend unlock poll failed:', e);
+      }
+      if (attempts < maxAttempts) {
+        pollTimerRef.current = setTimeout(tick, intervalMs);
+      } else {
+        // Poll timed out — try the direct RevenueCat reconciliation before
+        // giving up and showing an error.
+        const reconciled = await reconcileWithRevenueCat();
+        if (!reconciled) {
+          setIapState('error');
+          setIapError('Still confirming your purchase with Apple. This can take a moment — please try again shortly.');
+        }
+      }
+    };
+    tick();
+  }, [currentInspection?.id, authUser?.email, authUser?.name]);
+
+  // Clean up any pending poll timer on unmount.
+  useEffect(() => {
+    return () => {
+      if (pollTimerRef.current) clearTimeout(pollTimerRef.current);
+    };
+  }, []);
+
+  // On iOS, identify this report to RevenueCat (appUserID = inspectionId) and
+  // check whether it was already purchased before showing a purchase button —
+  // this alone never unlocks the report, it just avoids a redundant charge.
+  useEffect(() => {
+    if (!isIOSNative || !currentInspection?.id || paymentCompleted || currentInspection?.payment?.paid) return;
+    let cancelled = false;
+    (async () => {
+      setIapState('checking');
+      try {
+        await identifyReport(currentInspection.id);
+        const alreadyPurchased = await hasPurchasedReport();
+        if (cancelled) return;
+        if (alreadyPurchased) {
+          setIapState('confirming');
+          pollBackendForUnlock();
+        } else {
+          setIapState('idle');
+        }
+      } catch (err) {
+        if (cancelled) return;
+        console.error('[InspectionForm] RevenueCat identify/check failed:', err);
+        setIapState('idle');
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [isIOSNative, currentInspection?.id, paymentCompleted, currentInspection?.payment?.paid, pollBackendForUnlock]);
+
+  // Payment is server-authoritative. Refresh it whenever this draft opens and
+  // whenever the app returns to the foreground, so an unlock granted remotely
+  // appears on the same device without starting checkout again.
+  const refreshAuthoritativePayment = useCallback(async (showFeedback = false) => {
+    const reportId = currentInspection?.id;
+    if (!reportId) return false;
+    if (showFeedback) {
+      setPaymentCheckState('checking');
+      setPaymentCheckError('');
+    }
+    try {
+      const res = await client.api.fetch(`/api/inspections/${encodeURIComponent(reportId)}`);
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error || 'Unable to check report access.');
+      const rawPayment = body.data?.paymentData ?? body.data?.payment;
+      let paymentStatus: any = rawPayment && typeof rawPayment === 'object' ? rawPayment : {};
+      if (typeof rawPayment === 'string') {
+        try { paymentStatus = JSON.parse(rawPayment); } catch { paymentStatus = {}; }
+      }
+      if (paymentStatus?.paid !== true) {
+        if (showFeedback) setPaymentCheckError('This report is not unlocked yet.');
+        return false;
+      }
+      useInspectionStore.getState().recordPayment(reportId, {
+        paid: true,
+        amount: paymentStatus.amount || REPORT_PRICE,
+        currency: paymentStatus.currency || 'AED',
+        method: paymentStatus.provider || paymentStatus.method || 'card',
+        paidAt: paymentStatus.paidAt,
+        sessionId: paymentStatus.sessionId,
+      });
+      setPaymentCompleted(true);
+      setPaymentCheckError('');
+      return true;
+    } catch (error) {
+      if (showFeedback) setPaymentCheckError(error instanceof Error ? error.message : 'Unable to check report access.');
+      return false;
+    } finally {
+      if (showFeedback) setPaymentCheckState('idle');
+    }
+  }, [currentInspection?.id]);
+
+  useEffect(() => {
+    if (!currentInspection?.id || paymentCompleted || currentInspection.payment?.paid) return;
+    void refreshAuthoritativePayment();
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') void refreshAuthoritativePayment();
+    };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => document.removeEventListener('visibilitychange', onVisible);
+  }, [currentInspection?.id, currentInspection?.payment?.paid, paymentCompleted, refreshAuthoritativePayment]);
+
+  const handleNativePurchase = useCallback(async () => {
+    // RACE-CONDITION FIX (iOS only): the RevenueCat webhook resolves the report
+    // to unlock purely by app_user_id === inspectionId, and returns 200 (doing
+    // nothing) when no matching inspection row exists. If we start the purchase
+    // before the inspection is saved to the backend, the webhook can arrive
+    // first, find zero rows, and silently no-op — leaving the client polling
+    // forever until it times out. So we MUST guarantee the row exists first.
+    setIapState('purchasing');
+    setIapError('');
+
+    const synced = await syncCurrentInspection();
+    if (!synced) {
+      setIapState('error');
+      setIapError('Could not save your inspection before purchase. Please check your connection and try again.');
+      return;
+    }
+
+    const outcome = await purchaseReport();
+    if (outcome.status === 'success') {
+      // Purchase accepted by Apple/RevenueCat — but the client NEVER unlocks
+      // the report itself. Show a confirming state and wait for the verified
+      // backend webhook to flip paymentData.paid.
+      setIapState('confirming');
+      pollBackendForUnlock();
+    } else if (outcome.status === 'cancelled') {
+      setIapState('error');
+      setIapError('Purchase was cancelled.');
+    } else {
+      setIapState('error');
+      setIapError(outcome.message);
+    }
+  }, [pollBackendForUnlock, syncCurrentInspection]);
+
+  // Unified "unlock" entry point used by the Payment step below. iOS uses
+  // the native RevenueCat purchase flow; Android/web keep the existing
+  // Stripe flow completely unchanged.
+  const handleUnlockClick = useCallback(() => {
+    if (isIOSNative) {
+      if (iapState === 'purchasing' || iapState === 'confirming') return;
+      handleNativePurchase();
+    } else {
+      setShowPaymentModal(true);
+    }
+  }, [isIOSNative, iapState, handleNativePurchase]);
+
+  // Validation for each step
+  const isEmailValid = useCallback((email: string): boolean => {
+    if (!email || email.trim().length === 0) return false;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }, []);
+
+  const isPropertyValid = useCallback((): boolean => {
+    const p = currentInspection.property;
+    return !!(p.makaniNumber && p.area && p.city);
+  }, [currentInspection.property]);
+
+  // Phone number is NOT required on iOS (Apple Guideline 5.1.1(v) — it is
+  // not essential to the app's core functionality: report generation works
+  // fine with a blank phone field, it just prints as blank on the PDF).
+  // Android/web keep the existing required-phone behavior unchanged.
+  const isPartiesValid = useCallback((): boolean => {
+    const t = currentInspection.tenant;
+    const l = currentInspection.landlord;
+    return !!(
+      t.name && (isIOSNative || t.phone) && isEmailValid(t.email) &&
+      l.name && (isIOSNative || l.phone) && isEmailValid(l.email)
+    );
+  }, [currentInspection.tenant, currentInspection.landlord, isEmailValid, isIOSNative]);
+
+  // Contract Number is no longer collected (removed as a non-essential
+  // field during the Property+Parties+Tenancy consolidation). Lease End must
+  // not be before Lease Start.
+  const isTenancyValid = useCallback((): boolean => {
+    const tn = currentInspection.tenancy;
+    if (!tn.leaseStartDate || !tn.leaseEndDate) return false;
+    return new Date(tn.leaseEndDate).getTime() >= new Date(tn.leaseStartDate).getTime();
+  }, [currentInspection.tenancy]);
+
+  // Combined validity for the single consolidated "Details" step (Property +
+  // Involved Parties + Tenancy).
+  const isDetailsValid = useCallback((): boolean => {
+    return isPropertyValid() && isPartiesValid() && isTenancyValid();
+  }, [isPropertyValid, isPartiesValid, isTenancyValid]);
+
+  // FIX (inspection form submittable with no input): previously a room step
+  // was considered valid as long as no item had been *partially* filled in —
+  // meaning a user could tab straight through every room without entering
+  // any data at all. Now every room must have at least one non-General item
+  // fully assessed (condition + comment + photo) before the step is valid,
+  // in addition to the existing "if you start an item you must finish it" rule.
+  const isRoomValid = useCallback((roomIndex: number): boolean => {
+    const room = currentInspection.rooms[roomIndex];
+    if (!room) return true;
+    let anyFullyAssessed = false;
+    for (const item of room.items) {
+      if (item.name === 'General') continue;
+      const hasCondition = isRated(item);
+      const hasComment = item.comments.trim().length > 0;
+      const hasPhotos = item.photos.length > 0;
+      const filledAny = hasCondition || hasComment || hasPhotos;
+      if (filledAny && (!hasCondition || !hasPhotos)) {
+        return false;
+      }
+      if (hasCondition && hasPhotos) anyFullyAssessed = true;
+    }
+    return anyFullyAssessed;
+  }, [currentInspection.rooms]);
+
+  const getValidationError = useCallback((): string | null => {
+    if (currentStepKey === 'details') {
+      if (!isPropertyValid()) return 'Makani Number, Area, and City are required';
+      if (!isPartiesValid()) return isIOSNative ? 'Landlord and Tenant name and email are required' : 'Landlord and Tenant name, phone, and email are required';
+      if (!isTenancyValid()) {
+        const tn = currentInspection.tenancy;
+        if (tn.leaseStartDate && tn.leaseEndDate && new Date(tn.leaseEndDate).getTime() < new Date(tn.leaseStartDate).getTime()) {
+          return 'Lease End Date cannot be before Lease Start Date';
+        }
+        return 'Lease Start Date and Lease End Date are required';
+      }
+      return null;
+    }
+    if (isRoomStep && !isRoomValid(currentRoomIdx)) {
+      const room = currentInspection.rooms[currentRoomIdx];
+      for (const item of room.items) {
+        if (item.name === 'General') continue;
+        const hasCondition = isRated(item);
+        const hasComment = item.comments.trim().length > 0;
+        const hasPhotos = item.photos.length > 0;
+        const filledAny = hasCondition || hasComment || hasPhotos;
+        if (filledAny && (!hasCondition || !hasPhotos)) {
+          return `"${item.name}" in ${room.name}: Photo and Condition are required; notes are optional`;
+        }
+      }
+      return `Please fully assess at least one item in ${room.name} (Condition and Photo; notes are optional) before continuing`;
+    }
+    if (currentStepKey === 'signatures') return allSignaturesCollected ? null : 'All three signatures are required';
+    // Payment never blocks finishing or saving the inspection. Unpaid reports
+    // remain locked only for viewing, PDF download, and email.
+    if (currentStepKey === 'payment') return null;
+    return null;
+  }, [currentStepKey, isPropertyValid, isPartiesValid, isTenancyValid, isRoomStep, currentRoomIdx, currentInspection.rooms, currentInspection.tenancy, allSignaturesCollected, isIOSNative]);
+
+  const canProceed = useCallback((): boolean => getValidationError() === null, [getValidationError]);
+
+  // Tracks whether the user has attempted to advance from the current step
+  // while it was invalid — used to switch on inline per-field error messages
+  // instead of only a single generic banner. Resets whenever the step changes.
+  const [showStepErrors, setShowStepErrors] = useState(false);
+
+  // Check if a specific step (by index) has valid data up to that point
+  const canJumpToStep = useCallback((targetStep: number): boolean => {
+    // Always allow going backwards
+    if (targetStep <= currentStep) return true;
+    // Allow going forward one step at a time only
+    if (targetStep === currentStep + 1) return canProceed();
+    // Block jumping ahead more than one step
+    return false;
+  }, [currentStep, canProceed]);
+
+  const goNext = () => {
+    // Don't allow going forward if inspection is completed
+    if (currentInspection?.status === 'completed') return;
+    if (!canProceed()) {
+      // Validate on click and block navigation with a clear, visible error —
+      // switches on inline per-field messages in addition to the banner.
+      setShowStepErrors(true);
+      return;
+    }
+    setShowStepErrors(false);
+    if (currentStep < steps.length - 1) {
+      const nextStep = currentStep + 1;
+      setCurrentStep(nextStep);
+      // Sync currentRoomIndex when entering a room step
+      const nextKey = steps[nextStep]?.key;
+      if (typeof nextKey === 'string' && nextKey.startsWith('room_')) {
+        setCurrentRoomIndex(parseInt(nextKey.split('_')[1]));
+      }
+    }
+  };
+
+  const goPrev = () => {
+    // Don't allow going back if inspection is completed
+    if (currentInspection?.status === 'completed') return;
+    setShowStepErrors(false);
+    if (currentStep > 0) {
+      const prevStep = currentStep - 1;
+      setCurrentStep(prevStep);
+      const prevKey = steps[prevStep]?.key;
+      if (typeof prevKey === 'string' && prevKey.startsWith('room_')) {
+        setCurrentRoomIndex(parseInt(prevKey.split('_')[1]));
+      }
+    }
+  };
+
+  // Handle Android hardware back button — step through wizard instead of exiting
+  useEffect(() => {
+    const handleBackButton = () => {
+      if (currentInspection?.status === 'completed') {
+        navigate('/history');
+        return;
+      }
+      if (currentStep > 0) {
+        goPrev();
+      } else {
+        // At first step — confirm and exit to dashboard
+        if (window.confirm('Exit inspection? Your draft is saved. Keep the app open if any photos are not yet backed up.')) {
+          navigate('/');
+        }
+      }
+    };
+
+    window.addEventListener('capacitor-back-button', handleBackButton);
+    return () => window.removeEventListener('capacitor-back-button', handleBackButton);
+  }, [currentStep, currentInspection, navigate]);
+
+  // Guard: All hooks are now declared above. Safe to do early return here.
+  if (!currentInspection) {
+    navigate('/new');
+    return null;
+  }
+
+  const checkPhotosBeforePayment = async () => {
+    setPhotoCheckBusy(true);
+    try {
+      await retryPhotoBackups();
+      const current = useInspectionStore.getState().currentInspection || currentInspection;
+      const result = await runPhotoPreflight(current);
+      setCurrentInspection(result.inspection);
+      setPhotoFailures(result.failed);
+      if (!result.failed.length) handleUnlockClick();
+    } catch (error) {
+      console.error('[InspectionForm] Photo pre-flight failed:', error);
+      alert('The photo check could not finish. Payment has not started. Please reconnect and retry.');
+    } finally { setPhotoCheckBusy(false); }
+  };
+
+  const continueWithoutFailedPhotos = async () => {
+    const current = useInspectionStore.getState().currentInspection || currentInspection;
+    const updated = excludePhotos(current, photoFailures.map(failure => failure.photoId));
+    setCurrentInspection(updated);
+    await saveInspection(updated);
+    setPhotoFailures([]);
+    handleUnlockClick();
+  };
+
+  const retakeFailedPhoto = (failure: PhotoDiagnostic) => {
+    if (failure.roomId) {
+      const roomIndex = currentInspection.rooms.findIndex(room => room.id === failure.roomId);
+      if (roomIndex >= 0) { setCurrentRoomIndex(roomIndex); setCurrentStep(roomIndex + 1); }
+    } else if (failure.roomName === 'Property') {
+      setCurrentStep(currentInspection.rooms.length + 1);
+    }
+    setPhotoFailures([]);
+  };
+
+  const handleComplete = () => {
+    if (!currentInspection) return;
+    if (currentInspection.status === 'completed') {
+      // Already completed, just navigate to report
+      navigate(`/report/${currentInspection.id}`);
+      return;
+    }
+    // Completing and saving an inspection is independent from payment. Payment
+    // only controls report viewing, PDF download, and email access.
+    const id = currentInspection.id;
+    completeInspection();
+    // Small delay to ensure state is updated before navigation
+    setTimeout(() => {
+      navigate(`/report/${id}`);
+    }, 100);
+  };
+
+  const handlePaymentSuccess = () => {
+    // The server has already verified and persisted the payment before this
+    // callback is invoked. Refresh the authoritative draft/payment record.
+    setPaymentCompleted(true);
+    void useInspectionStore.getState().syncFromBackend();
+  };
+
+  const validationError = getValidationError();
+
+  return (
+    <div className="max-w-4xl mx-auto">
+      <BackupNotice />
+      {/* Completed/Locked Banner */}
+      {currentInspection?.status === 'completed' && (
+        <div className="mb-4 bg-emerald-50 border border-emerald-200 rounded-xl p-4 flex items-center gap-3">
+          <span className="text-emerald-500 text-lg">🔒</span>
+          <div>
+            <p className="text-sm font-semibold text-emerald-800">Inspection Completed & Locked</p>
+            <p className="text-xs text-emerald-600">This inspection has been completed and signed. No further changes are allowed.</p>
+          </div>
+          <button
+            onClick={() => navigate(`/report/${currentInspection.id}`)}
+            className="ml-auto px-4 py-2 rounded-lg text-xs font-medium bg-emerald-600 text-white hover:bg-emerald-700 transition-all"
+          >
+            View Report →
+          </button>
+        </div>
+      )}
+      {/* Header */}
+      <div className="mb-6">
+        <div className="flex items-center gap-3 mb-4">
+          <button aria-label="Go back" onClick={() => safeGoBack(navigate, '/')} className="p-2 rounded-lg hover:bg-slate-100 transition-colors">
+            <svg className="w-5 h-5 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <div>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Inspection Form</h1>
+            <p className="text-sm text-slate-500">
+              {getPropertyTypeLabel(currentInspection.propertyType)}
+            </p>
+          </div>
+        </div>
+
+        {/* Step Indicator */}
+        <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto pb-2">
+          {steps.map((step, i) => {
+            const canJump = canJumpToStep(i);
+            const isAccessible = i <= currentStep || (i === currentStep + 1 && canProceed());
+            return (
+              <button
+                key={step.key}
+                onClick={() => isAccessible && (setShowStepErrors(false), setCurrentStep(i))}
+                disabled={!isAccessible}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium whitespace-nowrap transition-all ${
+                  i === currentStep
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25'
+                    : isAccessible
+                    ? 'bg-blue-50 text-blue-700 hover:bg-blue-100 cursor-pointer'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed opacity-60'
+                }`}
+              >
+                <span>{step.icon}</span>
+                <span className="hidden sm:inline">{step.label}</span>
+                <span className="sm:hidden">{i + 1}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Step Content */}
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 sm:p-8 mb-6">
+        {currentStepKey === 'details' && (
+          <DetailsStep
+            property={currentInspection.property}
+            onUpdateProperty={updateProperty}
+            tenant={currentInspection.tenant}
+            landlord={currentInspection.landlord}
+            onUpdateTenant={updateTenant}
+            onUpdateLandlord={updateLandlord}
+            isIOSNative={isIOSNative}
+            tenancy={currentInspection.tenancy}
+            onUpdateTenancy={updateTenancy}
+            showErrors={showStepErrors}
+            isEmailValid={isEmailValid}
+          />
+        )}
+        {isRoomStep && (
+          <SingleRoomStep
+            key={`room-${currentRoomIdx}`}
+            room={currentInspection.rooms[currentRoomIdx]}
+            roomIndex={currentRoomIdx}
+            totalRooms={currentInspection.rooms.length}
+            onUpdateItemCondition={updateItemCondition}
+            onUpdateItemComments={updateItemComments}
+            onToggleItemChecked={toggleItemChecked}
+            onAddPhotoToItem={addPhotoToItem}
+            onRemovePhotoFromItem={removePhotoFromItem}
+            onUpdateRoomComments={updateRoomComments}
+            onAddItem={addItem}
+            onRemoveItem={removeItem}
+            showError={showStepErrors && !isRoomValid(currentRoomIdx)}
+            retakeItemId={retakeItemId}
+          />
+        )}
+        {currentStepKey === 'keys' && <>
+          <KeysStep
+            propertyItems={currentInspection.propertyItems.filter(item => item.id !== 'utility_meters' || item.value || item.comments || item.photos.length)}
+            onUpdatePropertyItem={updatePropertyItem}
+            onAddPhotoToPropertyItem={addPhotoToPropertyItem}
+            onRemovePhotoFromPropertyItem={removePhotoFromPropertyItem}
+            retakeItemId={retakeItemId}
+          />
+          <UtilityMeters />
+        </>}
+        {currentStepKey === 'reference' && <MoveInReference />}
+        {currentStepKey === 'signatures' && (
+          <SignaturesStep
+            tenant={currentInspection.tenant}
+            landlord={currentInspection.landlord}
+            inspectorName={currentInspection.meta.inspectorName}
+            signatures={currentInspection.signatures}
+            onAddSignature={addSignature}
+            onRemoveSignature={removeSignature}
+          />
+        )}
+        {currentStepKey === 'payment' && (
+          <PaymentStep
+            inspection={currentInspection}
+            reportPrice={REPORT_PRICE}
+            paymentCompleted={paymentCompleted}
+            onOpenPayment={handleUnlockClick}
+            isIOSNative={isIOSNative}
+            iapState={iapState}
+            iapError={iapError}
+            paymentCheckState={paymentCheckState}
+            paymentCheckError={paymentCheckError}
+            onCheckAccess={() => { void refreshAuthoritativePayment(true); }}
+          />
+        )}
+        {currentStepKey === 'review' && (
+          <ReviewStep
+            inspection={currentInspection}
+            onAddOverallPhoto={addOverallPhoto}
+            onRemoveOverallPhoto={removeOverallPhoto}
+            onUpdateGeneralNotes={updateGeneralNotes}
+            onUpdatePropertyItem={updatePropertyItem}
+            onAddPhotoToPropertyItem={addPhotoToPropertyItem}
+            onRemovePhotoFromPropertyItem={removePhotoFromPropertyItem}
+          />
+        )}
+      </div>
+
+      {/* Validation Error */}
+      {!canProceed() && validationError && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-sm text-red-700">
+          ⚠️ {validationError}
+        </div>
+      )}
+
+      {/* Navigation */}
+      <div className="flex items-center justify-between">
+        <button
+          onClick={goPrev}
+          disabled={currentStep === 0}
+          className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+            currentStep === 0
+              ? 'text-slate-300 cursor-not-allowed'
+              : 'text-slate-600 hover:bg-slate-100'
+          }`}
+        >
+          ← Previous
+        </button>
+
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => { saveDraft(); }}
+            className="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-slate-100 transition-all"
+          >
+            Save Draft
+          </button>
+
+          {currentStep < steps.length - 1 ? (
+            <button
+              onClick={goNext}
+              disabled={!canProceed()}
+              className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all active:scale-[0.98] ${
+                canProceed()
+                  ? 'bg-blue-600 text-white hover:bg-blue-700 shadow-md shadow-blue-500/25'
+                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+              }`}
+            >
+              Next →
+            </button>
+          ) : (
+            <button
+              onClick={handleComplete}
+              disabled={!allSignaturesCollected}
+              className={`px-6 py-2.5 rounded-xl text-sm font-semibold transition-all active:scale-[0.98] ${
+                allSignaturesCollected
+                  ? 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-md shadow-emerald-500/25'
+                  : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+              }`}
+            >
+              {!allSignaturesCollected
+                ? 'Signatures Required'
+                : 'Complete & Generate Report ✓'}
+            </button>
+          )}
+        </div>
+      </div>
+
+      <PhotoPreflightModal
+        failures={photoFailures}
+        busy={photoCheckBusy}
+        onRetry={() => { void checkPhotosBeforePayment(); }}
+        onRetake={retakeFailedPhoto}
+        onContinue={() => { void continueWithoutFailedPhotos(); }}
+        onClose={() => setPhotoFailures([])}
+      />
+      <PaymentModal
+        isOpen={showPaymentModal}
+        onClose={() => setShowPaymentModal(false)}
+        onPaymentSuccess={handlePaymentSuccess}
+        amount={REPORT_PRICE}
+        currency="AED"
+        reportId={currentInspection.id}
+      />
+    </div>
+  );
+}
+
+// Details Step — consolidated Property Details + Involved Parties + Tenancy
+// Details into a single scrollable step (previously 3 separate wizard
+// steps). Sections are separated by clear headers/dividers. Agent details
+// and Contract Number were removed as non-essential fields for the report.
+const DetailsStep = React.memo(function DetailsStep({
+  property, onUpdateProperty,
+  tenant, landlord, onUpdateTenant, onUpdateLandlord, isIOSNative,
+  tenancy, onUpdateTenancy,
+  showErrors, isEmailValid,
+}: {
+  property: any; onUpdateProperty: (p: any) => void;
+  tenant: any; landlord: any;
+  onUpdateTenant: (t: any) => void; onUpdateLandlord: (l: any) => void;
+  isIOSNative: boolean;
+  tenancy: any; onUpdateTenancy: (t: any) => void;
+  showErrors: boolean;
+  isEmailValid: (email: string) => boolean;
+}) {
+  const leaseDateOrderInvalid = !!(
+    tenancy.leaseStartDate && tenancy.leaseEndDate &&
+    new Date(tenancy.leaseEndDate).getTime() < new Date(tenancy.leaseStartDate).getTime()
+  );
+
+  return (
+    <div className="space-y-10">
+      <div>
+        <h2 className="text-lg font-semibold text-slate-800 mb-1">Property, Parties & Tenancy</h2>
+        <p className="text-sm text-slate-400">Enter the property, involved parties, and lease information for the inspection report.</p>
+      </div>
+
+      {/* ================= SECTION 1: Property Details ================= */}
+      <section>
+        <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs">🏠</span>
+          Property Details
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <InputField label="Makani Number *" value={property.makaniNumber || ''} onChange={(v) => onUpdateProperty({ makaniNumber: v })} placeholder="e.g., 123456" error={showErrors && !property.makaniNumber ? 'Makani Number is required' : undefined} />
+          <InputField label="Building Name" value={property.buildingName || ''} onChange={(v) => onUpdateProperty({ buildingName: v })} placeholder="e.g., Marina Heights Tower" />
+          <InputField label="Unit / Apartment Number" value={property.unitNumber || ''} onChange={(v) => onUpdateProperty({ unitNumber: v })} placeholder="e.g., 1204" />
+          <AutocompleteInput label="Area / Community *" value={property.area} onChange={(v) => onUpdateProperty({ area: v })} placeholder="e.g., Studio City" suggestions={DUBAI_AREAS} error={showErrors && !property.area ? 'Area / Community is required' : undefined} />
+          <AutocompleteInput label="City *" value={property.city} onChange={(v) => onUpdateProperty({ city: v })} placeholder="e.g., Dubai" suggestions={DUBAI_CITIES} error={showErrors && !property.city ? 'City is required' : undefined} />
+          <InputField label="Total Area (sq ft)" value={property.totalAreaSqft?.toString() || ''} onChange={(v) => onUpdateProperty({ totalAreaSqft: parseInt(v) || undefined })} type="number" placeholder="e.g., 1200" />
+          <InputField label="Bedrooms" value={property.bedrooms?.toString() || ''} onChange={(v) => onUpdateProperty({ bedrooms: parseInt(v) || undefined })} type="number" placeholder="e.g., 2" />
+          <InputField label="Bathrooms" value={property.bathrooms?.toString() || ''} onChange={(v) => onUpdateProperty({ bathrooms: parseInt(v) || undefined })} type="number" placeholder="e.g., 2" />
+        </div>
+
+        <div className="flex items-center gap-3 mt-4">
+          <label className="text-sm font-medium text-slate-700">Furnished:</label>
+          <button
+            onClick={() => onUpdateProperty({ furnished: !property.furnished })}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              property.furnished
+                ? 'bg-blue-100 text-blue-700 border border-blue-300'
+                : 'bg-slate-100 text-slate-500 border border-slate-200'
+            }`}
+          >
+            {property.furnished ? 'Yes ✓' : 'No'}
+          </button>
+        </div>
+      </section>
+
+      <hr className="border-slate-100" />
+
+      {/* ================= SECTION 2: Involved Parties ================= */}
+      <section>
+        <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-purple-100 rounded-full flex items-center justify-center text-xs">👥</span>
+          Involved Parties
+        </h3>
+        <p className="text-sm text-slate-400 mb-4 -mt-1">Enter details for the tenant and landlord.</p>
+
+        {/* Landlord */}
+        <div className="p-5 bg-slate-50 rounded-xl border border-slate-100 mb-4">
+          <h4 className="text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <span className="w-6 h-6 bg-amber-100 rounded-full flex items-center justify-center text-xs">🏢</span>
+            Landlord Details
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <InputField label="Full Name *" value={landlord.name} onChange={(v) => onUpdateLandlord({ name: v })} placeholder="Landlord name" error={showErrors && !landlord.name ? 'Landlord name is required' : undefined} />
+            <PhoneInput label={isIOSNative ? 'Phone' : 'Phone *'} value={landlord.phone} onChange={(v) => onUpdateLandlord({ phone: v })} error={showErrors && !isIOSNative && !landlord.phone ? 'Landlord phone is required' : undefined} />
+            <InputField label="Email *" value={landlord.email} onChange={(v) => onUpdateLandlord({ email: v })} placeholder="email@example.com" error={showErrors && !isEmailValid(landlord.email) ? 'A valid landlord email is required' : undefined} />
+          </div>
+        </div>
+
+        {/* Tenant */}
+        <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+          <h4 className="text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs">👤</span>
+            Tenant Details
+          </h4>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <InputField label="Full Name *" value={tenant.name} onChange={(v) => onUpdateTenant({ name: v })} placeholder="Tenant name" error={showErrors && !tenant.name ? 'Tenant name is required' : undefined} />
+            <PhoneInput label={isIOSNative ? 'Phone' : 'Phone *'} value={tenant.phone} onChange={(v) => onUpdateTenant({ phone: v })} error={showErrors && !isIOSNative && !tenant.phone ? 'Tenant phone is required' : undefined} />
+            <InputField label="Email *" value={tenant.email} onChange={(v) => onUpdateTenant({ email: v })} placeholder="email@example.com" error={showErrors && !isEmailValid(tenant.email) ? 'A valid tenant email is required' : undefined} />
+          </div>
+        </div>
+      </section>
+
+      <hr className="border-slate-100" />
+
+      {/* ================= SECTION 3: Tenancy Details ================= */}
+      <section>
+        <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wide mb-3 flex items-center gap-2">
+          <span className="w-6 h-6 bg-emerald-100 rounded-full flex items-center justify-center text-xs">📄</span>
+          Tenancy Details
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <InputField label="Lease Start Date *" value={tenancy.leaseStartDate} onChange={(v) => onUpdateTenancy({ leaseStartDate: v })} type="date" error={showErrors && !tenancy.leaseStartDate ? 'Lease Start Date is required' : undefined} />
+          <InputField label="Lease End Date *" value={tenancy.leaseEndDate} onChange={(v) => onUpdateTenancy({ leaseEndDate: v })} type="date" error={(showErrors && !tenancy.leaseEndDate) ? 'Lease End Date is required' : leaseDateOrderInvalid ? 'Lease End Date cannot be before Lease Start Date' : undefined} />
+        </div>
+      </section>
+    </div>
+  );
+});
+
+// Single Room Step (one room per page, used in new navigation flow)
+const SingleRoomStep = React.memo(function SingleRoomStep({
+  room, roomIndex, totalRooms,
+  onUpdateItemCondition, onUpdateItemComments, onToggleItemChecked,
+  onAddPhotoToItem, onRemovePhotoFromItem, onUpdateRoomComments,
+  onAddItem, onRemoveItem, showError, retakeItemId,
+}: {
+  room: any; roomIndex: number; totalRooms: number;
+  onUpdateItemCondition: (ri: number, itemId: string, c: ConditionRating) => void;
+  onUpdateItemComments: (ri: number, itemId: string, c: string) => void;
+  onToggleItemChecked: (ri: number, itemId: string) => void;
+  onAddPhotoToItem: (ri: number, itemId: string, p: Photo) => void;
+  onRemovePhotoFromItem: (ri: number, itemId: string, pid: string) => void;
+  onUpdateRoomComments: (ri: number, c: string) => void;
+  onAddItem: (ri: number, item: InspectionItem) => void;
+  onRemoveItem: (ri: number, itemId: string) => void;
+  showError?: boolean;
+  retakeItemId?: string;
+}) {
+  const [expandedItem, setExpandedItem] = useState<string | null>(retakeItemId || null);
+  const [newItemName, setNewItemName] = useState('');
+  const [showAddItem, setShowAddItem] = useState(false);
+  const [notePrompt, setNotePrompt] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!retakeItemId || !room?.items?.some((item: InspectionItem) => item.id === retakeItemId)) return;
+    setExpandedItem(retakeItemId);
+    const frame = requestAnimationFrame(() => document.getElementById(`inspection-item-${retakeItemId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+    return () => cancelAnimationFrame(frame);
+  }, [retakeItemId, room?.items]);
+
+  const handlePhoto = async (itemId: string) => {
+    try {
+      const photo = await capturePhoto();
+      if (!photo) return;
+      onAddPhotoToItem(roomIndex, itemId, photo);
+    } catch (err) {
+      console.error('[InspectionForm] capturePhoto failed:', err);
+    }
+  };
+
+  const handleAddItem = () => {
+    if (!newItemName.trim()) return;
+    onAddItem(roomIndex, {
+      id: '', name: newItemName.trim(), category: 'custom',
+      condition: null, comments: '', photos: [], checked: false,
+    });
+    setNewItemName('');
+    setShowAddItem(false);
+  };
+
+  // De-duplicate defensively at render time (task: duplicate items within a
+  // room) — in case a stale cached copy of this room (from before the
+  // template/store hardening) still has repeated entries, they are collapsed
+  // to one occurrence by ID (falling back to name) before rendering, without
+  // mutating the underlying store data.
+  const displayItems = useMemo(() => dedupeRoomItems(room?.items || []), [room?.items]);
+
+  if (!room) return null;
+
+  const completedItems = displayItems.filter(isRated).length;
+  const totalItems = displayItems.length;
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <div className="flex items-center gap-2 mb-1">
+          <span className="text-2xl">{room.icon}</span>
+          <h2 className="text-lg font-semibold text-slate-800">{room.name}</h2>
+        </div>
+        <p className="text-sm text-slate-400">Room {roomIndex + 1} of {totalRooms} — {completedItems}/{totalItems} items assessed</p>
+        <div className="mt-2 h-2 bg-slate-100 rounded-full overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full transition-all duration-500"
+            style={{ width: `${totalItems > 0 ? (completedItems / totalItems) * 100 : 0}%` }} />
+        </div>
+        {showError && (
+          <p className="text-xs text-red-500 mt-2">
+            ⚠️ Please fully assess at least one item below (Condition and Photo; notes are optional) before continuing.
+          </p>
+        )}
+      </div>
+
+      {/* Items */}
+      <div className="space-y-2">
+        {displayItems.map((item: any) => (
+          <div id={`inspection-item-${item.id}`} key={item.id} className={`bg-white rounded-xl border transition-all ${item.checked ? 'border-emerald-200' : 'border-slate-200'}`}>
+            <div className="flex items-center gap-3 p-3 cursor-pointer"
+              onClick={() => setExpandedItem(expandedItem === item.id ? null : item.id)}>
+              <button onClick={(e) => { e.stopPropagation(); onToggleItemChecked(roomIndex, item.id); }}
+                className={`w-5 h-5 rounded border-2 flex items-center justify-center flex-shrink-0 transition-all ${item.checked ? 'bg-emerald-500 border-emerald-500' : 'border-slate-300 hover:border-slate-400'}`}>
+                {item.checked && <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>}
+              </button>
+              <div className="flex-1 min-w-0">
+                <span className="text-sm font-medium text-slate-700">{item.name}</span>
+              </div>
+              {item.condition && (
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${conditionOptions.find(c => c.value === item.condition)?.activeColor || ''}`}>{conditionOptions.find(c => c.value === item.condition)?.label}</span>
+              )}
+              {item.photos.length > 0 && <span className="text-xs text-slate-400">📷 {item.photos.length}</span>}
+              {item.name !== 'General' && (
+                <button onClick={(e) => { e.stopPropagation(); if (confirm(`Remove "${item.name}"?`)) onRemoveItem(roomIndex, item.id); }}
+                  className="text-red-400 hover:text-red-600 active:text-red-700 transition-colors p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" title="Delete item">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                </button>
+              )}
+              <svg className={`w-4 h-4 text-slate-400 transition-transform ${expandedItem === item.id ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
+            </div>
+
+            {expandedItem === item.id && (
+              <div className="px-3 pb-3 border-t border-slate-100 pt-3 space-y-3">
+                <div>
+                  <span className="text-xs font-medium text-slate-500 block mb-2">Condition Rating *</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {conditionOptions.map((opt) => (
+                      <button key={opt.value} onClick={() => { onUpdateItemCondition(roomIndex, item.id, opt.value); if ((opt.value === 'fair' || opt.value === 'poor') && !item.comments.trim()) setNotePrompt(item.id); }}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${item.condition === opt.value ? opt.activeColor : opt.color}`}>{opt.label}</button>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <span className="text-xs font-medium text-slate-500 block mb-1">Comments (optional)</span>
+                  {notePrompt === item.id && <div className="mb-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-900">Please add a note explaining the {item.condition === 'fair' ? 'Fair' : 'Issue'} rating, if useful. <button onClick={() => setNotePrompt(null)} className="underline font-medium">Skip note</button></div>}
+                  <textarea aria-label={`Note for ${item.name}`} value={item.comments} onChange={(e) => onUpdateItemComments(roomIndex, item.id, e.target.value)}
+                    placeholder="Add notes about this item..."
+                    className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" rows={2} />
+                </div>
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-medium text-slate-500">Photos *</span>
+                    <button onClick={() => handlePhoto(item.id)} className="text-xs text-blue-600 hover:text-blue-700 font-medium">📷 Add Photo</button>
+                  </div>
+                  {item.photos.length > 0 && (
+                    <div className="flex gap-2 overflow-x-auto pb-1">
+                      {item.photos.map((photo: Photo) => (
+                        <div key={photo.id} className="relative flex-shrink-0 group">
+                          <img src={photo.url || undefined} alt={photo.url ? "Inspection evidence" : "Photo not yet backed up"} className="w-16 h-16 object-cover rounded-lg border border-slate-200" />
+                          {(photo.gpsLat === undefined || photo.gpsLat === null) && (
+                            <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-amber-500 text-white rounded-full text-[7px] flex items-center justify-center" title="No GPS data">⚠</div>
+                          )}
+                          <button aria-label="Remove photo" onClick={() => onRemovePhotoFromItem(roomIndex, item.id, photo.id)}
+                            className="absolute -top-2 -right-2 w-8 h-8 min-w-[44px] min-h-[44px] bg-red-500 text-white rounded-full text-sm flex items-center justify-center opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-md active:bg-red-600">×</button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Add Item */}
+      {showAddItem ? (
+        <div className="flex gap-2 items-center p-3 bg-white rounded-xl border border-blue-200">
+          <input type="text" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} placeholder="Item name"
+            className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onKeyDown={(e) => e.key === 'Enter' && handleAddItem()} autoFocus />
+          <button onClick={handleAddItem} className="px-3 py-2 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700">Add</button>
+          <button onClick={() => { setShowAddItem(false); setNewItemName(''); }} className="px-3 py-2 bg-slate-100 text-slate-600 rounded-lg text-xs font-medium hover:bg-slate-200">Cancel</button>
+        </div>
+      ) : (
+        <button onClick={() => setShowAddItem(true)} className="w-full py-2 border-2 border-dashed border-slate-200 rounded-xl text-sm text-slate-400 hover:text-blue-600 hover:border-blue-300 transition-all font-medium">+ Add Custom Item</button>
+      )}
+
+      {/* Room Comments */}
+      <div>
+        <span className="text-xs font-medium text-slate-500 block mb-1">Room General Notes</span>
+        <textarea value={room.overallComments} onChange={(e) => onUpdateRoomComments(roomIndex, e.target.value)}
+          placeholder="Overall notes for this room..."
+          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" rows={2} />
+      </div>
+    </div>
+  );
+});
+
+// Payment Step
+const PaymentStep = React.memo(function PaymentStep({
+  inspection, reportPrice, paymentCompleted, onOpenPayment, isIOSNative, iapState, iapError,
+  paymentCheckState, paymentCheckError, onCheckAccess,
+}: {
+  inspection: any; reportPrice: number; paymentCompleted: boolean;
+  onOpenPayment: () => void;
+  isIOSNative: boolean;
+  iapState: 'idle' | 'checking' | 'purchasing' | 'confirming' | 'error';
+  iapError: string;
+  paymentCheckState: 'idle' | 'checking' | 'error';
+  paymentCheckError: string;
+  onCheckAccess: () => void;
+}) {
+  const paid = inspection.payment?.paid || paymentCompleted;
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-lg font-semibold text-slate-800 mb-1">Payment</h2>
+        <p className="text-sm text-slate-400">Pay to generate your professional property condition report.</p>
+      </div>
+
+      <div className="p-6 bg-gradient-to-br from-slate-50 to-blue-50 rounded-2xl border border-slate-100">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="w-14 h-14 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/25">
+            <span className="text-2xl">📄</span>
+          </div>
+          <div>
+            <h3 className="text-base font-bold text-slate-800">Property Condition Report</h3>
+            <p className="text-xs text-slate-500">RPT-{inspection.id.slice(0, 8).toUpperCase()}</p>
+          </div>
+        </div>
+
+        {/* Report Summary */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <div className="bg-white rounded-xl p-3 border border-slate-100">
+            <div className="text-xs text-slate-400">Rooms</div>
+            <div className="text-lg font-bold text-slate-800">{inspection.rooms.length}</div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-slate-100">
+            <div className="text-xs text-slate-400">Items</div>
+            <div className="text-lg font-bold text-slate-800">{inspection.rooms.reduce((a: number, r: any) => a + r.items.length, 0)}</div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-slate-100">
+            <div className="text-xs text-slate-400">Photos</div>
+            <div className="text-lg font-bold text-slate-800">{inspection.rooms.reduce((a: number, r: any) => a + r.items.reduce((b: number, i: any) => b + i.photos.length, 0), 0)}</div>
+          </div>
+          <div className="bg-white rounded-xl p-3 border border-slate-100">
+            <div className="text-xs text-slate-400">Signatures</div>
+            <div className="text-lg font-bold text-slate-800">{inspection.signatures.length}/3</div>
+          </div>
+        </div>
+
+        {/* Price */}
+        <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-200 mb-4">
+          <span className="text-sm font-medium text-slate-600">Report Generation Fee</span>
+          <span className="text-2xl font-extrabold text-slate-900">AED {reportPrice}</span>
+        </div>
+
+        {paid ? (
+          <div className="flex items-center gap-3 p-4 bg-emerald-50 rounded-xl border border-emerald-200">
+            <svg className="w-6 h-6 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <p className="text-sm font-semibold text-emerald-800">Payment Complete</p>
+              <p className="text-xs text-emerald-600">You can now generate your report</p>
+            </div>
+          </div>
+        ) : isIOSNative ? (
+          <>
+            {iapState === 'error' && iapError && (
+              <p className="text-sm text-red-600 font-medium mb-2">{iapError}</p>
+            )}
+            <button
+              onClick={onOpenPayment}
+              disabled={iapState === 'purchasing' || iapState === 'confirming' || iapState === 'checking'}
+              className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-sm hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+            >
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+              </svg>
+              {iapState === 'checking' && 'Checking...'}
+              {iapState === 'purchasing' && 'Processing...'}
+              {iapState === 'confirming' && 'Confirming purchase...'}
+              {(iapState === 'idle' || iapState === 'error') && (iapError ? 'Try Again' : `Unlock Report (AED ${reportPrice})`)}
+            </button>
+          </>
+        ) : (
+          <button onClick={onOpenPayment}
+            className="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold text-sm hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-500/25 active:scale-[0.98] flex items-center justify-center gap-2">
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+            </svg>
+            Pay AED {reportPrice} to Generate Report
+          </button>
+        )}
+        {!paid && (
+          <div className="mt-4 text-center">
+            <button
+              type="button"
+              onClick={onCheckAccess}
+              disabled={paymentCheckState === 'checking'}
+              className="min-h-[44px] px-4 text-sm font-semibold text-blue-700 underline disabled:opacity-60"
+            >
+              {paymentCheckState === 'checking' ? 'Checking report access...' : 'Refresh report access'}
+            </button>
+            {paymentCheckError && (
+              <p role="alert" className="mt-1 text-xs font-medium text-red-600">{paymentCheckError}</p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+});
+
+// Keys & Access Cards + Utility Meters Step
+const KeysStep = React.memo(function KeysStep({
+  propertyItems, onUpdatePropertyItem, onAddPhotoToPropertyItem, onRemovePhotoFromPropertyItem, retakeItemId,
+}: {
+  propertyItems: any[];
+  onUpdatePropertyItem: (id: string, value: string, comments: string) => void;
+  onAddPhotoToPropertyItem: (id: string, p: Photo) => void;
+  onRemovePhotoFromPropertyItem: (id: string, pid: string) => void;
+  retakeItemId?: string;
+}) {
+  useEffect(() => {
+    if (!retakeItemId || !propertyItems.some(item => item.id === retakeItemId)) return;
+    const frame = requestAnimationFrame(() => document.getElementById(`property-item-${retakeItemId}`)?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+    return () => cancelAnimationFrame(frame);
+  }, [retakeItemId, propertyItems]);
+
+  const handlePhoto = async (itemId: string) => {
+    try {
+      const photo = await capturePhoto();
+      if (photo) onAddPhotoToPropertyItem(itemId, photo);
+    } catch (err) {
+      console.error('[InspectionForm] capturePhoto failed:', err);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-lg font-semibold text-slate-800 mb-1">Keys & Access Cards / Utility Meters</h2>
+        <p className="text-sm text-slate-400">Document keys, access cards, and utility meter readings with photos.</p>
+      </div>
+      {propertyItems.map((item: any) => (
+        <div id={`property-item-${item.id}`} key={item.id} className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+          <h3 className="text-sm font-semibold text-slate-700 mb-3 flex items-center gap-2">
+            <span>{item.id === 'keys_access_cards' ? '🔑' : '⚡'}</span>
+            {item.name}
+          </h3>
+          <div className="space-y-3">
+            <input type="text" value={item.value}
+              onChange={(e) => onUpdatePropertyItem(item.id, e.target.value, item.comments)}
+              placeholder={`Enter ${item.name.toLowerCase()} details...`}
+              className="w-full px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <textarea aria-label={`Note for ${item.name}`} value={item.comments}
+              onChange={(e) => onUpdatePropertyItem(item.id, item.value, e.target.value)}
+              placeholder="Additional comments..."
+              className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none" rows={2} />
+            <div className="flex items-center justify-between">
+              <span className="text-xs font-medium text-slate-500">Photos</span>
+              <button onClick={() => handlePhoto(item.id)} className="text-xs text-blue-600 hover:text-blue-700 font-medium">📷 Add Photo</button>
+            </div>
+            {item.photos && item.photos.length > 0 && (
+              <div className="flex gap-2 overflow-x-auto pb-1">
+                {item.photos.map((photo: Photo) => (
+                  <div key={photo.id} className="relative flex-shrink-0 group">
+                    <img src={photo.url || undefined} alt={photo.url ? "Inspection evidence" : "Photo not yet backed up"} className="w-20 h-20 object-cover rounded-lg border border-slate-200" />
+                    {(photo.gpsLat === undefined || photo.gpsLat === null) && (
+                      <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-amber-500 text-white rounded-full text-[8px] flex items-center justify-center" title="No GPS data">⚠</div>
+                    )}
+                    <button aria-label="Remove photo" onClick={() => onRemovePhotoFromPropertyItem(item.id, photo.id)}
+                      className="absolute -top-2 -right-2 w-8 h-8 min-w-[44px] min-h-[44px] bg-red-500 text-white rounded-full text-sm flex items-center justify-center opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-md active:bg-red-600">×</button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+});
+
+// Signatures Step
+const SignaturesStep = React.memo(function SignaturesStep({
+  tenant, landlord, inspectorName,
+  signatures, onAddSignature, onRemoveSignature,
+}: {
+  tenant: any; landlord: any; inspectorName: string;
+  signatures: any[];
+  onAddSignature: (s: any) => void;
+  onRemoveSignature: (role: 'tenant' | 'landlord' | 'inspector') => void;
+}) {
+  const [activeRole, setActiveRole] = useState<'tenant' | 'landlord' | 'inspector'>('tenant');
+
+  const roles: { role: 'tenant' | 'landlord' | 'inspector'; label: string; name: string; icon: string; color: string }[] = [
+    { role: 'tenant', label: 'Tenant', name: tenant.name || 'Tenant', icon: '👤', color: 'blue' },
+    { role: 'landlord', label: 'Landlord', name: landlord.name || 'Landlord', icon: '🏢', color: 'amber' },
+    { role: 'inspector', label: 'Inspector', name: inspectorName || 'Inspector', icon: '🔍', color: 'emerald' },
+  ];
+
+  const tenantSigned = signatures.some(s => s.role === 'tenant');
+  const landlordSigned = signatures.some(s => s.role === 'landlord');
+  const inspectorSigned = signatures.some(s => s.role === 'inspector');
+
+  return (
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-lg font-semibold text-slate-800 mb-1">Digital Signatures</h2>
+        <p className="text-sm text-slate-400">
+          All three parties must sign the report before it can be generated.
+        </p>
+      </div>
+
+      <div className="rounded-xl border border-blue-100 bg-blue-50 p-4 space-y-3 text-sm text-slate-700">
+        <p>{reportLegal.en.declaration}</p>
+        <p lang="ar" dir="rtl" className="arabic-text">{reportLegal.ar.declaration}</p>
+      </div>
+      {/* Status */}
+      <div className="grid grid-cols-3 gap-3">
+        {roles.map((r) => {
+          const signed = r.role === 'tenant' ? tenantSigned : r.role === 'landlord' ? landlordSigned : inspectorSigned;
+          return (
+            <div
+              key={r.role}
+              className={`p-3 rounded-xl text-center border-2 transition-all ${
+                signed
+                  ? 'bg-emerald-50 border-emerald-300'
+                  : 'bg-slate-50 border-slate-200'
+              }`}
+            >
+              <div className="text-2xl mb-1">{r.icon}</div>
+              <div className="text-xs font-medium text-slate-700">{r.label}</div>
+              <div className={`text-xs mt-1 font-semibold ${signed ? 'text-emerald-600' : 'text-slate-400'}`}>
+                {signed ? '✓ Signed' : <>{reportLegal.en.unsigned}<span lang="ar" dir="rtl" className="arabic-text block">{reportLegal.ar.unsigned}</span></>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Role Tabs */}
+      <div className="flex gap-2">
+        {roles.map((r) => {
+          const signed = r.role === 'tenant' ? tenantSigned : r.role === 'landlord' ? landlordSigned : inspectorSigned;
+          return (
+            <button
+              key={r.role}
+              onClick={() => setActiveRole(r.role)}
+              className={`flex-1 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                activeRole === r.role
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : signed
+                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                  : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+              }`}
+            >
+              {r.icon} {r.label}
+              {signed && ' ✓'}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Active Signature */}
+      <div className="bg-slate-50 rounded-xl p-5 border border-slate-100">
+        {(() => {
+          const activeRoleData = roles.find(r => r.role === activeRole)!;
+          const existingSig = signatures.find((s: any) => s.role === activeRole);
+
+          if (existingSig) {
+            return (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-sm font-semibold text-slate-700">
+                    {activeRoleData.icon} {activeRoleData.label} Signature — {activeRoleData.name}
+                  </h3>
+                  <span className="text-xs text-emerald-600 font-medium bg-emerald-50 px-2 py-1 rounded-lg">
+                    ✓ Signed {new Date(existingSig.signedAt).toLocaleDateString()}
+                  </span>
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200 p-4 flex items-center justify-center">
+                  <img src={existingSig.dataUrl} alt={`${activeRoleData.label} signature`} className="max-h-24" />
+                </div>
+                <button
+                  onClick={() => onRemoveSignature(activeRole)}
+                  className="text-xs text-red-400 hover:text-red-600 font-medium transition-colors"
+                >
+                  Re-sign (replace existing)
+                </button>
+              </div>
+            );
+          }
+
+          return (
+            <div className="space-y-4">
+              <h3 className="text-sm font-semibold text-slate-700">
+                {activeRoleData.icon} {activeRoleData.label} Signature — {activeRoleData.name}
+              </h3>
+              <SignaturePad
+                label={`${activeRoleData.label}: ${activeRoleData.name}`}
+                onSave={async (dataUrl) => {
+                  // Capture the address at the same event as this signature. If the
+                  // network lookup is unavailable, omit the field rather than print
+                  // a claim that it was recorded.
+                  const signedAt = new Date().toISOString();
+                  const ipAddress = await getIPAddress();
+                  onAddSignature({
+                    dataUrl,
+                    signedAt,
+                    role: activeRole,
+                    name: activeRoleData.name,
+                    ...(ipAddress ? { ipAddress } : {}),
+                  });
+                }}
+              />
+            </div>
+          );
+        })()}
+      </div>
+    </div>
+  );
+});
+
+// Review Step
+const ReviewStep = React.memo(function ReviewStep({
+  inspection, onAddOverallPhoto, onRemoveOverallPhoto, onUpdateGeneralNotes, onUpdatePropertyItem,
+  onAddPhotoToPropertyItem, onRemovePhotoFromPropertyItem,
+}: {
+  inspection: any; onAddOverallPhoto: (p: Photo) => void; onRemoveOverallPhoto: (pid: string) => void;
+  onUpdateGeneralNotes: (n: string) => void; onUpdatePropertyItem: (id: string, value: string, comments: string) => void;
+  onAddPhotoToPropertyItem: (id: string, p: Photo) => void; onRemovePhotoFromPropertyItem: (id: string, pid: string) => void;
+}) {
+  const [coverCapture, setCoverCapture] = useState(false);
+  const handlePhoto = () => setCoverCapture(true);
+
+  const handlePropertyItemPhoto = async (itemId: string) => {
+    try {
+      const photo = await capturePhoto();
+      if (photo) onAddPhotoToPropertyItem(itemId, photo);
+    } catch (err) {
+      console.error('[InspectionForm] capturePhoto failed:', err);
+    }
+  };
+
+  const summary = inspectionSummary(inspection);
+  const totalItems = summary.total;
+  const checkedItems = summary.rated;
+  const totalPhotos = summary.photos;
+
+  return (
+    <div className="space-y-6">
+      {coverCapture && <PortraitCapture onSave={onAddOverallPhoto} onClose={() => setCoverCapture(false)} />}
+      <div>
+        <h2 className="text-lg font-semibold text-slate-800 mb-1">Review & Complete</h2>
+        <p className="text-sm text-slate-400">Review your inspection summary before generating the report.</p>
+      </div>
+
+      {/* Summary Stats */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          { label: 'Rooms', value: inspection.rooms.length, icon: '🏠' },
+          { label: 'Items Assessed', value: `${checkedItems}/${totalItems}`, icon: '✅' },
+          { label: 'Good', value: summary.good, icon: '✓' },
+          { label: 'Fair', value: summary.fair, icon: '!' },
+          { label: 'Issues', value: summary.issues, icon: '!' },
+          { label: 'Photos', value: totalPhotos, icon: '📷' },
+          { label: 'Signatures', value: `${inspection.signatures.length}/3`, icon: '✍️' },
+        ].map((stat) => (
+          <div key={stat.label} className="bg-slate-50 rounded-xl p-4 text-center border border-slate-100">
+            <div className="text-xl mb-1">{stat.icon}</div>
+            <div className="text-lg font-bold text-slate-800">{stat.value}</div>
+            <div className="text-xs text-slate-500">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* Overall Photos */}
+      <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+        <div className="flex items-center justify-between mb-3">
+          <h3 className="text-sm font-semibold text-slate-700">Overall Property Photos</h3>
+          <button onClick={handlePhoto} className="text-xs text-blue-600 hover:text-blue-700 font-medium">
+            📷 Add Photo
+          </button>
+        </div>
+        {inspection.overallPhotos.length > 0 ? (
+          <div className="flex gap-2 overflow-x-auto pb-2">
+            {inspection.overallPhotos.map((photo: Photo) => (
+              <div key={photo.id} className="relative flex-shrink-0 group">
+                <img src={photo.url || undefined} alt={photo.url ? "Inspection evidence" : "Photo not yet backed up"} className="w-24 h-24 object-cover rounded-lg border border-slate-200" />
+                {(photo.gpsLat === undefined || photo.gpsLat === null) && (
+                  <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-amber-500 text-white rounded-full text-[8px] flex items-center justify-center" title="No GPS data">⚠</div>
+                )}
+                <button
+                  aria-label="Remove photo"
+                  onClick={() => onRemoveOverallPhoto(photo.id)}
+                  className="absolute -top-2 -right-2 w-8 h-8 min-w-[44px] min-h-[44px] bg-red-500 text-white rounded-full text-sm flex items-center justify-center opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-md active:bg-red-600"
+                >
+                  ×
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-slate-400">No overall photos added yet.</p>
+        )}
+      </div>
+
+      {/* General Notes */}
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">General Notes / Observations</label>
+        <textarea
+          value={inspection.generalNotes}
+          onChange={(e) => onUpdateGeneralNotes(e.target.value)}
+          placeholder="Add any general observations, recommendations, or notes for the report..."
+          className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+          rows={4}
+        />
+      </div>
+
+      {/* Property-Level Items */}
+      {inspection.propertyItems && inspection.propertyItems.length > 0 && (
+        <div className="p-5 bg-slate-50 rounded-xl border border-slate-100">
+          <h3 className="text-sm font-semibold text-slate-700 mb-4">Property Information</h3>
+          <div className="space-y-4">
+            {inspection.propertyItems.map((item: any) => (
+              <div key={item.id} className="bg-white rounded-xl border border-slate-200 p-4">
+                <label className="block text-sm font-medium text-slate-700 mb-2">{item.name}</label>
+                <input
+                  type="text"
+                  value={item.value}
+                  onChange={(e) => onUpdatePropertyItem(item.id, e.target.value, item.comments)}
+                  placeholder={`Enter ${item.name.toLowerCase()} details...`}
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-2"
+                />
+                <textarea
+                  value={item.comments}
+                  onChange={(e) => onUpdatePropertyItem(item.id, item.value, e.target.value)}
+                  placeholder="Additional comments..."
+                  className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none mb-2"
+                  rows={2}
+                />
+                {/* Photos */}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-medium text-slate-500">Photos</span>
+                  <button onClick={() => handlePropertyItemPhoto(item.id)}
+                    className="text-xs text-blue-600 hover:text-blue-700 font-medium">📷 Add Photo</button>
+                </div>
+                {item.photos && item.photos.length > 0 && (
+                  <div className="flex gap-2 overflow-x-auto pb-1">
+                    {item.photos.map((photo: Photo) => (
+                      <div key={photo.id} className="relative flex-shrink-0 group">
+                        <img src={photo.url || undefined} alt={photo.url ? "Inspection evidence" : "Photo not yet backed up"} className="w-16 h-16 object-cover rounded-lg border border-slate-200" />
+                        {(photo.gpsLat === undefined || photo.gpsLat === null) && (
+                          <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-amber-500 text-white rounded-full text-[7px] flex items-center justify-center" title="No GPS data">⚠</div>
+                        )}
+                        <button aria-label="Remove photo" onClick={() => onRemovePhotoFromPropertyItem(item.id, photo.id)}
+                          className="absolute -top-2 -right-2 w-8 h-8 min-w-[44px] min-h-[44px] bg-red-500 text-white rounded-full text-sm flex items-center justify-center opacity-80 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shadow-md active:bg-red-600">×</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Inspection Info */}
+      <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
+        <h4 className="text-sm font-semibold text-blue-800 mb-2">Report will include:</h4>
+        <ul className="space-y-1 text-xs text-blue-700">
+          <li className="flex items-center gap-2">✓ Property details with Makani number</li>
+          <li className="flex items-center gap-2">✓ Landlord and tenant information</li>
+          <li className="flex items-center gap-2">✓ Tenancy/lease details</li>
+          <li className="flex items-center gap-2">✓ Room-by-room condition assessment with ratings</li>
+          <li className="flex items-center gap-2">✓ All inspection photos with timestamps</li>
+          <li className="flex items-center gap-2">✓ Digital signatures from all parties</li>
+          <li className="flex items-center gap-2">✓ GPS location and timestamp verification</li>
+          <li className="flex items-center gap-2">✓ Inspector metadata for authenticity</li>
+        </ul>
+      </div>
+    </div>
+  );
+});
+
+// Reusable Input
+// Dubai Areas/Communities for autocomplete
+const DUBAI_AREAS = [
+  'Dubai Marina', 'Downtown Dubai', 'Palm Jumeirah', 'JBR (Jumeirah Beach Residence)',
+  'Business Bay', 'DIFC', 'Jumeirah Lake Towers (JLT)', 'Dubai Hills Estate',
+  'Arabian Ranches', 'Motor City', 'Sports City', 'Dubai Silicon Oasis',
+  'Dubai South', 'Dubai Production City (IMPZ)', 'Dubai Sports City',
+  'Jumeirah Village Circle (JVC)', 'Jumeirah Village Triangle (JVT)',
+  'Al Barsha', 'Al Quoz', 'Al Sufouh', 'Al Nahda', 'Al Qusais',
+  'Deira', 'Bur Dubai', 'Karama', 'Satwa', 'Jumeirah', 'Umm Suqeim',
+  'Al Jaddaf', 'Culture Village', 'Dubai Creek Harbour', 'Festival City',
+  'Ras Al Khor', 'MBR City (Mohammed Bin Rashid City)', 'Emirates Living',
+  'The Springs', 'The Meadows', 'The Lakes', 'Emirates Hills',
+  'Mirdif', 'Al Warqaa', 'Rashidiya', 'Town Square',
+  'Dubai Land', 'Liwan', 'Tilal Al Ghaf', 'Damac Hills',
+  'Damac Hills 2', 'Mudon', 'Reem', 'Sobha Hartland',
+  'MBR Fountain Views', 'Zabeel', 'Downtown Views', 'City Walk',
+  'Al Quoz Creative Zone', 'Jumeirah Bay Island', 'Bluewaters Island',
+  'Port de La Mer', 'La Mer', 'North Beach', 'Dubai Harbour',
+  'Palm Jebel Ali', 'Dubai Islands', 'Creek Beach',
+  'International City', 'Discovery Gardens', 'Dubai Production City',
+  'Al Furjan', 'Jumeirah Park', 'Jumeirah Islands',
+  'The Villa', 'Al Barari', 'Meydan', ' Mohammed Bin Rashid Al Maktoum City',
+  'Academic City', 'Dubai International Academic City',
+  'Dubai Healthcare City', 'Oud Metha', 'BurJuman',
+];
+
+const DUBAI_CITIES = ['Dubai', 'Abu Dhabi', 'Sharjah', 'Ajman', 'Ras Al Khaimah', 'Fujairah', 'Umm Al Quwain'];
+
+function AutocompleteInputInner({
+  label, value, onChange, placeholder, suggestions, error,
+}: {
+  label: string; value: string; onChange: (v: string) => void; placeholder: string; suggestions: string[]; error?: string;
+}) {
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+  const [highlightIndex, setHighlightIndex] = useState(-1);
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const handleChange = (v: string) => {
+    onChange(v);
+    if (v.trim().length > 0) {
+      const filtered = suggestions.filter(s =>
+        s.toLowerCase().includes(v.toLowerCase())
+      ).slice(0, 8);
+      setFilteredSuggestions(filtered);
+      setShowSuggestions(filtered.length > 0);
+      setHighlightIndex(-1);
+    } else {
+      setShowSuggestions(false);
+    }
+  };
+
+  const handleSelect = (val: string) => {
+    onChange(val);
+    setShowSuggestions(false);
+    setHighlightIndex(-1);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!showSuggestions) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setHighlightIndex(prev => Math.min(prev + 1, filteredSuggestions.length - 1));
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setHighlightIndex(prev => Math.max(prev - 1, 0));
+    } else if (e.key === 'Enter' && highlightIndex >= 0) {
+      e.preventDefault();
+      handleSelect(filteredSuggestions[highlightIndex]);
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+    }
+  };
+
+  return (
+    <div ref={wrapperRef} className="relative">
+      <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
+      <input
+        ref={inputRef}
+        type="text"
+        value={value}
+        onChange={(e) => handleChange(e.target.value)}
+        onFocus={() => {
+          if (value.trim().length > 0) {
+            const filtered = suggestions.filter(s =>
+              s.toLowerCase().includes(value.toLowerCase())
+            ).slice(0, 8);
+            setFilteredSuggestions(filtered);
+            setShowSuggestions(filtered.length > 0);
+          }
+        }}
+        onKeyDown={handleKeyDown}
+        placeholder={placeholder}
+        className={`w-full px-3 py-2.5 border rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${error ? 'border-red-300' : 'border-slate-200'}`}
+        autoComplete="off"
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+      {showSuggestions && filteredSuggestions.length > 0 && (
+        <div className="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-lg shadow-lg max-h-48 overflow-y-auto">
+          {filteredSuggestions.map((suggestion, idx) => (
+            <button
+              key={suggestion}
+              onClick={() => handleSelect(suggestion)}
+              className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                idx === highlightIndex
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-slate-700 hover:bg-slate-50'
+              }`}
+            >
+              <span>{suggestion}</span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const AutocompleteInput = React.memo(AutocompleteInputInner);
+
+function InputFieldInner({
+  label, value, onChange, type = 'text', placeholder, className = '', error,
+}: {
+  label: string; value: string; onChange: (v: string) => void;
+  type?: string; placeholder?: string; className?: string; error?: string;
+}) {
+  return (
+    <div className={className}>
+      <label className="block text-sm font-medium text-slate-700 mb-1">{label}</label>
+      <input
+        type={type}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className={`w-full px-3 py-2.5 border rounded-lg text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all ${error ? 'border-red-300' : 'border-slate-200'}`}
+      />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
+    </div>
+  );
+}
+const InputField = React.memo(InputFieldInner);

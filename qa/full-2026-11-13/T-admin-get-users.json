@@ -1,0 +1,14 @@
+{
+  "label": "T-admin-get-users",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/admin/users",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf6b9debef0c-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:55.878210+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:57:03.775727+00:00",
+  "date": "Wed, 04 Nov 2026 07:57:03 GMT",
+  "cfRay": "a55210cfd906a11a-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "sentCount": 1,
+    "failedCount": 0,
+    "results": [
+      {
+        "email": "aalekh.dxb@gmail.com",
+        "success": true,
+        "id": "01a1a58f-bf0c-71a8-b331-14e76a2a399f"
+      }
+    ]
+  }
+}

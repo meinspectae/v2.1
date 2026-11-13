@@ -1,0 +1,7 @@
+from http_client import *
+from live import create,ledger,PREFIX
+s,d,e,_=request('N','main-for-final','/api/inspections/'+PREFIX+'main');r=d['data']
+id=create('N','final',{'property':{'type':'apartment','buildingName':'QA Test','area':'Dubai Marina','city':'Dubai','unitNumber':'13','makaniNumber':'QA','furnished':False,'specialFeatures':[]},'tenant':{'name':'QA Test tenant','email':'delivered@resend.dev','phone':''},'landlord':{'name':'QA Test landlord','phone':'','email':''},'agent':{'name':'','phone':'','email':''},'tenancy':{'contractNumber':'QA','leaseStartDate':'2026-11-13','leaseEndDate':'2027-11-13'},'rooms':[{'id':'r','type':'living','name':'QA Test room','icon':'','overallComments':'QA Test notes عربي 😀','overallCondition':'good','items':[{'id':'i','name':'Walls','condition':'fair','checked':True,'category':'general','comments':'QA Test note','photos':[]}]}],'signatures':json.loads(r['signatures']),'extra':{'meta':{'inspectorId':load_private('N')['id'],'inspectorName':'QA Test','inspectorEmail':'','deviceInfo':'QA browser','appVersion':'3.5'},'utilityMeters':{'water':{'reading':'13'}},'moveInReference':{'keys':'2','cards':'1','defects':'None','newDefects':'None'}},'completedAt':'2026-11-13T06:43:00Z'})
+s,d,e,_=request('N','final-free-checkout','/api/checkout',{'inspectionId':id,'discountCode':'FREE_REPORT','amount':199})
+check('Payments','final report free unlock',s==200 and d.get('status')=='paid',e['label'])
+if d.get('orderId'):ledger('order',d['orderId'],inspectionId=id,state='retained',provider='discount')

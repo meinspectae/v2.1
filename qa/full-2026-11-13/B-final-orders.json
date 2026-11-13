@@ -1,0 +1,14 @@
+{
+  "label": "B-final-orders",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/orders",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be67b9ddb2095-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:35.928836+00:00",
+  "response": {
+    "data": []
+  }
+}

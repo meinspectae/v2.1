@@ -1,0 +1,9 @@
+{
+  "reason": "Platform completion did not recognize guarded deployment; identical bundle re-deployed directly using installed CLI 0.0.12",
+  "deploymentReference": "a8a177e4...",
+  "environment": "staging",
+  "schemaNoChangesReported": true,
+  "schemaByteIdentical": true,
+  "bundleByteIdentical": true,
+  "published": false
+}

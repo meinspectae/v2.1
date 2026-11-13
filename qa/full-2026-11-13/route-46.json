@@ -1,0 +1,14 @@
+{
+  "label": "route-46",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/public/notifications/password-changed",
+  "status": 400,
+  "requestId": null,
+  "cfRay": "a59bd9422844efce-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:34.158183+00:00",
+  "response": {
+    "error": "email is required"
+  }
+}

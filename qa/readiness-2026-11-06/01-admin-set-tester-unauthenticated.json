@@ -1,0 +1,16 @@
+{
+  "label": "01-admin-set-tester-unauthenticated",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/admin/set-tester",
+  "timeUTC": "2026-11-06T06:36:17.415239+00:00",
+  "status": 401,
+  "headers": {
+    "date": "Fri, 06 Nov 2026 06:36:17 GMT",
+    "content-type": "application/json",
+    "cf-ray": "a56215408c848864-PDX"
+  },
+  "responseSummary": {
+    "error": "UNAUTHENTICATED"
+  }
+}

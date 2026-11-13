@@ -1,0 +1,14 @@
+{
+  "label": "C-profile-create",
+  "actor": "C",
+  "method": "POST",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbb756ea587cd-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:31:13.765234+00:00",
+  "response": {
+    "success": true
+  }
+}

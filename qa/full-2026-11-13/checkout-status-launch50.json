@@ -1,0 +1,32 @@
+{
+  "label": "checkout-status-launch50",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/checkout/cs_live_acvde6So6R8TA7HfuwVU9KHpQ8dPZcvOrD1PSdrYDWip7s69upNkaZycUv",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be43be96bff17-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:03.895061+00:00",
+  "response": {
+    "data": {
+      "id": 91,
+      "environment": "staging",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "inspectionId": "qa-20261113-pay-launch50",
+      "priceId": null,
+      "amount": 149,
+      "currency": "AED",
+      "status": "pending",
+      "type": "one_time",
+      "provider": "stripe",
+      "providerSessionId": "cs_live_acvde6So6R8TA7HfuwVU9KHpQ8dPZcvOrD1PSdrYDWip7s69upNkaZycUv",
+      "providerPaymentId": null,
+      "discountCode": "LAUNCH50",
+      "discountAmount": 50,
+      "metadata": null,
+      "paidAt": null,
+      "createdAt": 1794551665
+    }
+  }
+}

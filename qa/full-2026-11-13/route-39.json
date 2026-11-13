@@ -1,0 +1,14 @@
+{
+  "label": "route-39",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/admin/prices",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd9410a400ba9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.966215+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

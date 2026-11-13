@@ -1,0 +1,10 @@
+[
+  {
+    "path": "backend/src/index.ts",
+    "change": "modified"
+  },
+  {
+    "path": "backend/dist/bundle.js",
+    "change": "modified"
+  }
+]

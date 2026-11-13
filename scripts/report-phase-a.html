@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8"><title>MeInspect PDF checks</title></head><body><div id="root"></div><script type="module">
+import '/src/styles/report.css';
+import { renderReportPDF } from '/src/utils/reportPdf.ts';
+import { prepareCapturedPhoto } from '/src/utils/photoEncoding.ts';
+window.runPhaseA = async () => {
+ const root = document.getElementById('root'); root.className='meinspect-report';root.style.width='680.315px';
+ root.innerHTML='<div data-report-header style="width:680px;font-size:10px;border-bottom:1px solid #2563eb">MeInspect · RPT-PHASE-A · 1 Oct 2026</div><div data-pdf-footer style="width:680px;font-size:8px">GPS: 25.080000, 55.140000 | IP: 192.0.2.1</div><div data-report-block style="padding:12px 0"><h1 style="font-size:22px">Property Condition Report</h1><p lang="ar" dir="rtl" style="font-family:Noto Naskh Arabic;font-size:18px">تقرير حالة العقار</p><p>Selectable text test: small scratch on the wall.</p></div>';
+ const photos=[];
+ for(let i=0;i<32;i++) {
+  const c=document.createElement('canvas');const landscape=i%4===0;c.width=landscape?1200:900;c.height=landscape?900:1200; const ctx=c.getContext('2d');
+  ctx.fillStyle='#c7c2b8';ctx.fillRect(0,0,c.width,c.height);
+  // Reproducible textured wall with corner markers and a two-pixel scratch.
+  let seed=i+1;for(let n=0;n<90000;n++){seed=(1664525*seed+1013904223)>>>0;const x=seed%c.width;seed=(1664525*seed+1013904223)>>>0;const y=seed%c.height;ctx.fillStyle=n%2?'#b5b0a6':'#d8d4ca';ctx.fillRect(x,y,1,1);}
+  ctx.fillStyle='#174f95';for(const [x,y] of [[0,0],[c.width-24,0],[0,c.height-24],[c.width-24,c.height-24]])ctx.fillRect(x,y,24,24);
+  ctx.strokeStyle='#31312d';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(c.width*.4,c.height*.4);ctx.lineTo(c.width*.4+45,c.height*.4+4);ctx.stroke();
+  ctx.fillStyle='#333';ctx.font='26px sans-serif';ctx.fillText('TEST WALL '+(i+1),40,60);
+  photos.push(await prepareCapturedPhoto(c.toDataURL('image/png')));c.width=c.height=0;
+ }
+ for(let i=0;i<photos.length;i+=3){const block=document.createElement('div');block.dataset.reportBlock='';block.style.padding='4px 0';block.innerHTML='<div data-photo-flow style="width:680px;display:block">'+photos.slice(i,i+3).map((url,j)=>`<div data-photo-wrap style="width:189px"><div data-evidence="${url}" style="width:189px;height:249px;background:#f1f5f9;border:1px solid #ddd;border-radius:7.56px"></div><p style="font-size:10.6667px;color:#64748b;text-align:center">1 Oct 2026, 08:${String(i+j).padStart(2,'0')}</p></div>`).join('')+'</div>';root.append(block);}
+ await document.fonts.load('400 12px Inter');await document.fonts.load('400 12px "Noto Naskh Arabic"');
+ const blob=await renderReportPDF(root, s=>window.progress=s); window.phaseAPdf=blob; window.phaseAPhotos=photos;
+ const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='phase-a-test-report.pdf';a.textContent='Download phase A test report';a.id='download-report';document.body.prepend(a);
+ return {bytes:blob.size,photos:32};
+};
+window.ready=true;
+</script></body></html>

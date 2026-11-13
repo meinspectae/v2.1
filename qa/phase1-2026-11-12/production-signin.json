@@ -1,0 +1,16 @@
+{
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-in/email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59493657c6eefb8-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:32 GMT",
+  "observedAt": "2026-11-12T09:40:33.046388+00:00",
+  "response": {
+    "authenticated": true,
+    "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+    "cookieRetained": true,
+    "error": null
+  }
+}

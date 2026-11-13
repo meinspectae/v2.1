@@ -1,0 +1,12 @@
+{
+  "status": 400,
+  "time": "2026-11-10T06:25:36.289591+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/webhooks/stripe",
+  "cfRay": "a582fb19498f9976-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Invalid Stripe signature"
+  }
+}

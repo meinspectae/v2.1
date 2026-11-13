@@ -1,0 +1,23 @@
+{
+  "label": "email-recipient-18",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/send-email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bcaf7b9d00024-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:41:49.224797+00:00",
+  "response": {
+    "success": true,
+    "results": [
+      {
+        "email": "delivered@resend.dev",
+        "success": true,
+        "id": "01a1d3a4-1850-7cca-bb43-630fef825009"
+      }
+    ],
+    "sentCount": 1,
+    "failedCount": 0
+  }
+}

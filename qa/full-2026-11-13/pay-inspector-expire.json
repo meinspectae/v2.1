@@ -1,0 +1,17 @@
+{
+  "label": "pay-inspector-expire",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout/cs_live_acT2EOqMvaH8Cc8tCJnD105leNyjV4hDv05tLpS3sLHk5LenjUs3Lxvjgk/expire",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf603bccfef6-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:54.161411+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acT2EOqMvaH8Cc8tCJnD105leNyjV4hDv05tLpS3sLHk5LenjUs3Lxvjgk",
+    "status": "expired",
+    "stripeRequestId": "req_cAe7nq8Ri65ejw"
+  }
+}

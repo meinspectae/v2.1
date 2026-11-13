@@ -1,0 +1,144 @@
+"""Generate the fresh evidence report, without sessions, secrets or signed URLs."""
+import json,pathlib
+p=pathlib.Path('qa/phase1-2026-11-12')
+read=lambda n:json.loads((p/n).read_text())
+rows=[]
+def row(item,result,evidence):rows.append(f'| {item} | {result} | {evidence} |')
+def http(env,label,item,expected,extra=''):
+    e=read(env+'-'+label+'.json');result='PASS' if e['status']==expected else 'FAIL'
+    row(env.upper()+' — '+item,result,f"HTTP {e['status']} (expected {expected}); CF-Ray `{e['cfRay']}`. {extra}")
+row('Candidate activated with only requested fallback exception','PASS','Active source equals saved candidate except pre-run webhook block and fallback source type; full webhook block, validation and logging byte-identical to pre-run source')
+row('Local compatibility suite','PASS','36/36 actual bundled-handler assertions, isolated SQLite and mocked email provider; rerun after deployment, not live acceptance')
+row('Local safety/fallback suite','PASS','33/33 actual bundled-handler assertions, isolated SQLite, dummy signatures and mocked Stripe event retrieval; includes authoritative event-only processing, every fallback logged, delayed write before 200, write failure 500')
+row('Frontend/backend typechecks; frontend production build','PASS','Both typechecks exit 0; frontend build exit 0; no frontend source changes')
+for mode,title in [('dry-run','Pinned CLI dry run'),('staging','Pinned CLI STAGING deployment')]:
+    e=read(mode+'-check.json');row(title,'PASS',f"Executed 0.0.12; exit {e['exitCode']}; output: `Schema up to date (no changes)`; all {e['schemaFilesChecked']} protected schema/generated/migration files byte-identical to restore; 50 routes valid")
+for env in ['staging','production']:
+    http(env,'signin','A sign-in',200,'Authenticated user confirmed; session cookie retained for subsequent calls, then signed out')
+    http(env,'admin-prices','A GET /api/admin/prices',403)
+    http(env,'set-tester','A POST /api/admin/set-tester',403,'Nonexistent target address, isTester=false; no account role changed')
+    row(env.upper()+' — T admin prices / set-tester','NOT RUN','No T identity or credentials supplied; did not create an account or turn A into a tester')
+    http(env,'paid-delete','A deletes paid QA inspection',409,'Fresh QA-only paid marker, amount 0; no card charge or real paid order fabricated')
+    http(env,'draft-delete','A deletes fresh QA draft',200,'Subsequent GET 404 confirms removal')
+    e=read(env+'-legacy-email-replay.json');send=e['response']['results'][0]['id']
+    http(env,'legacy-email-replay','Old-format captured Email Report request replay',200,f'Real provider accepted 1 email to approved address; provider ID `{send}`; historical Nov 10 captured request replay, not a fresh live UI capture')
+    row(env.upper()+' — Fresh live Email Report modal capture / PDF-link validity','NOT RUN','No browser/device modal flow executed; historical captured request includes a previously signed PDF link whose current validity was not verified')
+    e=read(env+'-new-email.json');send=e['response']['results'][0]['id']
+    http(env,'new-email','{inspectionId} email format',200,f'Real provider accepted 1 email to approved address; provider ID `{send}`')
+    row(env.upper()+' — Inbox delivery','NOT RUN','Provider accepted sending; inbox not inspected')
+    http(env,'old-inspection','Old inspection opens via authenticated API',200,'mvuxjr15recovery1 returned completed and paid; no modification')
+    row(env.upper()+' — Old inspection browser rendering / all photos','NOT RUN','API readability does not prove browser rendering or missing-photo recovery')
+    row(env.upper()+' — T tester free checkout','NOT RUN','No T credentials; A remains non-tester with 20 credits. No checkout, credit debit or role provisioning performed')
+    http(env,'signout','QA session signed out',200,'Private session cookies removed afterward')
+row('STAGING — Stripe webhook','NOT RUN','Skipped as instructed: staging has no signing secret')
+http('production','webhook-no-signature','Stripe webhook without signature',400,'Body deliberately has no valid evt_ ID; does not exercise event-retrieval fallback')
+http('production','webhook-wrong-signature','Stripe webhook with wrong signature',400,'Body deliberately has no valid evt_ ID; does not prove every unsigned valid Stripe event is rejected')
+row('Production verification of newly staged candidate','NOT RUN','User has not clicked Update during this run. Real production checks above exercised the already-published backend, not the newly staged candidate')
+row('Schema/lockfiles/config/frontend final invariant','PASS','85 protected files byte-identical to pre-run restore; 11 schema/generated/migration files also byte-identical to Nov 11 archive; active source and bundle still match staged hashes')
+report='''# STAGING deployment and verification — 12 November 2026
+
+## Decision: STAGED, NOT READY FOR UPDATE
+
+The requested candidate variant deployed successfully to **STAGING**, but A's staging admin checks **FAILED** the requested 403 expectation: both returned **200**. The supplied account has `is_admin=1`, and the saved candidate deliberately grants access to existing admins. No role or additional application changes were made to force these tests to pass. The first failure was reported immediately, with rollback guidance, before continuing the other independent checks.
+
+Only the supplied account was used as A. No T account was supplied; all T-specific checks are **NOT RUN**, not substituted with A. No questions, forms, new accounts or secret requests were made. **Nothing was published or promoted to production.**
+
+Fresh live requests ran on 12 November 2026, approximately 09:38–09:42 UTC. Application request-ID headers were absent; the request references below are actual **CF-Ray edge request IDs**, not invented application IDs. PASS means the named check actually executed; local, replay and API-only scopes are explicitly distinguished from browser/device acceptance.
+
+## Report: item | result | evidence
+
+| Item | Result | Evidence |
+|---|---|---|
+'''+ '\n'.join(rows)+'''
+
+## Exact deployment output excerpts
+
+Both commands executed the installed, verified **0.0.12** CLI without modifying it. Full sanitized output is retained with this report. No production deployment command ran.
+
+Dry run:
+
+```text
+✔ Schema up to date (no changes)
+✔ Type check passed
+✔ Build completed
+✔ Bundle valid (1.20MB)
+✔ Routes valid (50 routes)
+✔ Dry run complete
+Schema files byte-identical to restore: true (11 files)
+Exit code: 0
+```
+
+Staging deployment:
+
+```text
+✔ Schema up to date (no changes)
+✔ Type check passed
+✔ Build completed
+✔ Bundle valid (1.20MB)
+✔ Routes valid (50 routes)
+✔ Deployment prepared (1ce7acf2...)
+✔ Bundle uploaded
+✔ Deployed successfully to staging
+Schema files byte-identical to restore: true (11 files)
+Exit code: 0
+```
+
+No schema-file changes, DDL, migration, schema push, secret edits or package-version changes occurred. No schema changes were reported. The CLI's unchanged-schema pull was allowed by the revised rule; both post-command byte checks passed, as did the final check against the November 11 restore.
+
+## What Update will deploy and replace
+
+Under the platform's documented publication behavior, **Update publishes the current frontend and promotes the backend currently staged**. This run did stage the requested candidate variant successfully, and the active backend source/bundle still match the deployed artifacts. Therefore, if staging remains unchanged before Update, **the backend promoted to production will be this staged candidate variant**, replacing the currently published backend for all routes, not just the repaired routes.
+
+The frontend source was not edited; its current production build is included in publication. Update replaces the published web assets, not installed Android/iOS binaries. The staged backend differs from this run's starting source in the saved candidate's admin, atomic-credit and signed-missing-report handling, while preserving the exact pre-run webhook retrieval fallback and logs. Existing dual-format email and paid-delete protection remain intact. There is no queued schema migration or secret change from this run.
+
+**Important observed replacement difference:** the current production backend denied A admin access (403/403), while the staged candidate granted it (200/200). Updating would introduce that candidate's intentional existing-admin behavior, which conflicts with the requested expected results. Do not Update based on this report as an acceptance pass.
+
+The platform's internal Update CLI execution and exact previous production revision are not exposed here. This is a documented promotion guarantee conditional on unchanged staging, not an already-executed publication or verified previous-production-bundle diff. Current production test passes cannot certify the candidate after Update; that verification remains NOT RUN.
+
+Staged identity:
+
+- Deployment reference shown by CLI: `1ce7acf2...` (CLI displays only a prefix; full ID unavailable).
+- Backend source SHA-256: `aa395ac676824dd499edc42cd8e8fc355ae9a326322dbd9cd6f72a7a3c5304e2`.
+- Backend bundle SHA-256: `0671f15dc119a9c36c55650a7b09ced267275a16ce225b179965222e0955e6f6`.
+
+## Rollback steps — not executed
+
+### Before Update: local/staging undo
+
+1. Do not click Update. Production needs no deployment rollback because this run did not publish.
+2. Verify restore archive `restore-points/phase1-before-2026-11-12.tar.gz` has SHA-256 `6af07edb989c53b8e909810a8babb9c6d36e8fdc59c4ded3b9b79c59d4394c44`.
+3. Restore only `backend/src/index.ts` and `backend/dist/bundle.js` from that archive; verify both against the saved restore manifest. The included `rollback-local.py` performs only that local restoration, with checksum checks and no network/database action.
+4. To also undo staging, run the unchanged pinned 0.0.12 dry run and staging deployment against the restored backend. After EACH command require the exact `Schema up to date (no changes)` output and byte-identical schema-file checks; stop immediately on any reported/file change. Do not promote or publish.
+5. Recheck the restored staging behavior. This restores the **starting local backend**, not a certified previous staging deployment revision; it also removes the candidate's atomic-credit improvements. A rollback was not silently performed because the requested candidate was to remain staged for review.
+
+### If Update is clicked later
+
+Use platform History to select the release published immediately before that Update; verify that its matching frontend and backend are both restored, then have the user click Update to republish that matching pair and repeat real checks. The exact prior production revision and whether History restores both artifacts cannot be independently certified here, so this is **NOT a tested one-click rollback**. Do not treat the local starting archive as a verified production backup. Do not restore the shared database, delete payment/order history, change secrets, or use CLI promote as a workaround.
+
+## Shared QA record ledger — every created application record
+
+Only four QA inspections and four email-rate records were created. The staging/production inspection table is shared; environment in the names identifies which endpoint created/tested them, not physical database isolation.
+
+| Record | Created through | Final state |
+|---|---|---|
+| `qa-20261112-staging-draft` | Staging API, 201; CF-Ray `a59492b95a239694-PDX` | Deleted by QA DELETE 200; GET 404 |
+| `qa-20261112-staging-paid` | Staging API, 201; CF-Ray `a59492bb7bb2495f-PDX` | Retained; QA-only payment marker set to paid with amount 0 using one narrowly scoped UPDATE; DELETE rejected 409 |
+| `qa-20261112-production-draft` | Production API, 201; CF-Ray `a59493948df4a509-PDX` | Deleted by QA DELETE 200; GET 404 |
+| `qa-20261112-production-paid` | Production API, 201; CF-Ray `a5949396fd9c613d-PDX` | Retained; QA-only payment marker set to paid with amount 0 using one narrowly scoped UPDATE; DELETE rejected 409 |
+| Email event `9298c755-c452-4bd4-9b48-2b93e057298d` | Staging legacy replay | Retained; empty inspection ID, recipient_count 1 |
+| Email event `ef19bef9-d932-497c-b1f2-67ef6868e17c` | Staging new format | Retained; staging paid QA inspection, recipient_count 1 |
+| Email event `d184e0c3-255f-406f-b395-4608d0367fb8` | Production legacy replay | Retained; empty inspection ID, recipient_count 1 |
+| Email event `109b0e2e-7d33-4c92-8a34-49482e93fe10` | Production new format | Retained; production paid QA inspection, recipient_count 1 |
+
+Two auth sessions were created by the required sign-ins, used through private cookie jars, and successfully signed out (200/200); session identifiers were deliberately neither retained nor printed. Authentication may update its normal login metadata. No account was created, no tester/admin role changed, no credit consumed (A remains at 20), and no order, payment, card charge, photo or PDF object was created. The existing old inspection and historical email-report inspection were only read/referenced, not modified. Four emails were accepted by the real provider to the approved address; their provider IDs are listed in the result table. Inbox delivery was not checked.
+
+## Isolated local QA records
+
+These are in-memory SQLite fixtures only, not staging/production rows. The compatibility fixture operation ledger records each SQL mutation and generated email-event ID. The safety fixture ledger enumerates every user, inspection and order created; temporary credit-user rows are explicitly removed and each in-memory database is discarded at the end of the suite. No production financial history was deleted. Fresh evidence includes both complete local ledgers and the 36/33 assertion output.
+
+## Stop
+
+Candidate remains staged, with no further application edits after deployment. **No Update/publication action was taken.** Acceptance remains blocked by the two staging admin mismatches and the explicitly unrun T/browser/post-Update checks.
+'''
+path=pathlib.Path('qa/PHASE1_STAGING_VERIFICATION_2026-11-12.md');path.write_text(report)
+print('Report saved; '+str(len(rows))+' result rows; no secrets or session cookies included.')

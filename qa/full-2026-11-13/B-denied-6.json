@@ -1,0 +1,14 @@
+{
+  "label": "B-denied-6",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/upload/photo",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf771c5accd1-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:57.713328+00:00",
+  "response": {
+    "error": "Inspection not found"
+  }
+}

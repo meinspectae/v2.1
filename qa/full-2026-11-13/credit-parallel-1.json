@@ -1,0 +1,18 @@
+{
+  "label": "credit-parallel-1",
+  "actor": "C",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf7e1a10ff01-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:59.070171+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "credit_1794551638862_4k7r49b4el8",
+    "orderId": 90,
+    "status": "paid",
+    "message": "Free inspection credit used successfully."
+  }
+}

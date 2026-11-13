@@ -1,0 +1,28 @@
+https://staging--olkmxpl1sliijytnc48w.youbase.cloud/api/webhooks/stripe
+HTTP/2 500 
+date: Tue, 03 Nov 2026 06:23:17 GMT
+content-type: application/json
+content-length: 34
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+content-security-policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://*.youbase.cloud; frame-src https://js.stripe.com https://hooks.stripe.com; upgrade-insecure-requests
+permissions-policy: camera=(self), geolocation=(self), microphone=(), payment=(self)
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=RxYqQo1RGKYf2%2Bzm0bEX8rPD2afujQbFYLBfF8n6279x71ftf6rudidhvO9fADueBGkX5t6PpIoaBQf3mIDP56JT%2BOdQQ5FKTAU5gdQax2T4YXRdyGfOb72MQ7zrJB5e%2FsfVplIbvjzm2MstbS3czk70051sycdD6SxKdbU%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+body={"error":"Webhook not configured"}
+https://olkmxpl1sliijytnc48w.youbase.cloud/api/webhooks/stripe
+HTTP/2 400 
+date: Tue, 03 Nov 2026 06:23:17 GMT
+content-type: application/json
+content-length: 36
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+content-security-policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://*.youbase.cloud; frame-src https://js.stripe.com https://hooks.stripe.com; upgrade-insecure-requests
+permissions-policy: camera=(self), geolocation=(self), microphone=(), payment=(self)
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=ZOPIt69s%2Fk1LTmkURw7HD11ONq%2FVWucIUtMgCugztqugtx79m%2BEdfRevYjAXhn%2BpiviIoym7fmu8JCMpVQFo1%2BCqPJhjdT6%2FriY3icVYyZ1xX1AiB12QI8rY2UZnfmDmJu9CwI17ju9iRLELAhGyz7lSp64%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+body={"error":"Invalid Stripe signature"}

@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:29:52.692500+00:00",
+  "environment": "production",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261110-production-draft",
+  "cfRay": "a583015a0d3d8b90-PDX",
+  "requestId": null,
+  "body": {
+    "success": true
+  }
+}

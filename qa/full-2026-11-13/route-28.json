@@ -1,0 +1,14 @@
+{
+  "label": "route-28",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/checkout/qa-20261113-missing",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd93e8a7cb395-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.568232+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

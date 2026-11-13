@@ -1,0 +1,22 @@
+{
+  "label": "B-signup",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-in/anonymous",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbb5bd836ef24-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:31:10.027765+00:00",
+  "response": {
+    "token": "[REDACTED]",
+    "user": {
+      "id": "I9x4jTX29wRiTIum0mYmjbSEzLfXQZX2",
+      "email": "temp@j7ytolfxpi8lduhcpfdw0frjerhfpppo.com",
+      "emailVerified": false,
+      "name": "Anonymous",
+      "createdAt": "2026-11-13T06:31:09.481Z",
+      "updatedAt": "2026-11-13T06:31:09.481Z"
+    }
+  }
+}

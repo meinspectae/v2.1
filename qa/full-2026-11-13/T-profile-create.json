@@ -1,0 +1,14 @@
+{
+  "label": "T-profile-create",
+  "actor": "T",
+  "method": "POST",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbb6c3ad51687-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:31:12.291239+00:00",
+  "response": {
+    "success": true
+  }
+}

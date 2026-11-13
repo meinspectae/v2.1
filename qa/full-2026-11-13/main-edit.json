@@ -1,0 +1,14 @@
+{
+  "label": "main-edit",
+  "actor": "N",
+  "method": "PUT",
+  "path": "/api/inspections/qa-20261113-main",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf4f689c5ed2-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:51.683158+00:00",
+  "response": {
+    "success": true
+  }
+}

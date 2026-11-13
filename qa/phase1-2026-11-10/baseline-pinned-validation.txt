@@ -1,0 +1,21 @@
+0.0.23
+EdgeSpark CLI
+Project: e1e97b93-d0a5-4010-bf48-f906242007ef
+Installing dependencies in ....
+
+Type checking...
+✔ Type check passed
+
+Building project...
+✔ Build completed
+
+Validating bundle...
+
+✖ Missing required export: default.
+Fix: Add to src/index.ts: const app = new Hono(); export default app;
+
+
+⚠ ACTION REQUIRED: SDK types outdated (Local types are STALE and may cause incorrect code)
+  IMMEDIATELY run: edgespark pull types
+
+Failed in 16.26s

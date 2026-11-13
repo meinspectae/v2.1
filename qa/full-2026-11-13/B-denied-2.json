@@ -1,0 +1,14 @@
+{
+  "label": "B-denied-2",
+  "actor": "B",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261113-main",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf71f8680c31-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:56.917586+00:00",
+  "response": {
+    "error": "Inspection not found"
+  }
+}

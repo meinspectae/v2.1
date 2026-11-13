@@ -1,0 +1,16 @@
+{
+  "label": "tester-repeat-checkout",
+  "actor": "T",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf78dcd78bee-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:58.009674+00:00",
+  "response": {
+    "success": true,
+    "status": "paid",
+    "alreadyPaid": true
+  }
+}

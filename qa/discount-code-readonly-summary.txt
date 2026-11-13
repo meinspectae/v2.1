@@ -1,0 +1,7 @@
+Production read-only database inspection; no checkout request made
+WELCOME20: configured 20%; computed route price AED 159; NOT RUN as normal user
+LAUNCH50: configured AED 50; computed route price AED 149; NOT RUN as normal user
+MEINSPECT10: configured 10%; computed route price AED 179; NOT RUN as normal user
+INSPECTOR: configured AED 100; computed route price AED 99; NOT RUN as normal user
+FREE_REPORT: configured 100%; computed route price AED 0; NOT RUN as normal user
+INVALID: route logic would leave AED 199; NOT RUN as normal user

@@ -1,0 +1,12 @@
+{
+  "status": 403,
+  "time": "2026-11-10T06:38:39.267586+00:00",
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/admin/set-tester",
+  "cfRay": "a5830e366e8b8639-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Admin access required"
+  }
+}

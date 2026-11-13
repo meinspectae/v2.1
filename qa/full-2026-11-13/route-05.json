@@ -1,0 +1,14 @@
+{
+  "label": "route-05",
+  "actor": "unauth",
+  "method": "DELETE",
+  "path": "/api/user/account",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd937cd628ce4-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.681323+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "label": "pay-launch50-create",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/inspections",
+  "status": 201,
+  "requestId": null,
+  "cfRay": "a59bbf4f6f356c24-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:51.608336+00:00",
+  "response": {
+    "data": {
+      "id": "qa-20261113-pay-launch50",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "propertyType": "apartment",
+      "status": "draft",
+      "generalNotes": "QA Test disposable inspection",
+      "propertyData": "{\"buildingName\":\"QA Test\",\"unitNumber\":\"13\",\"city\":\"Dubai\"}",
+      "tenantData": "{}",
+      "landlordData": "{}",
+      "agentData": "{}",
+      "tenancyData": "{}",
+      "roomsData": "[]",
+      "propertyItems": "[]",
+      "signatures": "[]",
+      "overallPhotos": "[]",
+      "paymentData": "{\"paid\":false}",
+      "reportGenerated": 0,
+      "createdAt": "2026-11-13T06:33:51.282Z",
+      "updatedAt": "2026-11-13T06:33:51.282Z",
+      "completedAt": null,
+      "pdfUrl": "",
+      "extraData": "{}",
+      "shareToken": "[REDACTED]",
+      "shareRevokedAt": null,
+      "deletedAt": null
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "B-profile-after-signout",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/user/profile",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59be6815cdddabf-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:36.770732+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

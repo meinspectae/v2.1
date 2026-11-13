@@ -1,0 +1,1 @@
+{"info":0,"low":2,"moderate":9,"high":21,"critical":3,"total":35}

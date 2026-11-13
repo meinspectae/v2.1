@@ -1,0 +1,12 @@
+{
+  "label": "T-session-after-signout",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/_es/auth/get-session",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be6888c0c9bf9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:37.978169+00:00",
+  "response": null
+}

@@ -1,0 +1,14 @@
+{
+  "label": "N-admin-get-users",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/admin/users",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf614cd3b8b9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:54.266999+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

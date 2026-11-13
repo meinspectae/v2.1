@@ -1,0 +1,12 @@
+{
+  "pages": 13,
+  "bytes": 3283294,
+  "photos": 34,
+  "legalClausesPerLanguage": 19,
+  "tests": "PASS",
+  "limitations": [
+    "Synthetic fixture only; no physical camera or authenticated cloud finalisation tested",
+    "Per-signer IP absent in existing Signature records; report prints Not recorded rather than inventing it",
+    "Test QR is displayed but deliberately not registered as a real inspection"
+  ]
+}

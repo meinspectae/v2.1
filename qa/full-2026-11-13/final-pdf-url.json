@@ -1,0 +1,15 @@
+{
+  "label": "final-pdf-url",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/download/pdf/qa-20261113-final",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd0655ed9ff1a-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:45:31.268311+00:00",
+  "response": {
+    "downloadUrl": "[REDACTED]",
+    "expiresAt": "2026-11-13T07:45:31.206Z"
+  }
+}

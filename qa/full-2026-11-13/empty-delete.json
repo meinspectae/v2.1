@@ -1,0 +1,14 @@
+{
+  "label": "empty-delete",
+  "actor": "N",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261113-empty",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf576c4796ba-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:52.793756+00:00",
+  "response": {
+    "success": true
+  }
+}

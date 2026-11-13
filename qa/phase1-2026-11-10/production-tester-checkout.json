@@ -1,0 +1,16 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:31:10.784753+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/checkout",
+  "cfRay": "a58303415cf4eedd-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "sessionId": "tester_1794292270379_m5tu2jw709",
+    "orderId": 81,
+    "status": "paid",
+    "message": "Tester payment processed successfully (Free)"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "label": "main-photo-list",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261113-main/photos",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbfa03b938e5d-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:04.489644+00:00",
+  "response": {
+    "photos": [
+      {
+        "id": "qa-20261113-photo1",
+        "inspectionId": "qa-20261113-main",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "roomId": "room1",
+        "itemId": "item1",
+        "cloudPath": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo1.png",
+        "metadata": {
+          "id": "qa-20261113-photo1",
+          "timestamp": "2026-11-13T06:32:00Z",
+          "caption": "QA Test photo 1"
+        },
+        "ready": 1,
+        "downloadUrl": "[REDACTED]"
+      },
+      {
+        "id": "qa-20261113-photo2",
+        "inspectionId": "qa-20261113-main",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "roomId": "room1",
+        "itemId": "item1",
+        "cloudPath": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo2.png",
+        "metadata": {
+          "id": "qa-20261113-photo2",
+          "timestamp": "2026-11-13T06:32:00Z",
+          "caption": "QA Test photo 2"
+        },
+        "ready": 1,
+        "downloadUrl": "[REDACTED]"
+      },
+      {
+        "id": "qa-20261113-photo3",
+        "inspectionId": "qa-20261113-main",
+        "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+        "roomId": "room1",
+        "itemId": "item1",
+        "cloudPath": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo3.png",
+        "metadata": {
+          "id": "qa-20261113-photo3",
+          "timestamp": "2026-11-13T06:32:00Z",
+          "caption": "QA Test photo 3"
+        },
+        "ready": 1,
+        "downloadUrl": "[REDACTED]"
+      }
+    ]
+  }
+}

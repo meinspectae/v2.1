@@ -1,0 +1,20 @@
+Progress: resolved 0, reused 1, downloaded 0, added 0
+ WARN  2 deprecated subdependencies found: @esbuild-kit/core-utils@3.3.2, @esbuild-kit/esm-loader@2.6.5
+Packages: +3
++++
+Progress: resolved 132, reused 34, downloaded 1, added 0
+Progress: resolved 132, reused 34, downloaded 1, added 2
+Progress: resolved 132, reused 34, downloaded 1, added 3, done
+
+devDependencies:
++ @edgespark/cli 0.0.12 (0.0.25 is available)
+
+╭ Warning ─────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│   Ignored build scripts: esbuild@0.18.20, esbuild@0.25.12, esbuild@0.27.7,   │
+│   esbuild@0.28.2.                                                            │
+│   Run "pnpm approve-builds" to pick which dependencies should be allowed     │
+│   to run scripts.                                                            │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+Done in 3s using pnpm v10.33.0

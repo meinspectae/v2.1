@@ -1,0 +1,14 @@
+{
+  "label": "reference-download",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261113-main/reference",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be424ce328d3a-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:00.221243+00:00",
+  "response": {
+    "downloadUrl": "[REDACTED]"
+  }
+}

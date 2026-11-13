@@ -1,0 +1,14 @@
+{
+  "label": "delete-account",
+  "actor": "C",
+  "method": "DELETE",
+  "path": "/api/user/account",
+  "status": 500,
+  "requestId": null,
+  "cfRay": "a59bdc4438558969-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:53:37.837563+00:00",
+  "response": {
+    "error": "Failed to delete account"
+  }
+}

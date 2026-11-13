@@ -1,0 +1,27 @@
+{
+  "label": "T-profile",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf44ef6a6e09-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:49.687842+00:00",
+  "response": {
+    "data": {
+      "id": "ngpPitm0v8x6HZJEtcCNiCz9BqBD7ZcS",
+      "email": "temp@0uob3vijlfvajrckfx3y3h8bvgmxstaz.com",
+      "name": "QA Test",
+      "phone": "",
+      "location": "",
+      "createdAt": "sql`(datetime('now'))`",
+      "updatedAt": "sql`(datetime('now'))`",
+      "passwordHash": "[REDACTED]",
+      "isTester": 1,
+      "freeInspections": 0,
+      "isAdmin": 0,
+      "deletedAt": null
+    }
+  }
+}

@@ -1,0 +1,5 @@
+wrong_password status=401 request_id=a5494b5649bc3e6d-PDX result=INVALID_EMAIL_OR_PASSWORD
+correct_password status=403 request_id=a5494b591c3d1bed-PDX result=EMAIL_NOT_VERIFIED
+session status=200 request_id=a5494b5bcf282f25-PDX result=no-session
+sign_out status=415 request_id=a5494b5d1fe10d87-PDX result=response
+session_after_sign_out status=200 request_id=a5494b5e3e5db338-PDX result=no-session

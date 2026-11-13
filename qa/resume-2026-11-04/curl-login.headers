@@ -1,0 +1,15 @@
+HTTP/2 200 
+date: Wed, 04 Nov 2026 07:52:50 GMT
+content-type: application/json
+content-length: 392
+access-control-allow-origin: https://olkmxpl1sliijytnc48w.youbase.cloud
+vary: Origin
+access-control-allow-credentials: true
+access-control-expose-headers: set-auth-token
+set-auth-token: NKK4Tq76zM4Ss22pOclF8vIycGc2IB6F.BpPAtDMJ2XietwpjXrABZ6%2FH75Nr3QAUNo%2Fn6l5WHkM%3D
+x-es-sticky-session-db-bookmark: 0000068e-00000004-00005119-26fc6f802448e331272127d735e59c28
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=v6xpgCqsazf0xB5%2F6U%2B33%2FAojhYfmuHIeZF9ahpzRDSHLZrV0YoskCHyqCqm6ioZzu1vni6EGCMu4xChA6FMKeqPtl%2BAJ7KUqAwBZffy41fNhfUAjM7hRtQK9Onuzlv6utBuZrFSk7pgQiAng%2FDnHVp7%2BmE%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a5520a9b8f491ef3-PDX
+

@@ -1,0 +1,14 @@
+{
+  "label": "T-admin-get-access",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/admin/access",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf668903c153-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:55.069592+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

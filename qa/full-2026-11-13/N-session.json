@@ -1,0 +1,39 @@
+{
+  "label": "N-session",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/_es/auth/get-session",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf3c9ccc0d87-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:48.462543+00:00",
+  "response": {
+    "session": {
+      "expiresAt": "2026-11-20T06:31:07.897Z",
+      "token": "[REDACTED]",
+      "createdAt": "2026-11-13T06:31:07.897Z",
+      "updatedAt": "2026-11-13T06:31:07.897Z",
+      "ipAddress": "",
+      "userAgent": "curl/7.88.1",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "impersonatedBy": null,
+      "id": "fS87wpLK8o4Bp4Q2HmgvdTwDR8NCuJk5"
+    },
+    "user": {
+      "name": "QA Test",
+      "email": "temp@38daxb5rc6bhqztyptokx0scgrplab5q.com",
+      "emailVerified": false,
+      "image": null,
+      "createdAt": "2026-11-13T06:31:07.777Z",
+      "updatedAt": "2026-11-13T06:31:08.709Z",
+      "role": "esu",
+      "banned": false,
+      "banReason": null,
+      "banExpires": null,
+      "lastLoginAt": "2026-11-13T06:31:08.098Z",
+      "isAnonymous": true,
+      "id": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry"
+    }
+  }
+}

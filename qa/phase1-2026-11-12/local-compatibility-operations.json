@@ -1,0 +1,513 @@
+{
+  "scope": "isolated local SQLite only",
+  "operations": [
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "paid",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{\"paid\":true}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "completed",
+        "qa",
+        "apartment",
+        "completed",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "finalised",
+        "qa",
+        "apartment",
+        "finalised",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "report",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        1,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, null, null)",
+      "params": [
+        "timestamp",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "registered",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"report_verifications\" (\"id\", \"inspection_id\", \"user_id\", \"content_hash\", \"pdf_hash\", \"pdf_path\", \"created_at\") values (?, ?, ?, ?, ?, ?, ?)",
+      "params": [
+        "reg",
+        "registered",
+        "qa",
+        "hash",
+        "hash",
+        "qa.pdf",
+        "2026-11-10"
+      ]
+    },
+    {
+      "query": "delete from \"inspections\" where (\"inspections\".\"id\" = ? and \"inspections\".\"user_id\" = ? and COALESCE(json_extract(CASE WHEN json_valid(\"inspections\".\"payment_data\") THEN \"inspections\".\"payment_data\" ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true') and \"inspections\".\"status\" NOT IN ('completed', 'finalised', 'finalized') and COALESCE(\"inspections\".\"report_generated\", 0) = 0 and COALESCE(\"inspections\".\"completed_at\", '') = '' and NOT EXISTS (SELECT 1 FROM \"report_verifications\" WHERE \"report_verifications\".\"inspection_id\" = ?) and NOT EXISTS (SELECT 1 FROM \"orders\" WHERE \"orders\".\"inspection_id\" = ? AND \"orders\".\"status\" = 'paid') and NOT EXISTS (SELECT 1 FROM \"payments\" WHERE \"payments\".\"inspection_id\" = ?)) returning \"id\"",
+      "params": [
+        "registered",
+        "qa",
+        "registered",
+        "registered",
+        "registered"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "payment",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"payments\" (\"id\", \"inspection_id\", \"paid\", \"amount\", \"currency\", \"method\", \"paid_at\", \"transaction_id\") values (null, ?, ?, ?, ?, ?, null, null)",
+      "params": [
+        "payment",
+        0,
+        0,
+        "AED",
+        "card"
+      ]
+    },
+    {
+      "query": "delete from \"inspections\" where (\"inspections\".\"id\" = ? and \"inspections\".\"user_id\" = ? and COALESCE(json_extract(CASE WHEN json_valid(\"inspections\".\"payment_data\") THEN \"inspections\".\"payment_data\" ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true') and \"inspections\".\"status\" NOT IN ('completed', 'finalised', 'finalized') and COALESCE(\"inspections\".\"report_generated\", 0) = 0 and COALESCE(\"inspections\".\"completed_at\", '') = '' and NOT EXISTS (SELECT 1 FROM \"report_verifications\" WHERE \"report_verifications\".\"inspection_id\" = ?) and NOT EXISTS (SELECT 1 FROM \"orders\" WHERE \"orders\".\"inspection_id\" = ? AND \"orders\".\"status\" = 'paid') and NOT EXISTS (SELECT 1 FROM \"payments\" WHERE \"payments\".\"inspection_id\" = ?)) returning \"id\"",
+      "params": [
+        "payment",
+        "qa",
+        "payment",
+        "payment",
+        "payment"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "order",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "insert into \"orders\" (\"id\", \"environment\", \"user_id\", \"inspection_id\", \"price_id\", \"amount\", \"currency\", \"status\", \"type\", \"provider\", \"provider_session_id\", \"provider_payment_id\", \"discount_code\", \"discount_amount\", \"metadata\", \"paid_at\", \"created_at\") values (null, ?, ?, ?, null, ?, ?, ?, ?, ?, null, null, null, ?, null, null, (unixepoch()))",
+      "params": [
+        "staging",
+        "qa",
+        "order",
+        0,
+        "AED",
+        "paid",
+        "one_time",
+        "stripe",
+        0
+      ]
+    },
+    {
+      "query": "delete from \"inspections\" where (\"inspections\".\"id\" = ? and \"inspections\".\"user_id\" = ? and COALESCE(json_extract(CASE WHEN json_valid(\"inspections\".\"payment_data\") THEN \"inspections\".\"payment_data\" ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true') and \"inspections\".\"status\" NOT IN ('completed', 'finalised', 'finalized') and COALESCE(\"inspections\".\"report_generated\", 0) = 0 and COALESCE(\"inspections\".\"completed_at\", '') = '' and NOT EXISTS (SELECT 1 FROM \"report_verifications\" WHERE \"report_verifications\".\"inspection_id\" = ?) and NOT EXISTS (SELECT 1 FROM \"orders\" WHERE \"orders\".\"inspection_id\" = ? AND \"orders\".\"status\" = 'paid') and NOT EXISTS (SELECT 1 FROM \"payments\" WHERE \"payments\".\"inspection_id\" = ?)) returning \"id\"",
+      "params": [
+        "order",
+        "qa",
+        "order",
+        "order",
+        "order"
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "draft",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "delete from \"inspections\" where (\"inspections\".\"id\" = ? and \"inspections\".\"user_id\" = ? and COALESCE(json_extract(CASE WHEN json_valid(\"inspections\".\"payment_data\") THEN \"inspections\".\"payment_data\" ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true') and \"inspections\".\"status\" NOT IN ('completed', 'finalised', 'finalized') and COALESCE(\"inspections\".\"report_generated\", 0) = 0 and COALESCE(\"inspections\".\"completed_at\", '') = '' and NOT EXISTS (SELECT 1 FROM \"report_verifications\" WHERE \"report_verifications\".\"inspection_id\" = ?) and NOT EXISTS (SELECT 1 FROM \"orders\" WHERE \"orders\".\"inspection_id\" = ? AND \"orders\".\"status\" = 'paid') and NOT EXISTS (SELECT 1 FROM \"payments\" WHERE \"payments\".\"inspection_id\" = ?)) returning \"id\"",
+      "params": [
+        "draft",
+        "qa",
+        "draft",
+        "draft",
+        "draft"
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "9a948b6a-55b8-4683-925b-4aa30ea2323a",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "c57568ce-ceb4-4c7d-88d1-787f3ebb953c",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "owned",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{\"email\":\"party@example.com\"}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "9322fe80-698a-42cc-a6b5-83a27a6e1b37",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "2cc069ba-9013-402d-b604-72ecdfa635fb",
+        "qa",
+        "owned",
+        2,
+        1794476567,
+        "qa",
+        1794472967,
+        2
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "7904be59-5663-4be1-b611-1d5c1aa4a088",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "directFixtureOperation": "DELETE email_send_events",
+      "deletedIds": [
+        "2cc069ba-9013-402d-b604-72ecdfa635fb",
+        "7904be59-5663-4be1-b611-1d5c1aa4a088",
+        "9322fe80-698a-42cc-a6b5-83a27a6e1b37",
+        "9a948b6a-55b8-4683-925b-4aa30ea2323a",
+        "c57568ce-ceb4-4c7d-88d1-787f3ebb953c"
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "981e62a5-d5c2-4ba4-a980-2f0c3aff359b",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "803dbefc-312e-48dd-8f40-f17808cf6d9c",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "f96af4e2-943a-4525-a602-790fd9d55bdf",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)\n      SELECT ?, ?, ?, ?, ?\n      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events\n        WHERE user_id = ? AND sent_at > ?) + ? <= 30",
+      "params": [
+        "1ac76719-767c-4ff2-abe3-e12a1f35f125",
+        "qa",
+        "",
+        1,
+        1794476567,
+        "qa",
+        1794472967,
+        1
+      ]
+    },
+    {
+      "query": "insert into \"inspections\" (\"id\", \"user_id\", \"property_type\", \"status\", \"general_notes\", \"property_data\", \"tenant_data\", \"landlord_data\", \"agent_data\", \"tenancy_data\", \"rooms_data\", \"property_items\", \"signatures\", \"overall_photos\", \"payment_data\", \"report_generated\", \"created_at\", \"updated_at\", \"completed_at\", \"pdf_url\", \"extra_data\", \"share_token\", \"share_revoked_at\", \"deleted_at\") values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, null, ?, ?, null, null, null)",
+      "params": [
+        "account-draft",
+        "qa",
+        "apartment",
+        "draft",
+        "",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "{}",
+        "[]",
+        "[]",
+        "[]",
+        "[]",
+        "{}",
+        0,
+        "2026-11-10",
+        "2026-11-10",
+        "",
+        "{}"
+      ]
+    },
+    {
+      "query": "delete from \"inspections\" where (\"inspections\".\"user_id\" = ? and COALESCE(json_extract(CASE WHEN json_valid(\"inspections\".\"payment_data\") THEN \"inspections\".\"payment_data\" ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true') and \"inspections\".\"status\" NOT IN ('completed', 'finalised', 'finalized') and COALESCE(\"inspections\".\"report_generated\", 0) = 0 and COALESCE(\"inspections\".\"completed_at\", '') = '' and NOT EXISTS (SELECT 1 FROM \"report_verifications\" WHERE \"report_verifications\".\"inspection_id\" = \"inspections\".\"id\") and NOT EXISTS (SELECT 1 FROM \"orders\" WHERE \"orders\".\"inspection_id\" = \"inspections\".\"id\" AND \"orders\".\"status\" = 'paid') and NOT EXISTS (SELECT 1 FROM \"payments\" WHERE \"payments\".\"inspection_id\" = \"inspections\".\"id\"))",
+      "params": [
+        "qa"
+      ]
+    },
+    {
+      "query": "delete from \"users\" where \"users\".\"id\" = ?",
+      "params": [
+        "qa"
+      ]
+    },
+    {
+      "query": "delete from \"user_profiles\" where \"user_profiles\".\"user_id\" = ?",
+      "params": [
+        "qa"
+      ]
+    },
+    {
+      "query": "delete from \"es_system__auth_user\" where \"es_system__auth_user\".\"id\" = ?",
+      "params": [
+        "qa"
+      ]
+    }
+  ],
+  "remainingEmailEvents": [
+    "1ac76719-767c-4ff2-abe3-e12a1f35f125",
+    "981e62a5-d5c2-4ba4-a980-2f0c3aff359b",
+    "boundary"
+  ]
+}

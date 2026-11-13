@@ -1,0 +1,17 @@
+{
+  "label": "pay-launch50-expire",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout/cs_live_acvde6So6R8TA7HfuwVU9KHpQ8dPZcvOrD1PSdrYDWip7s69upNkaZycUv/expire",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bc0256e5588dc-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:25.696494+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acvde6So6R8TA7HfuwVU9KHpQ8dPZcvOrD1PSdrYDWip7s69upNkaZycUv",
+    "status": "expired",
+    "stripeRequestId": "req_j1snqH9tfQJiu0"
+  }
+}

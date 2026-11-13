@@ -1,0 +1,14 @@
+{
+  "label": "route-13",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/sync/inspections",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd93a4f2023a3-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.889100+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

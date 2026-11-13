@@ -1,0 +1,17 @@
+{
+  "environment": "staging",
+  "method": "GET",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a5949581590c69d4-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:41:58 GMT",
+  "observedAt": "2026-11-12T09:41:58.723237+00:00",
+  "response": {
+    "id": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+    "isAdmin": 1,
+    "isTester": 0,
+    "freeInspections": 20,
+    "error": null
+  }
+}

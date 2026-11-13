@@ -1,0 +1,14 @@
+{
+  "label": "B-signout",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-out",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be67d4f2cda91-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:36.283495+00:00",
+  "response": {
+    "success": true
+  }
+}

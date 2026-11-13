@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:29:54.858082+00:00",
+  "environment": "staging",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261110-staging-draft",
+  "cfRay": "a58301678c990ba9-PDX",
+  "requestId": null,
+  "body": {
+    "success": true
+  }
+}

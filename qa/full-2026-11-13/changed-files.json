@@ -1,0 +1,9 @@
+[
+  "src/pages/ReportPage.tsx",
+  "src/components/EmailReportModal.tsx",
+  "backend/src/index.ts",
+  "backend/dist/bundle.js",
+  "dist/sw.js",
+  "dist/index.html",
+  "public/sw.js"
+]

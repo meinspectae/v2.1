@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "sentCount": 1,
+  "failedCount": 0,
+  "results": [
+    {
+      "email": "aalekh.dxb@gmail.com",
+      "success": true,
+      "id": "01a1a58f-bf0c-71a8-b331-14e76a2a399f"
+    }
+  ]
+}

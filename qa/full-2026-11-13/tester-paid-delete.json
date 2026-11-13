@@ -1,0 +1,14 @@
+{
+  "label": "tester-paid-delete",
+  "actor": "T",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261113-tester",
+  "status": 409,
+  "requestId": null,
+  "cfRay": "a59bbf779d9ccb90-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:57.798169+00:00",
+  "response": {
+    "error": "Paid or finalised inspections cannot be deleted. Keep the report for your records."
+  }
+}

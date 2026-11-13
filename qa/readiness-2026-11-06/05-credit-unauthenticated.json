@@ -1,0 +1,16 @@
+{
+  "label": "05-credit-unauthenticated",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/checkout",
+  "timeUTC": "2026-11-06T06:39:40.781648+00:00",
+  "status": 401,
+  "headers": {
+    "date": "Fri, 06 Nov 2026 06:39:40 GMT",
+    "content-type": "application/json",
+    "cf-ray": "a5621a379f0cfdb1-PDX"
+  },
+  "responseSummary": {
+    "error": "UNAUTHENTICATED"
+  }
+}

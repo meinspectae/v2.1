@@ -1,0 +1,14 @@
+{
+  "data": {
+    "id": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+    "email": "aalekh.dxb@gmail.com",
+    "name": "Aalekh Agarwal",
+    "phone": "0521253379",
+    "location": "",
+    "createdAt": "sql`(datetime('now'))`",
+    "updatedAt": "2026-10-29 08:10:26",
+    "passwordHash": "",
+    "isTester": 0,
+    "freeInspections": 21
+  }
+}

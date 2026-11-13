@@ -1,0 +1,6 @@
+https://olkmxpl1sliijytnc48w.youbase.cloud/api/webhooks/stripe
+status=400
+body={"error":"Invalid Stripe signature"}
+https://staging--olkmxpl1sliijytnc48w.youbase.cloud/api/webhooks/stripe
+status=500
+body={"error":"Webhook not configured"}

@@ -1,0 +1,12 @@
+{
+  "status": 429,
+  "time": "2026-11-10T06:35:29.692091+00:00",
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/send-email",
+  "cfRay": "a5830992ecf18d3a-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Email limit reached. You can send at most 30 emails per hour."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "N-profile-create",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbb595a15ad76-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:31:09.305853+00:00",
+  "response": {
+    "success": true
+  }
+}

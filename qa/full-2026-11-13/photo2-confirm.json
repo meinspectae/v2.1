@@ -1,0 +1,14 @@
+{
+  "label": "photo2-confirm",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/inspections/qa-20261113-main/photos/qa-20261113-photo2/confirm",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf8c68875012-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:01.378135+00:00",
+  "response": {
+    "success": true
+  }
+}

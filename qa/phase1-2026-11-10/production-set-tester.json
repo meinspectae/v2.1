@@ -1,0 +1,13 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:25:35.329091+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/admin/set-tester",
+  "cfRay": "a582fb10dc9e0055-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "message": "User aalekh.dxb@gmail.com tester status set to false"
+  }
+}

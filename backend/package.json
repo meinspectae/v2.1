@@ -1,0 +1,28 @@
+{
+  "name": "meinspect-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "drizzle-orm": "0.45.4",
+    "hono": "4.13.13",
+    "sanitize-html": "2.17.0",
+    "stripe": "^22.3.0"
+  },
+  "devDependencies": {
+    "@edgespark/cli": "0.0.12",
+    "@edgespark/devkit": "^0.0.1",
+    "@types/node": "^22.20.1",
+    "@types/sanitize-html": "2.16.0",
+    "drizzle-kit": "0.31.11",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "shell-quote": "1.12.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "shell-quote": "1.12.0"
+    }
+  }
+}

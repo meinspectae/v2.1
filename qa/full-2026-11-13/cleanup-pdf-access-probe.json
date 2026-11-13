@@ -1,0 +1,14 @@
+{
+  "label": "cleanup-pdf-access-probe",
+  "actor": "B",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261113-pdf-access-probe",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be66dea4d3741-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:33.889692+00:00",
+  "response": {
+    "success": true
+  }
+}

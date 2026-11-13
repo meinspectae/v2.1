@@ -1,0 +1,21 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:32:06.917716+00:00",
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/send-email",
+  "cfRay": "a58304a09bd4150f-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "sentCount": 1,
+    "failedCount": 0,
+    "results": [
+      {
+        "email": "aalekh.dxb@gmail.com",
+        "success": true,
+        "id": "01a1c428-216f-73c8-a33b-a3e5e79ad1c9"
+      }
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+@import '@fontsource/noto-naskh-arabic/400.css';
+@import '@fontsource/noto-naskh-arabic/700.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    max-width: 100vw;
+    position: relative;
+  }
+
+  #root {
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+  /* Prevent iOS Safari from auto-zooming the page when a form field is
+     focused. iOS triggers this zoom whenever a focused input/textarea/select
+     has a computed font-size below 16px, and (notably) does not always
+     zoom back out afterwards, leaving the page stuck zoomed in. The
+     viewport meta tag already sets maximum-scale=1/user-scalable=no as the
+     primary fix; this is a defense-in-depth rule for any 14px form fields. */
+  @media (max-width: 768px) {
+    input,
+    textarea,
+    select {
+      font-size: 16px !important;
+    }
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+}
+
+@layer components {
+  /* Print styles */
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background: white;
+    }
+
+    .section {
+      page-break-inside: avoid;
+    }
+  }
+
+  /* Page break styles for PDF generation */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  /* Condition badge colors */
+  .condition-badge {
+    @apply inline-block px-2 py-0.5 rounded-full text-xs font-semibold;
+  }
+
+  .condition-excellent {
+    @apply bg-emerald-100 text-emerald-700;
+  }
+
+  .condition-good {
+    @apply bg-green-100 text-green-700;
+  }
+
+  .condition-fair {
+    @apply bg-amber-100 text-amber-700;
+  }
+
+  .condition-poor {
+    @apply bg-orange-100 text-orange-700;
+  }
+
+  .condition-damaged {
+    @apply bg-red-100 text-red-700;
+  }
+
+  .condition-missing {
+    @apply bg-gray-100 text-gray-600;
+  }
+
+  .condition-null {
+    @apply bg-slate-50 text-slate-400;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Arabic must be shaped as a complete RTL run, never letter-spaced. */
+.arabic-text, [lang="ar"] { font-family: 'Noto Naskh Arabic', serif; direction: rtl; text-align: right; letter-spacing: 0 !important; font-kerning: normal; }

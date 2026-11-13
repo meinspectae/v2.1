@@ -1,0 +1,24 @@
+{
+  "id": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB",
+  "orders": [
+    {
+      "id": 90,
+      "environment": "staging",
+      "userId": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB",
+      "inspectionId": "qa-20261113-credit-1",
+      "priceId": null,
+      "amount": 0,
+      "currency": "AED",
+      "status": "paid",
+      "type": "one_time",
+      "provider": "admin_credit",
+      "providerSessionId": "credit_1794551638862_4k7r49b4el8",
+      "providerPaymentId": null,
+      "discountCode": "ADMIN_CREDIT",
+      "discountAmount": 199,
+      "metadata": null,
+      "paidAt": 1794551638,
+      "createdAt": 1794551638
+    }
+  ]
+}

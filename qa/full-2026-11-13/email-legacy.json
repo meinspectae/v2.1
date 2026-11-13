@@ -1,0 +1,23 @@
+{
+  "label": "email-legacy",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/send-email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bca89787f1a0b-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:41:31.795898+00:00",
+  "response": {
+    "success": true,
+    "results": [
+      {
+        "email": "delivered@resend.dev",
+        "success": true,
+        "id": "01a1d3a3-d425-7336-b40e-dcc61d9bd0ce"
+      }
+    ],
+    "sentCount": 1,
+    "failedCount": 0
+  }
+}

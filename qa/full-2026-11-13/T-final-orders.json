@@ -1,0 +1,34 @@
+{
+  "label": "T-final-orders",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/orders",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be6844d8628b9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:37.313924+00:00",
+  "response": {
+    "data": [
+      {
+        "id": 89,
+        "environment": "staging",
+        "userId": "ngpPitm0v8x6HZJEtcCNiCz9BqBD7ZcS",
+        "inspectionId": "qa-20261113-tester",
+        "priceId": null,
+        "amount": 0,
+        "currency": "AED",
+        "status": "paid",
+        "type": "one_time",
+        "provider": "tester",
+        "providerSessionId": "tester_1794551637256_0sk1sbcxkh3",
+        "providerPaymentId": null,
+        "discountCode": "TESTER_PROVISION",
+        "discountAmount": 0,
+        "metadata": null,
+        "paidAt": 1794551637,
+        "createdAt": 1794551637
+      }
+    ]
+  }
+}

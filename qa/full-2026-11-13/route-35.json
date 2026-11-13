@@ -1,0 +1,14 @@
+{
+  "label": "route-35",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/inspections/qa-20261113-missing/reconcile-purchase",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd9402a6e9873-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.832138+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

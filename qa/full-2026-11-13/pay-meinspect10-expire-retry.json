@@ -1,0 +1,17 @@
+{
+  "label": "pay-meinspect10-expire-retry",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout/cs_live_acaGK9iBoKoJ4WLiXI0xPBhMyHAImOuOK2tBSWUw1Pts6l5m8uDruA0EZs/expire",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bc01fc9fc1fb9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:24.789101+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acaGK9iBoKoJ4WLiXI0xPBhMyHAImOuOK2tBSWUw1Pts6l5m8uDruA0EZs",
+    "status": "expired",
+    "stripeRequestId": "req_dNfAxGDzEjfNOv"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:55:06.793109+00:00",
+  "date": "Wed, 04 Nov 2026 07:55:06 GMT",
+  "cfRay": "a5520df65dc369d4-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "status": "paid",
+    "alreadyPaid": true
+  }
+}

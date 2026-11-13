@@ -1,0 +1,21 @@
+{
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/inspections",
+  "status": 201,
+  "requestId": null,
+  "cfRay": "a5949396fd9c613d-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:40 GMT",
+  "observedAt": "2026-11-12T09:40:40.358704+00:00",
+  "response": {
+    "data": {
+      "id": "qa-20261112-production-paid",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "status": "draft",
+      "reportGenerated": 0,
+      "paymentData": "{\"paid\":false}",
+      "createdAt": "2026-11-12T09:40:40.173Z",
+      "error": null
+    }
+  }
+}

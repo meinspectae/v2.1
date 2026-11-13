@@ -1,0 +1,16 @@
+{
+  "label": "photo2-presign",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/upload/photo",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf87cd31f3b4-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:00.578237+00:00",
+  "response": {
+    "uploadUrl": "[REDACTED]",
+    "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo2.png",
+    "expiresAt": "2026-11-13T07:34:00.511Z"
+  }
+}

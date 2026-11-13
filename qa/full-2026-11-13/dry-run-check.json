@@ -1,0 +1,10 @@
+{
+  "cliVersion": "0.0.12",
+  "exitCode": 0,
+  "noSchemaChangesReported": true,
+  "schemaByteIdentical": true,
+  "schemaFilesChecked": 11,
+  "stoppedForChange": false,
+  "sourceSha256": "6d3b349ca5c31fc78152a254729e46643875241c5fccd671134eeb0bc38c0130",
+  "bundleSha256": "40cec6d9dd662e1386bbebca29bdaa4a9e97f918e98dabacfcfec85cae957ff7"
+}

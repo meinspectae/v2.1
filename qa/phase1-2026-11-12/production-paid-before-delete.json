@@ -1,0 +1,21 @@
+{
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261112-production-paid",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59493fcef15efbe-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:56 GMT",
+  "observedAt": "2026-11-12T09:40:56.576199+00:00",
+  "response": {
+    "data": {
+      "id": "qa-20261112-production-paid",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "status": "draft",
+      "reportGenerated": 0,
+      "paymentData": "{\"paid\":true,\"provider\":\"qa_fixture\",\"qaRun\":\"2026-11-12\",\"amount\":0}",
+      "createdAt": "2026-11-12T09:40:40.173Z",
+      "error": null
+    }
+  }
+}

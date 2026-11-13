@@ -1,0 +1,229 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:20:11.029415+00:00",
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/inspections",
+  "cfRay": "a582f3243ebb2d7c-PDX",
+  "requestId": null,
+  "body": {
+    "data": [
+      {
+        "id": "e2e-inspection-full-001",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"amount\":500,\"currency\":\"AED\",\"method\":\"card\",\"paidAt\":\"2026-06-30T08:03:00.000Z\",\"transactionId\":\"txn_e2e_001\",\"discountCode\":\"WELCOME20\",\"discountAmount\":100}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "mr3kz8pvyrde5c6p",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"amount\":500,\"currency\":\"AED\",\"method\":\"card\",\"paidAt\":\"2026-07-02T14:12:45Z\",\"transactionId\":\"txn_mr3l3ht8rgqnu1ud\",\"reportId\":\"RPT-MR3KZ8PV\",\"inspectionId\":\"mr3kz8pvyrde5c6p\",\"paymentId\":\"cs_test_1783001564875_72enzkr7q3v\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "mr7i8ns08yl6gzg7",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"amount\":500,\"currency\":\"AED\",\"method\":\"card\",\"paidAt\":\"2026-07-05T08:06:08Z\",\"transactionId\":\"txn_mr7iblpygsxe3vat\",\"reportId\":\"RPT-MR7I8NS0\",\"inspectionId\":\"mr7i8ns08yl6gzg7\",\"paymentId\":\"cs_test_1783238768103_wqpesi0e1s\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "mrdlbo0jrsd58tf6",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MRDLBO0J\",\"paid\":true,\"paidAt\":\"2026-07-09T14:42:23Z\",\"paymentId\":\"tester_1783608143354_0bytji6dgsiw\",\"sessionId\":\"tester_1783608143354_0bytji6dgsiw\",\"amount\":500,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "mrdo3bn719m071zl",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MRDO3BN7\",\"paid\":true,\"paidAt\":\"2026-07-09T15:36:22Z\",\"paymentId\":\"tester_1783611382771_o16q2wu2fzb\",\"sessionId\":\"tester_1783611382771_o16q2wu2fzb\",\"amount\":500,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "mrvput5prbf1sdjo",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MRVPUT5P\",\"paid\":true,\"paidAt\":\"2026-07-22T06:48:53Z\",\"paymentId\":\"tester_1784702933891_vqy7fygmdck\",\"sessionId\":\"tester_1784702933891_vqy7fygmdck\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "ms1hlymow2hyrnag",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MS1HLYMO\",\"paid\":true,\"paidAt\":\"2026-07-26T07:43:06Z\",\"paymentId\":\"tester_1785051786719_ym0s9g7713n\",\"sessionId\":\"tester_1785051786719_ym0s9g7713n\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "ms1iw7axp2snplxa",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MS1IW7AX\",\"paid\":true,\"paidAt\":\"2026-07-26T10:40:43Z\",\"paymentId\":\"tester_1785062443184_c2ga3hlns29\",\"sessionId\":\"tester_1785062443184_c2ga3hlns29\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "ms5rdkbl627f28k6",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MS5RDKBL\",\"paid\":true,\"paidAt\":\"2026-08-07T06:56:41Z\",\"paymentId\":\"tester_1786085801998_fg63365j4ne\",\"sessionId\":\"tester_1786085801998_fg63365j4ne\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "msbh8qr3lqinirn5",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MSBH8QR3\",\"paid\":true,\"paidAt\":\"2026-08-02T07:29:09Z\",\"paymentId\":\"tester_1785655749200_6xk2p3vay23\",\"sessionId\":\"tester_1785655749200_6xk2p3vay23\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "msrvc4ke75wve5w2",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MSRVC4KE\",\"paid\":true,\"paidAt\":\"2026-08-17T09:01:46Z\",\"paymentId\":\"tester_1786957306229_yqpe1s9kg7m\",\"sessionId\":\"tester_1786957306229_yqpe1s9kg7m\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "msx0bouttoo795qn",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MSX0BOUT\",\"paid\":true,\"paidAt\":\"2026-08-18T11:07:27Z\",\"paymentId\":\"tester_1787051247854_g5lr28ngr7b\",\"sessionId\":\"tester_1787051247854_g5lr28ngr7b\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "msykxyfmzsd9pheh",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MSYKXYFM\",\"paid\":true,\"paidAt\":\"2026-08-18T12:33:46Z\",\"paymentId\":\"tester_1787056426055_z4nty51dhwi\",\"sessionId\":\"tester_1787056426055_z4nty51dhwi\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "msztkp6uftr76dev",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"provider\":\"revenuecat\",\"productId\":\"com.meinspect.app.report\",\"transactionId\":\"2000001227649287\",\"paidAt\":1787815662,\"unlockedByEvent\":\"NON_RENEWING_PURCHASE\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "munub90h2bzq6x79",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MUNUB90H\",\"paid\":true,\"paidAt\":\"2026-09-30T08:55:43Z\",\"paymentId\":\"tester_1790758543279_v9mbsnacru\",\"sessionId\":\"tester_1790758543279_v9mbsnacru\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "munvkf0k2zabiqcz",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MUNVKF0K\",\"paid\":true,\"paidAt\":\"2026-09-30T09:13:35Z\",\"paymentId\":\"tester_1790759615281_2zrcv2dckok\",\"sessionId\":\"tester_1790759615281_2zrcv2dckok\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "mupjufh1uyeey9gk",
+        "status": "completed",
+        "paymentData": "{\"reportId\":\"RPT-MUPJUFH1\",\"paid\":true,\"paidAt\":\"2026-10-01T13:15:33Z\",\"paymentId\":\"tester_1790860533309_141smxrgu2tf\",\"sessionId\":\"tester_1790860533309_141smxrgu2tf\",\"amount\":199,\"currency\":\"AED\",\"provider\":\"tester\"}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "mus1nb0plp4b1t4s",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"provider\":\"revenuecat\",\"productId\":\"com.meinspect.app.report\",\"transactionId\":\"2000001245746798\",\"paidAt\":1791011850,\"unlockedByEvent\":\"NON_RENEWING_PURCHASE\"}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "mvqcsdp150ycv97e",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793085767648_522b7a7ojcq\",\"provider\":\"tester\"}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "promo1029e2e001",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793262443547_y8lvzaeevii\",\"provider\":\"tester\",\"amount\":199,\"currency\":\"AED\",\"paidAt\":1793262443}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "mvuk8fm2yqiwzd8l",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793340535804_qy7mc8ksxkr\",\"provider\":\"tester\",\"amount\":199,\"currency\":\"AED\",\"paidAt\":1793340535}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "mvuxjr15sp5jlpzt",
+        "status": "draft",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793369269879_t4bqoyz717\",\"provider\":\"tester\",\"amount\":199,\"currency\":\"AED\",\"paidAt\":1793369269}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "mvuxjr15recovery1",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793369269879_t4bqoyz717\",\"provider\":\"admin_recovery\",\"amount\":199,\"currency\":\"AED\",\"paidAt\":1793369269,\"recoveredFrom\":\"mvuxjr15sp5jlpzt\",\"recoveredAt\":1793371516}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-a-stripe-20261104-0520",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-disc-welcome20-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-disc-launch50-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-disc-meinspect10-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-disc-inspector-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-disc-free-report-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"free_1793769710119_6zngsffsyiw\",\"provider\":\"discount\",\"amount\":0,\"currency\":\"AED\",\"paidAt\":1793769710,\"confirmationEmailSentAt\":1793769710}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-disc-invalid-qa-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-credit-1-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"credit_1793769815636_ll91wdnan79\",\"provider\":\"admin_credit\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-credit-2-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"credit_1793769816402_airkzh4ofk9\",\"provider\":\"admin_credit\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-credit-3-20261104",
+        "status": "draft",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"credit_1793769816429_rsbgsqr430n\",\"provider\":\"admin_credit\"}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-1793778867-main",
+        "status": "draft",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 0
+      },
+      {
+        "id": "qa-1793778867-staging-guard",
+        "status": "completed",
+        "paymentData": "{\"paid\":false}",
+        "reportGenerated": 1
+      },
+      {
+        "id": "qa-phase1-email-20261109",
+        "status": "completed",
+        "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1794207314368_ma2p82prgg\",\"provider\":\"tester\",\"amount\":0,\"currency\":\"AED\",\"paidAt\":1794207314}",
+        "reportGenerated": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "B-denied-3",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/download/pdf/qa-20261113-main",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf735e71dd6a-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:57.105923+00:00",
+  "response": {
+    "error": "Not found"
+  }
+}

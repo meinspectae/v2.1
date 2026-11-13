@@ -1,0 +1,19 @@
+{
+  "label": "pay-invalid-checkout",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf6b2e5e503f-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:56.228624+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS",
+    "url": "https://checkout.stripe.com/g/pay/cs_live_acZksRcNJn7IKIv4FMfmovUxolKWgzgIincn9XXR5XWBb9NXrGIVi1kJRS#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicyc%2FNiknZHVsTmB8Jz8ndW5aaWxzYFowNFFqa1BKQn9%2FfXBBbmBLUjJ0cVFMYE9BQkpJUnZURjZ3MWxva1ZpYTNdfEs8VUo3VVFOaVBRRDJ2UUdOPTU1aGIxNW5rTVwyRlBgXEd1NmRMQUB3aUZWYDU1MV88bF1wSH0nKSdjd2poVmB3c2B3Jz9xd3BgKSdnZGZuYndqcGthRmppancnPycmY2NjY2NjJyknaWR8anBxUXx1YCc%2FJ3Zsa2JpYFpscWBoJ3gl",
+    "orderId": 88,
+    "status": "pending",
+    "stripeRequestId": "req_nNKCvevSju0pis"
+  }
+}

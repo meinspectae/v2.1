@@ -1,0 +1,10 @@
+Usage: edgespark storage [options] [command]
+
+Manage storage buckets.
+
+Options:
+  -h, --help      Display help for command
+
+Commands:
+  bucket          Manage storage buckets
+  help [command]  display help for command

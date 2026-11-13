@@ -1,0 +1,13 @@
+versionCode=10
+versionName=3.5
+allowBackup=true
+permission=INTERNET
+permission=CAMERA
+permission=ACCESS_FINE_LOCATION
+permission=ACCESS_COARSE_LOCATION
+permission=ACCESS_NETWORK_STATE
+permission=WRITE_EXTERNAL_STORAGE(maxSdkVersion=28)
+permission=READ_MEDIA_IMAGES
+permission=POST_NOTIFICATIONS
+backup_rules=sharedpref,database,external excluded
+data_extraction_rules=sharedpref,database excluded from cloud backup and device transfer

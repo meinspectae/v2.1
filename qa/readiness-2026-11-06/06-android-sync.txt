@@ -1,0 +1,16 @@
+✔ Copying web assets from dist to android/app/src/main/assets/public in 1.16s
+✔ Creating capacitor.config.json in android/app/src/main/assets in 9.74ms
+✔ copy android in 1.24s
+✔ Updating Android plugins in 7.07ms
+[info] Found 9 Capacitor plugins for android:
+       @capacitor/app@8.1.0
+       @capacitor/browser@8.0.4
+       @capacitor/camera@8.2.0
+       @capacitor/filesystem@8.1.2
+       @capacitor/geolocation@8.2.0
+       @capacitor/share@8.0.1
+       @capacitor/splash-screen@8.0.1
+       @capacitor/status-bar@8.0.2
+       @revenuecat/purchases-capacitor@13.4.0
+✔ update android in 290.97ms
+[info] Sync finished in 1.577s

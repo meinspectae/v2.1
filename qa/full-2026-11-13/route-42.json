@@ -1,0 +1,14 @@
+{
+  "label": "route-42",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/admin/users",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd9415ab43741-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:34.011315+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

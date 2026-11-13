@@ -1,0 +1,14 @@
+{
+  "label": "C-signout",
+  "actor": "C",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-out",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be68ebd8a5ec8-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:39.082705+00:00",
+  "response": {
+    "success": true
+  }
+}

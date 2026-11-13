@@ -1,0 +1,12 @@
+{
+  "status": 409,
+  "time": "2026-11-10T06:31:37.464009+00:00",
+  "environment": "staging",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261110-staging-paid",
+  "cfRay": "a58303ea5e6bef4b-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Paid or finalised inspections cannot be deleted. Keep the report for your records."
+  }
+}

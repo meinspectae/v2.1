@@ -1,0 +1,49 @@
+{
+  "photos": [
+    {
+      "id": "qa-1793778867-main-photo-1",
+      "inspectionId": "qa-1793778867-main",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "roomId": "overall",
+      "itemId": "cover",
+      "cloudPath": "photos/8k5LgKUmGw7faQY8hcsk19iMV9lwepcv/qa-1793778867-main/overall/cover/qa-1793778867-main-photo-1.png",
+      "metadata": {
+        "id": "qa-1793778867-main-photo-1",
+        "timestamp": "2026-11-04T07:54:27.649311+00:00",
+        "caption": "Synthetic QA evidence 1"
+      },
+      "ready": 1,
+      "downloadUrl": "[REDACTED signed URL]"
+    },
+    {
+      "id": "qa-1793778867-main-photo-2",
+      "inspectionId": "qa-1793778867-main",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "roomId": "qa-room",
+      "itemId": "wall",
+      "cloudPath": "photos/8k5LgKUmGw7faQY8hcsk19iMV9lwepcv/qa-1793778867-main/qa-room/wall/qa-1793778867-main-photo-2.png",
+      "metadata": {
+        "id": "qa-1793778867-main-photo-2",
+        "timestamp": "2026-11-04T07:54:27.660025+00:00",
+        "caption": "Synthetic QA evidence 2"
+      },
+      "ready": 1,
+      "downloadUrl": "[REDACTED signed URL]"
+    },
+    {
+      "id": "qa-1793778867-main-photo-3",
+      "inspectionId": "qa-1793778867-main",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "roomId": "qa-room",
+      "itemId": "floor",
+      "cloudPath": "photos/8k5LgKUmGw7faQY8hcsk19iMV9lwepcv/qa-1793778867-main/qa-room/floor/qa-1793778867-main-photo-3.png",
+      "metadata": {
+        "id": "qa-1793778867-main-photo-3",
+        "timestamp": "2026-11-04T07:54:27.671392+00:00",
+        "caption": "Synthetic QA evidence 3"
+      },
+      "ready": 1,
+      "downloadUrl": "[REDACTED signed URL]"
+    }
+  ]
+}

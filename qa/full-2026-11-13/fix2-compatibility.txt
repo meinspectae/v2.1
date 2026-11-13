@@ -1,0 +1,122 @@
+PASS (local SQLite/provider mock): normal/tester admin prefix blocked /api/admin/prices
+PASS (local SQLite/provider mock): normal/tester admin prefix blocked /api/admin/set-tester
+PASS (local SQLite/provider mock): normal/tester admin prefix blocked /api/admin/audit-stripe-unlocks
+PASS (local SQLite/provider mock): normal/tester admin prefix blocked /api/admin/not-yet-defined
+PASS (local SQLite/provider mock): allowlisted owner retains access
+PASS (local SQLite/provider mock): empty allowlist fails closed
+PASS (local SQLite/provider mock): paid deletion protected
+PASS (local SQLite/provider mock): completed deletion protected
+PASS (local SQLite/provider mock): finalised deletion protected
+PASS (local SQLite/provider mock): report deletion protected
+PASS (local SQLite/provider mock): timestamp deletion protected
+PASS (local SQLite/provider mock): registered PDF protected even when row says draft
+PASS (local SQLite/provider mock): unpaid payments cannot cascade-delete
+PASS (local SQLite/provider mock): payment record retained
+PASS (local SQLite/provider mock): paid order authoritative even when row says unpaid
+PASS (local SQLite/provider mock): unpaid unfinalised draft deletes
+[NOTIFICATIONS] Sending "MeInspect Report: QA Phase 1 Email Compatibility (RPT-QA-PHASE)" to aalekh.dxb@gmail.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to aalekh.dxb@gmail.com — id: mock-send-1
+[EMAIL_REPORT] {
+  userId: 'qa',
+  format: 'legacy',
+  email: 'aalekh.dxb@gmail.com',
+  success: true,
+  id: 'mock-send-1',
+  error: undefined
+}
+PASS (local SQLite/provider mock): captured real legacy request remains accepted
+PASS (local SQLite/provider mock): legacy success response shape unchanged
+PASS (local SQLite/provider mock): real email table styles gradient and signed PDF download preserved
+[NOTIFICATIONS] Sending "QA" to aalekh.dxb@gmail.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to aalekh.dxb@gmail.com — id: mock-send-2
+[EMAIL_REPORT] {
+  userId: 'qa',
+  format: 'legacy',
+  email: 'aalekh.dxb@gmail.com',
+  success: true,
+  id: 'mock-send-2',
+  error: undefined
+}
+PASS (local SQLite/provider mock): legacy string recipient and ignored from accepted
+PASS (local SQLite/provider mock): client sender ignored
+PASS (local SQLite/provider mock): scripts frames handlers encoded javascript SVG and executable CSS removed
+PASS (local SQLite/provider mock): normal styles tables images and multilingual text preserved
+[NOTIFICATIONS] Sending "QA" to party@example.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to party@example.com — id: mock-send-3
+[EMAIL_REPORT] {
+  userId: 'qa',
+  format: 'legacy',
+  email: 'party@example.com',
+  success: true,
+  id: 'mock-send-3',
+  error: undefined
+}
+PASS (local SQLite/provider mock): owned inspection party accepted by legacy contract
+PASS (local SQLite/provider mock): unrelated recipient denied
+[NOTIFICATIONS] Sending "MeInspect report RPT-OWNED" to party@example.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to party@example.com — id: mock-send-4
+[EMAIL_REPORT] {
+  userId: 'qa',
+  inspectionId: 'owned',
+  format: 'inspectionId',
+  email: 'party@example.com',
+  success: true,
+  id: 'mock-send-4',
+  error: undefined
+}
+[NOTIFICATIONS] Sending "MeInspect report RPT-OWNED" to aalekh.dxb@gmail.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to aalekh.dxb@gmail.com — id: mock-send-5
+[EMAIL_REPORT] {
+  userId: 'qa',
+  inspectionId: 'owned',
+  format: 'inspectionId',
+  email: 'aalekh.dxb@gmail.com',
+  success: true,
+  id: 'mock-send-5',
+  error: undefined
+}
+PASS (local SQLite/provider mock): new inspectionId format sends own email plus contact
+PASS (local SQLite/provider mock): new format enforces ownership
+[NOTIFICATIONS] Sending "MeInspect Report: QA Phase 1 Email Compatibility (RPT-QA-PHASE)" to aalekh.dxb@gmail.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend REJECTED email to aalekh.dxb@gmail.com (status 422): Provider unavailable { message: 'Provider unavailable' }
+[EMAIL_REPORT] {
+  userId: 'qa',
+  format: 'legacy',
+  email: 'aalekh.dxb@gmail.com',
+  success: false,
+  id: undefined,
+  error: 'Provider unavailable'
+}
+PASS (local SQLite/provider mock): legacy provider failure HTTP and response preserved
+[NOTIFICATIONS] Sending "MeInspect Report: QA Phase 1 Email Compatibility (RPT-QA-PHASE)" to aalekh.dxb@gmail.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to aalekh.dxb@gmail.com — id: mock-send-7
+[EMAIL_REPORT] {
+  userId: 'qa',
+  format: 'legacy',
+  email: 'aalekh.dxb@gmail.com',
+  success: true,
+  id: 'mock-send-7',
+  error: undefined
+}
+PASS (local SQLite/provider mock): two concurrent sends with one slot allow exactly one
+PASS (local SQLite/provider mock): atomic reservation and recipient count capped at 30
+PASS (local SQLite/provider mock): rejected retries do not extend quota
+[NOTIFICATIONS] Sending "MeInspect Report: QA Phase 1 Email Compatibility (RPT-QA-PHASE)" to aalekh.dxb@gmail.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to aalekh.dxb@gmail.com — id: mock-send-8
+[EMAIL_REPORT] {
+  userId: 'qa',
+  format: 'legacy',
+  email: 'aalekh.dxb@gmail.com',
+  success: true,
+  id: 'mock-send-8',
+  error: undefined
+}
+PASS (local SQLite/provider mock): rolling hour expires
+[ACCOUNT] Deleted auth identity and disposable data; retained financial/finalised records for user: qa
+PASS (local SQLite/provider mock): account deletion still succeeds locally
+PASS (local SQLite/provider mock): account deletion removes disposable drafts
+PASS (local SQLite/provider mock): account deletion retains financial and finalised inspection evidence
+PASS (local SQLite/provider mock): account deletion never cascades orders or payments
+{"result":"PASS","assertions":36,"scope":"local actual SQLite, mocked email provider; not live acceptance"}
+(node:1847) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

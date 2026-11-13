@@ -1,0 +1,14 @@
+{
+  "label": "N-admin-post-grant-credits",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/admin/grant-credits",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf62cc429314-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:54.468291+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

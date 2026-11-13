@@ -1,0 +1,38 @@
+MeInspect
+
+Property Condition Reports
+
+Welcome, QA
+
+📊
+Dashboard
+➕
+New
+📋
+History
+⚙️
+Settings
+QT
+QA
+New Inspection
+
+Select the property type and enter room details to begin.
+
+Property Type
+🏢
+Apartment
+Standard apartment unit in a residential building
+🏠
+Townhouse
+Multi-story townhouse with shared walls
+🏡
+Villa
+Independent villa with private outdoor spaces
+🏬
+Office
+Commercial office space
+Start Inspection →
+📱 Install MeInspect
+Add to home screen for the best experience
+Later
+Install

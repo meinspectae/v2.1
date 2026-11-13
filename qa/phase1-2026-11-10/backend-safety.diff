@@ -1,0 +1,222 @@
+--- before/backend/src/index.ts
++++ after/backend/src/index.ts
+@@ -3,6 +3,7 @@
+ import { tables, buckets, drizzleSchema } from "@generated";
+ import { eq, and, sql } from "drizzle-orm";
+ import Stripe from "stripe";
++import { sanitizeReportHtml } from './email-safety';
+ 
+ // Re-export the required EdgeSpark bundle contract (tables/buckets/drizzleSchema).
+ export { tables, buckets, drizzleSchema };
+@@ -187,6 +188,13 @@
+   }
+ 
+   const app = new Hono();
++
++  // Register before every admin route, including routes declared in other sections.
++  // Tester flags, emails, and the legacy users.is_admin column confer no access.
++  app.use('/api/admin/*', async (c, next) => {
++    if (!requireAdmin()) return c.json({ error: 'Admin access required' }, 403);
++    await next();
++  });
+ 
+   // Defense-in-depth for every worker response, including errors and public routes.
+   app.use('*', async (c, next) => {
+@@ -348,9 +356,18 @@
+     const userId = auth.user!.id;
+ 
+     try {
+-      // Delete all inspections for this user (cascade should handle related data)
+-      await db.delete(tables.inspections)
+-        .where(eq(tables.inspections.userId, userId));
++      // Never cascade-delete financial records through account deletion either.
++      // Retain paid/finalised evidence; delete only disposable drafts.
++      await db.delete(tables.inspections).where(and(
++        eq(tables.inspections.userId, userId),
++        sql`COALESCE(json_extract(CASE WHEN json_valid(${tables.inspections.paymentData}) THEN ${tables.inspections.paymentData} ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true')`,
++        sql`${tables.inspections.status} NOT IN ('completed', 'finalised', 'finalized')`,
++        sql`COALESCE(${tables.inspections.reportGenerated}, 0) = 0`,
++        sql`COALESCE(${tables.inspections.completedAt}, '') = ''`,
++        sql`NOT EXISTS (SELECT 1 FROM ${tables.reportVerifications} WHERE ${tables.reportVerifications.inspectionId} = ${tables.inspections.id})`,
++        sql`NOT EXISTS (SELECT 1 FROM ${tables.orders} WHERE ${tables.orders.inspectionId} = ${tables.inspections.id} AND ${tables.orders.status} = 'paid')`,
++        sql`NOT EXISTS (SELECT 1 FROM ${tables.payments} WHERE ${tables.payments.inspectionId} = ${tables.inspections.id})`
++      ));
+ 
+       // Delete the app-level user record
+       await db.delete(tables.users)
+@@ -375,7 +392,7 @@
+       await db.delete(tables.esSystemAuthUser)
+         .where(eq(tables.esSystemAuthUser.id, userId));
+ 
+-      console.log(`[ACCOUNT] Deleted account (auth identity + all data) for user: ${userId}`);
++      console.log(`[ACCOUNT] Deleted auth identity and disposable data; retained financial/finalised records for user: ${userId}`);
+       return c.json({ success: true, message: 'Account and all associated data deleted successfully' });
+     } catch (err) {
+       console.error('[ACCOUNT] Error deleting account:', err);
+@@ -499,12 +516,23 @@
+       }, 409);
+     }
+ 
+-    await db.delete(tables.inspections).where(
+-      and(
+-        eq(tables.inspections.id, id),
+-        eq(tables.inspections.userId, userId)
+-      )
+-    );
++    // Check authoritative related records in the DELETE itself, closing the
++    // read/delete race. payments has ON DELETE CASCADE, so even an unpaid payment
++    // record must block physical deletion. Orders/payments are never deleted here.
++    const deleted = await db.delete(tables.inspections).where(and(
++      eq(tables.inspections.id, id),
++      eq(tables.inspections.userId, userId),
++      sql`COALESCE(json_extract(CASE WHEN json_valid(${tables.inspections.paymentData}) THEN ${tables.inspections.paymentData} ELSE '{}' END, '$.paid'), 0) NOT IN (1, 'true')`,
++      sql`${tables.inspections.status} NOT IN ('completed', 'finalised', 'finalized')`,
++      sql`COALESCE(${tables.inspections.reportGenerated}, 0) = 0`,
++      sql`COALESCE(${tables.inspections.completedAt}, '') = ''`,
++      sql`NOT EXISTS (SELECT 1 FROM ${tables.reportVerifications} WHERE ${tables.reportVerifications.inspectionId} = ${id})`,
++      sql`NOT EXISTS (SELECT 1 FROM ${tables.orders} WHERE ${tables.orders.inspectionId} = ${id} AND ${tables.orders.status} = 'paid')`,
++      sql`NOT EXISTS (SELECT 1 FROM ${tables.payments} WHERE ${tables.payments.inspectionId} = ${id})`
++    )).returning({ id: tables.inspections.id });
++    if (deleted.length === 0) {
++      return c.json({ error: 'Paid or finalised inspections, or inspections with payment records, cannot be deleted. Keep the report for your records.' }, 409);
++    }
+     return c.json({ success: true });
+   });
+ 
+@@ -518,13 +546,95 @@
+     .replaceAll('"', '&quot;')
+     .replaceAll("'", '&#39;');
+ 
+-  // Send a fixed report notification to inspection parties and the signed-in user.
+-  // The client controls only which owned inspection is sent.
++  const inspectionContacts = (inspection: any): string[] => {
++    const extra = tryParse(inspection.extraData);
++    return [
++      tryParse(inspection.tenantData).email,
++      tryParse(inspection.landlordData).email,
++      tryParse(inspection.agentData).email,
++      extra?.meta?.inspectorEmail,
++    ].filter((email): email is string => typeof email === 'string' && EMAIL_REGEX.test(email));
++  };
++
++  // One atomic INSERT ... SELECT reserves capacity. Rejected attempts do not
++  // consume quota; parallel workers cannot oversubscribe the rolling-hour cap.
++  // Legacy requests have no inspectionId: an empty string keeps the existing
++  // NOT NULL column and avoids inventing an inspection or changing the schema.
++  async function reserveEmailRecipients(userId: string, inspectionId: string, count: number): Promise<boolean> {
++    const now = Math.floor(Date.now() / 1000);
++    const eventId = crypto.randomUUID();
++    await db.run(sql`INSERT INTO email_send_events (id, user_id, inspection_id, recipient_count, sent_at)
++      SELECT ${eventId}, ${userId}, ${inspectionId}, ${count}, ${now}
++      WHERE (SELECT COALESCE(SUM(recipient_count), 0) FROM email_send_events
++        WHERE user_id = ${userId} AND sent_at > ${now - 3600}) + ${count} <= 30`);
++    const reserved = await db.select().from(tables.emailSendEvents)
++      .where(eq(tables.emailSendEvents.id, eventId));
++    return reserved.length === 1;
++  }
++
++  // Both contracts are permanent: installed v9/web clients send to/subject/html;
++  // newer clients may send inspectionId. Never require a v9 client upgrade.
+   app.post('/api/send-email', async (c) => {
+     const userId = auth.user!.id;
+     const body = await c.req.json().catch(() => null) as Record<string, unknown> | null;
+-    if (!body || Object.keys(body).length !== 1 || typeof body.inspectionId !== 'string' || !body.inspectionId.trim()) {
+-      return c.json({ error: 'inspectionId is required and is the only accepted field' }, 400);
++    if (!body || Array.isArray(body) || typeof body !== 'object') {
++      return c.json({ error: 'to, subject, and html are required' }, 400);
++    }
++
++    if ('to' in body || 'subject' in body || 'html' in body) {
++      const { to, subject, html } = body;
++      if (!to || typeof subject !== 'string' || !subject || typeof html !== 'string' || !html) {
++        return c.json({ error: 'to, subject, and html are required' }, 400);
++      }
++      const recipients = Array.isArray(to) ? to : [to];
++      const invalid = recipients.filter(email => typeof email !== 'string' || !EMAIL_REGEX.test(email));
++      if (invalid.length) return c.json({ error: `Invalid email address(es): ${invalid.join(', ')}` }, 400);
++      if (!recipients.length) return c.json({ error: 'At least one recipient is required' }, 400);
++      const htmlBytes = new TextEncoder().encode(html).length;
++      if (htmlBytes > 8 * 1024 * 1024) {
++        return c.json({ error: `Email content too large (${(htmlBytes / (1024 * 1024)).toFixed(1)} MB). Please compress images before sending. Maximum allowed: 8 MB.` }, 413);
++      }
++      if (!secret.get('RESEND_API_KEY')) {
++        return c.json({ error: 'Email service not configured (RESEND_API_KEY missing)' }, 500);
++      }
++
++      // Live UI and restored v9-compatible modal only offer inspection contacts;
++      // neither has a free-text recipient field. The legacy body has no report ID,
++      // so match contacts across all inspections owned by this authenticated user.
++      const owned = await db.select().from(tables.inspections)
++        .where(eq(tables.inspections.userId, userId));
++      const allowed = new Set([auth.user!.email || '', ...owned.flatMap(inspectionContacts)]
++        .map(email => email.toLowerCase()));
++      if (recipients.some(email => !allowed.has(String(email).toLowerCase()))) {
++        return c.json({ error: 'Recipients must be your own email address or contacts on your inspections.' }, 403);
++      }
++
++      const safeHtml = sanitizeReportHtml(html);
++      if (!await reserveEmailRecipients(userId, '', recipients.length)) {
++        c.header('Retry-After', '3600');
++        return c.json({ error: 'Email limit reached. You can send at most 30 emails per hour.' }, 429);
++      }
++      const results: { email: string; success: boolean; id?: string; error?: string }[] = [];
++      for (const email of recipients as string[]) {
++        // sendNotificationEmail uses FROM_EMAIL or the server fallback only.
++        const result = await sendNotificationEmail(email, subject, safeHtml);
++        console.log('[EMAIL_REPORT]', { userId, format: 'legacy', email, success: result.ok, id: result.id, error: result.error });
++        results.push({ email, success: result.ok, ...(result.ok ? { id: result.id } : { error: result.error }) });
++      }
++      const allSuccess = results.every(result => result.success);
++      // Preserve legacy HTTP 200 even for provider/partial failure; clients read
++      // success/results, and the original response always used this shape.
++      return c.json({
++        success: allSuccess,
++        results,
++        sentCount: results.filter(result => result.success).length,
++        failedCount: results.filter(result => !result.success).length,
++        ...(allSuccess ? {} : { error: results.find(result => !result.success)?.error || '' }),
++      });
++    }
++
++    if (typeof body.inspectionId !== 'string' || !body.inspectionId.trim()) {
++      return c.json({ error: 'inspectionId or to, subject, and html are required' }, 400);
+     }
+ 
+     const inspectionId = body.inspectionId.trim();
+@@ -550,26 +660,8 @@
+     ).values()];
+     if (recipients.length === 0) return c.json({ error: 'No valid inspection recipient email addresses were found' }, 422);
+ 
+-    const now = Math.floor(Date.now() / 1000);
+-    const oneHourAgo = now - 3600;
+-
+-    // Reserve the whole request before checking the total. Concurrent requests
+-    // therefore see each other's reservations and cannot both slip past the cap.
+-    await db.insert(tables.emailSendEvents).values({
+-      id: crypto.randomUUID(),
+-      userId,
+-      inspectionId,
+-      recipientCount: recipients.length,
+-      sentAt: now,
+-    });
+-    const recentEvents = await db.select().from(tables.emailSendEvents).where(and(
+-      eq(tables.emailSendEvents.userId, userId),
+-      sql`${tables.emailSendEvents.sentAt} >= ${oneHourAgo}`
+-    ));
+-    const used = recentEvents.reduce((total, event) => total + event.recipientCount, 0);
+-    if (used > 30) {
+-      const oldest = recentEvents.reduce((minimum, event) => Math.min(minimum, event.sentAt), now);
+-      c.header('Retry-After', String(Math.max(1, oldest + 3600 - now)));
++    if (!await reserveEmailRecipients(userId, inspectionId, recipients.length)) {
++      c.header('Retry-After', '3600');
+       return c.json({ error: 'Email limit reached. You can send at most 30 emails per hour.' }, 429);
+     }
+ 
+@@ -582,6 +674,7 @@
+     const results = [] as { email: string; success: boolean; id?: string; error?: string }[];
+     for (const recipient of recipients) {
+       const result = await sendNotificationEmail(recipient.email, subject, html);
++      console.log('[EMAIL_REPORT]', { userId, inspectionId, format: 'inspectionId', email: recipient.email, success: result.ok, id: result.id, error: result.error });
+       results.push({ email: recipient.email, success: result.ok, id: result.id, error: result.error });
+     }
+     const sentCount = results.filter(result => result.success).length;

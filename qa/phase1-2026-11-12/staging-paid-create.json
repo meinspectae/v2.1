@@ -1,0 +1,21 @@
+{
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/inspections",
+  "status": 201,
+  "requestId": null,
+  "cfRay": "a59492bb7bb2495f-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:05 GMT",
+  "observedAt": "2026-11-12T09:40:05.283067+00:00",
+  "response": {
+    "data": {
+      "id": "qa-20261112-staging-paid",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "status": "draft",
+      "reportGenerated": 0,
+      "paymentData": "{\"paid\":false}",
+      "createdAt": "2026-11-12T09:40:05.072Z",
+      "error": null
+    }
+  }
+}

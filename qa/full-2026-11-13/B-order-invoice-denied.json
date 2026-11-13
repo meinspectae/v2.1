@@ -1,0 +1,14 @@
+{
+  "label": "B-order-invoice-denied",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/orders/89/invoice",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59be42e1d7ada91-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:01.598676+00:00",
+  "response": {
+    "error": "Order not found"
+  }
+}

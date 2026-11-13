@@ -1,0 +1,14 @@
+{
+  "label": "N-admin-get-prices",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/admin/prices",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf5ed82aefde-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:53.827671+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

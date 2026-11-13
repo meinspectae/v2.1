@@ -1,0 +1,12 @@
+{
+  "status": 403,
+  "time": "2026-11-10T06:35:30.202011+00:00",
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/send-email",
+  "cfRay": "a5830997e88111c8-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Recipients must be your own email address or contacts on your inspections."
+  }
+}

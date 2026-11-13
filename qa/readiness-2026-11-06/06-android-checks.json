@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "removedMediaPermission": true,
+    "removedNotificationPermission": true,
+    "versionCode10": true,
+    "versionName35": true,
+    "noCacheBackupDomain": true,
+    "passwordsFromEnvironmentOnly": true,
+    "noLiteralPasswordFindings": true,
+    "productionAddressOnceInCopiedJS": true,
+    "noStagingInCopiedJS": true,
+    "keystoreFilesUnchanged": true,
+    "copiedBundleMatchesBuild": true
+  },
+  "allPassed": true,
+  "productionAddressOccurrences": 1,
+  "stagingOccurrences": 0,
+  "copiedJavaScriptFiles": 36,
+  "keystoreFilesPreserved": 4,
+  "potentialCredentialLocations": [],
+  "nativeCompileAndSigning": "NOT RUN; not implied by sync"
+}

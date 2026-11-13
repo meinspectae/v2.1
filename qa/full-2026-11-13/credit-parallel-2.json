@@ -1,0 +1,14 @@
+{
+  "label": "credit-parallel-2",
+  "actor": "C",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 409,
+  "requestId": null,
+  "cfRay": "a59bbf7e1c6f5135-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:59.107982+00:00",
+  "response": {
+    "error": "No credit was used. Your credit balance or report access changed; refresh and try again."
+  }
+}

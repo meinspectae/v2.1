@@ -1,0 +1,11 @@
+PASS admin: non-admin tester 403, tester promotion 403, configured admin 200, tester free checkout 200
+PASS delete: draft 200, paid 409, finalised 409
+[NOTIFICATIONS] Sending "MeInspect report RPT-INSPECTI" to tenant@example.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to tenant@example.com — id: email-1
+[NOTIFICATIONS] Sending "MeInspect report RPT-INSPECTI" to landlord@example.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to landlord@example.com — id: email-2
+[NOTIFICATIONS] Sending "MeInspect report RPT-INSPECTI" to agent@example.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to agent@example.com — id: email-3
+[NOTIFICATIONS] Sending "MeInspect report RPT-INSPECTI" to tester@example.com from MeInspect <hello@meinspect.com>
+[NOTIFICATIONS] Resend accepted email to tester@example.com — id: email-4
+PASS email: custom fields 400, unowned 404, fixed recipients/template 200, escaped text, 30-recipient limit 429

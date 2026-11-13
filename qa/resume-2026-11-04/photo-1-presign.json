@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:54:28.400469+00:00",
+  "date": "Wed, 04 Nov 2026 07:54:28 GMT",
+  "cfRay": "a5520d059cf420eb-PDX",
+  "requestId": null,
+  "body": {
+    "uploadUrl": "[REDACTED signed URL]",
+    "path": "photos/8k5LgKUmGw7faQY8hcsk19iMV9lwepcv/qa-1793778867-main/overall/cover/qa-1793778867-main-photo-1.png",
+    "expiresAt": "2026-11-04T08:54:28.325Z"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "route-02",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/public/mobile-auth/secure-state",
+  "status": 400,
+  "requestId": null,
+  "cfRay": "a59bd934ae9fc4ac-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.236844+00:00",
+  "response": {
+    "error": "OAuth state cookie was not initialized"
+  }
+}

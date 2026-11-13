@@ -1,0 +1,21 @@
+{
+  "environment": "staging",
+  "method": "GET",
+  "path": "/api/inspections/mvuxjr15recovery1",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59492b78a435f03-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:04 GMT",
+  "observedAt": "2026-11-12T09:40:04.542261+00:00",
+  "response": {
+    "data": {
+      "id": "mvuxjr15recovery1",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "status": "completed",
+      "reportGenerated": 0,
+      "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793369269879_t4bqoyz717\",\"provider\":\"admin_recovery\",\"amount\":199,\"currency\":\"AED\",\"paidAt\":1793369269,\"recoveredFrom\":\"mvuxjr15sp5jlpzt\",\"recoveredAt\":1793371516}",
+      "createdAt": "2026-10-30T12:09:56.633Z",
+      "error": null
+    }
+  }
+}

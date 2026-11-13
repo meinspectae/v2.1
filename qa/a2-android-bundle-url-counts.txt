@@ -1,0 +1,6 @@
+production_api_total= 2
+staging_prefix_total= 0
+production_files=
+  1 android/app/src/main/assets/public/mobile-auth.html
+  1 android/app/src/main/assets/public/assets/index-DcAB4BKc.js
+staging_files=

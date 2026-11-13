@@ -1,0 +1,14 @@
+{
+  "label": "route-04",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/user/profile",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd934aeb3d74d-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.238720+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

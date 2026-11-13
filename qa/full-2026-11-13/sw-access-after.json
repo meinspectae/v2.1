@@ -1,0 +1,5 @@
+{
+  "result": "PASS",
+  "scope": "actual service worker in isolated harness: owner GET cached then second-account offline request",
+  "sharedApiCacheLeak": false
+}

@@ -1,0 +1,14 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:55:06.488326+00:00",
+  "date": "Wed, 04 Nov 2026 07:55:06 GMT",
+  "cfRay": "a5520df1a9215939-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "sessionId": "credit_1793778905982_lhcts2xywmf",
+    "orderId": 77,
+    "status": "paid",
+    "message": "Free inspection credit used successfully."
+  }
+}

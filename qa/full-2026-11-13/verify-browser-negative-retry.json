@@ -1,0 +1,4 @@
+{
+  "calls": [],
+  "text": "MeInspect\nVerify a report\n\nReport ID: qa-20261113-final-0ea7f42773d3c245\n\nThe printed hash identifies report content; selecting a PDF checks its final-file hash against the server’s registered copy.\n\nSelect the report PDF\n\nYour PDF stays on your device. Only its fingerprint is sent for comparison.\n\nOr paste the full printed content hash\nVerify hash\nUnable to verify\nFailed to fetch\n📱 Install MeInspect\nAdd to home screen for the best experience\nLater\nInstall"
+}

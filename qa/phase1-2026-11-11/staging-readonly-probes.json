@@ -1,0 +1,67 @@
+[
+  {
+    "label": "session",
+    "time": "2026-11-11T05:34:41.706652+00:00",
+    "environment": "staging (unchanged deployment)",
+    "method": "GET",
+    "path": "/api/_es/auth/get-session",
+    "status": 200,
+    "requestId": null,
+    "cfRay": "a58aede5ec879314-PDX",
+    "body": {
+      "authenticated": false
+    }
+  },
+  {
+    "label": "admin-unauthenticated",
+    "time": "2026-11-11T05:34:41.861746+00:00",
+    "environment": "staging (unchanged deployment)",
+    "method": "GET",
+    "path": "/api/admin/access",
+    "status": 401,
+    "requestId": null,
+    "cfRay": "a58aede73ae3ff01-PDX",
+    "body": {
+      "error": "UNAUTHENTICATED"
+    }
+  },
+  {
+    "label": "old-inspection-unauthenticated",
+    "time": "2026-11-11T05:34:42.012397+00:00",
+    "environment": "staging (unchanged deployment)",
+    "method": "GET",
+    "path": "/api/inspections/mvuxjr15recovery1",
+    "status": 401,
+    "requestId": null,
+    "cfRay": "a58aede82eae5012-PDX",
+    "body": {
+      "error": "UNAUTHENTICATED"
+    }
+  },
+  {
+    "label": "webhook-unconfigured",
+    "time": "2026-11-11T05:34:42.166506+00:00",
+    "environment": "staging (unchanged deployment)",
+    "method": "POST",
+    "path": "/api/webhooks/stripe",
+    "status": 500,
+    "requestId": null,
+    "cfRay": "a58aede92ea4f3b4-PDX",
+    "body": {
+      "error": "Webhook not configured"
+    }
+  },
+  {
+    "label": "webhook-unconfigured-wrong-signature",
+    "time": "2026-11-11T05:34:42.289989+00:00",
+    "environment": "staging (unchanged deployment)",
+    "method": "POST",
+    "path": "/api/webhooks/stripe",
+    "status": 500,
+    "requestId": null,
+    "cfRay": "a58aedea1d5b96ba-PDX",
+    "body": {
+      "error": "Webhook not configured"
+    }
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/admin/prices",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a594936b7df0ef10-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:33 GMT",
+  "observedAt": "2026-11-12T09:40:33.288973+00:00",
+  "response": {
+    "responseKeys": [
+      "error"
+    ],
+    "rowCount": null,
+    "error": "Admin access required"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:32:07.355311+00:00",
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/inspections/mvuxjr15recovery1",
+  "cfRay": "a58304a4880fa32d-PDX",
+  "requestId": null,
+  "body": {
+    "data": {
+      "id": "mvuxjr15recovery1",
+      "status": "completed",
+      "paymentData": "{\"paid\":true,\"sessionId\":\"tester_1793369269879_t4bqoyz717\",\"provider\":\"admin_recovery\",\"amount\":199,\"currency\":\"AED\",\"paidAt\":1793369269,\"recoveredFrom\":\"mvuxjr15sp5jlpzt\",\"recoveredAt\":1793371516}",
+      "reportGenerated": 0
+    },
+    "note": "Customer contact details, signatures and room/photo payloads omitted from QA evidence"
+  }
+}

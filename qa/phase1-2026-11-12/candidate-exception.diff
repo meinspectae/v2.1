@@ -1,0 +1,53 @@
+--- saved-candidate
++++ active-with-baseline-fallback
+@@ -59,7 +59,7 @@
+    */
+   async function confirmStripeCheckout(
+     session: CheckoutSession,
+-    source: 'webhook' | 'session_reconcile' | 'report_reconcile'
++    source: 'webhook' | 'webhook_fallback' | 'session_reconcile' | 'report_reconcile'
+   ): Promise<{ paid: boolean; reportId: string; alreadyPaid: boolean }> {
+     const reportId = session.metadata?.reportId || session.metadata?.inspectionId || '';
+     if (!reportId) throw new Error(`Stripe session ${session.id} has no reportId metadata`);
+@@ -1467,19 +1467,36 @@
+ 
+     const body = await c.req.text();
+     let event: Stripe.Event;
++    let eventSource: 'webhook' | 'webhook_fallback' = 'webhook';
+     try {
+       event = await stripe.webhooks.constructEventAsync(body, signature, signingSecret);
+-    } catch {
+-      // Invalid signatures never trigger a Stripe lookup or a payment write.
+-      console.warn('[WEBHOOK] signature verification failed');
+-      return c.json({ error: 'Invalid Stripe signature' }, 400);
++    } catch (err: any) {
++      let claimedEventId = '';
++      try {
++        const parsed = JSON.parse(body);
++        if (typeof parsed?.id === 'string' && /^evt_[A-Za-z0-9]+$/.test(parsed.id)) claimedEventId = parsed.id;
++      } catch {}
++      if (!claimedEventId) {
++        console.error('[WEBHOOK] signature verification failed and no valid event id was supplied');
++        return c.json({ error: 'Invalid Stripe signature' }, 400);
++      }
++
++      console.warn(`[WEBHOOK_FALLBACK] signature verification failed; retrieving event=${claimedEventId} from Stripe`);
++      try {
++        event = await stripe.events.retrieve(claimedEventId);
++        eventSource = 'webhook_fallback';
++        console.warn(`[WEBHOOK_FALLBACK] retrieved event=${event.id} type=${event.type}`);
++      } catch (retrieveError: any) {
++        console.error(`[WEBHOOK_FALLBACK] Stripe retrieval failed event=${claimedEventId} requestId=${retrieveError?.requestId || 'unavailable'}`);
++        return c.json({ error: 'Invalid Stripe event' }, 400);
++      }
+     }
+ 
+     try {
+       console.log(`[WEBHOOK] Received event: ${event.type}`);
+       if (event.type === 'checkout.session.completed' || event.type === 'checkout.session.async_payment_succeeded') {
+         const session = event.data.object as Stripe.Checkout.Session;
+-        await confirmStripeCheckout(session, 'webhook');
++        await confirmStripeCheckout(session, eventSource);
+       }
+ 
+       // Stripe receives 2xx only after every required database write above has

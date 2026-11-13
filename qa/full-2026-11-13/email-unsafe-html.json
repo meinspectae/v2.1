@@ -1,0 +1,23 @@
+{
+  "label": "email-unsafe-html",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/send-email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bca92cc918639-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:41:33.088515+00:00",
+  "response": {
+    "success": true,
+    "results": [
+      {
+        "email": "delivered@resend.dev",
+        "success": true,
+        "id": "01a1d3a3-d944-7783-b229-ad3142fce5ff"
+      }
+    ],
+    "sentCount": 1,
+    "failedCount": 0
+  }
+}

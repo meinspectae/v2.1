@@ -1,0 +1,70 @@
+
+> youware-react-template@0.0.0 build /workspace
+> vite build
+
+vite v7.3.6 building client environment for production...
+transforming...
+✓ 966 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/assets/noto-naskh-arabic-symbols-400-normal-BoBMuTRv.woff2      5.42 kB
+dist/assets/noto-naskh-arabic-symbols-700-normal-s-Hxeun5.woff2      5.70 kB
+dist/assets/noto-naskh-arabic-latin-ext-400-normal-BbeOg8Tq.woff2    6.46 kB
+dist/assets/noto-naskh-arabic-latin-ext-700-normal-BdpHOyev.woff2    6.62 kB
+dist/index.html                                                      6.62 kB │ gzip:   2.23 kB
+dist/assets/noto-naskh-arabic-symbols-400-normal-Dyan2v4O.woff       6.74 kB
+dist/assets/noto-naskh-arabic-symbols-700-normal-BzCgKmvF.woff       7.03 kB
+dist/assets/noto-naskh-arabic-latin-ext-400-normal-Er5jWGmQ.woff     8.18 kB
+dist/assets/noto-naskh-arabic-math-400-normal-tNY49amj.woff2         8.33 kB
+dist/assets/noto-naskh-arabic-latin-ext-700-normal-kZwI4aZI.woff     8.34 kB
+dist/assets/noto-naskh-arabic-math-700-normal-BP-LajJh.woff2         8.65 kB
+dist/assets/noto-naskh-arabic-math-400-normal-C570QcAC.woff         10.42 kB
+dist/assets/noto-naskh-arabic-math-700-normal-CDAZVDWY.woff         10.74 kB
+dist/assets/noto-naskh-arabic-latin-400-normal-Dajb6q3W.woff2       11.50 kB
+dist/assets/noto-naskh-arabic-latin-700-normal-CG_vrPqD.woff2       12.05 kB
+dist/assets/noto-naskh-arabic-latin-400-normal-pwOnwvFs.woff        14.39 kB
+dist/assets/noto-naskh-arabic-latin-700-normal-DP4-Rtre.woff        14.92 kB
+dist/assets/noto-naskh-arabic-arabic-400-normal-U_i0HMfG.woff2      52.67 kB
+dist/assets/noto-naskh-arabic-arabic-700-normal-BdBAMxnO.woff2      53.02 kB
+dist/assets/noto-naskh-arabic-arabic-400-normal-1AoZhAAW.woff       87.40 kB
+dist/assets/noto-naskh-arabic-arabic-700-normal-fm10sHOa.woff       87.67 kB
+dist/assets/mozjpeg_enc-DO-zoExo.wasm                              251.52 kB │ gzip:  59.85 kB
+dist/assets/ReportPage-Bo9voQaR.css                                  0.65 kB │ gzip:   0.26 kB
+dist/assets/index-Cczr5PZ0.css                                      61.14 kB │ gzip:  11.02 kB
+dist/assets/web-946Qibm5.js                                          0.50 kB │ gzip:   0.32 kB
+dist/assets/web-C45M602z.js                                          0.52 kB │ gzip:   0.32 kB
+dist/assets/web-CtBQnV10.js                                          0.99 kB │ gzip:   0.47 kB
+dist/assets/BackupNotice-CbdUloqf.js                                 1.00 kB │ gzip:   0.64 kB
+dist/assets/reportVerification-ClZGbB5O.js                           1.17 kB │ gzip:   0.69 kB
+dist/assets/web-GiePM32M.js                                          2.44 kB │ gzip:   0.99 kB
+dist/assets/inspectionData-BZqNN7g_.js                               2.95 kB │ gzip:   1.23 kB
+dist/assets/vendor-zustand-CKdMj3gx.js                               3.23 kB │ gzip:   1.49 kB
+dist/assets/VerifyReportPage-jkLHdlPD.js                             4.94 kB │ gzip:   1.84 kB
+dist/assets/PhoneInput-D-dGzPW1.js                                   6.13 kB │ gzip:   2.00 kB
+dist/assets/AdminPage-DFX3LAdM.js                                    8.81 kB │ gzip:   2.32 kB
+dist/assets/reportLegal-BzwSylOw.js                                  8.90 kB │ gzip:   3.48 kB
+dist/assets/web-sSpTyL2r.js                                          9.08 kB │ gzip:   3.15 kB
+dist/assets/VerifyEmailPage-CfHjvGc4.js                              9.15 kB │ gzip:   2.25 kB
+dist/assets/web-B4qmIeGO.js                                         10.08 kB │ gzip:   2.07 kB
+dist/assets/PaymentHistoryPage-CIcHUmnQ.js                          10.48 kB │ gzip:   2.57 kB
+dist/assets/reportPdf-j6VZ-dsq.js                                   11.69 kB │ gzip:   4.86 kB
+dist/assets/LoginPage-KIP2szVZ.js                                   11.80 kB │ gzip:   3.59 kB
+dist/assets/HistoryPage-CUXJhomr.js                                 13.18 kB │ gzip:   3.44 kB
+dist/assets/Dashboard-BL4kUIy0.js                                   13.70 kB │ gzip:   2.86 kB
+dist/assets/NewInspection-lVpeBi9o.js                               14.27 kB │ gzip:   2.51 kB
+dist/assets/ForgotPasswordPage-C-Xgtqra.js                          16.74 kB │ gzip:   3.73 kB
+dist/assets/photoPreflight-Bj6Qc0Wk.js                              17.86 kB │ gzip:   5.36 kB
+dist/assets/SettingsPage-BJDuWsZ5.js                                22.07 kB │ gzip:   4.11 kB
+dist/assets/SignUpPage-NVD2_ZOw.js                                  22.90 kB │ gzip:   6.41 kB
+dist/assets/purify.es-CC4Brkr_.js                                   27.95 kB │ gzip:  10.57 kB
+dist/assets/inspectionStore-C0rlK7hT.js                             67.76 kB │ gzip:  22.43 kB
+dist/assets/InspectionForm-BwDHxsFJ.js                              88.43 kB │ gzip:  18.69 kB
+dist/assets/ReportPage-nUJZQkHB.js                                  98.62 kB │ gzip:  27.34 kB
+dist/assets/vendor-ui-C_2w5Jdg.js                                  114.95 kB │ gzip:  38.09 kB
+dist/assets/index-DcAB4BKc.js                                      153.98 kB │ gzip:  43.57 kB
+dist/assets/index.es-CLNKlMld.js                                   158.84 kB │ gzip:  53.05 kB
+dist/assets/vendor-react-BokEbl_k.js                               164.43 kB │ gzip:  53.98 kB
+dist/assets/html2canvas.esm-DXEQVQnt.js                            201.04 kB │ gzip:  47.43 kB
+dist/assets/vendor-pdf-jspdf-8BsbPPvU.js                           386.84 kB │ gzip: 126.75 kB
+dist/assets/vendor-pdf-lib-CqyA8y1h.js                             428.59 kB │ gzip: 177.64 kB
+✓ built in 15.16s

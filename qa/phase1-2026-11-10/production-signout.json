@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:41:58.773660+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-out",
+  "cfRay": "a5831313fe3ec654-PDX",
+  "requestId": null,
+  "body": {
+    "success": true
+  }
+}

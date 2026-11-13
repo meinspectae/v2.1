@@ -1,0 +1,14 @@
+{
+  "label": "reference-empty",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261113-main/reference",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59be41cac76b84b-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:58:58.797199+00:00",
+  "response": {
+    "error": "Reference PDF not found"
+  }
+}

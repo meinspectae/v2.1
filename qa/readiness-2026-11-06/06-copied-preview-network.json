@@ -1,0 +1,77 @@
+{
+  "scope": "sanitized copied Android web bundle in preview, not native execution",
+  "requests": [
+    {
+      "requestId": "2DE5F3C916143BDEA020D59AF2451609",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/login",
+      "status": 200
+    },
+    {
+      "requestId": "875.128",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/index-0gMX4Dbx.js",
+      "status": 200
+    },
+    {
+      "requestId": "875.129",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/vendor-react-BokEbl_k.js",
+      "status": 200
+    },
+    {
+      "requestId": "875.130",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/vendor-ui-C_2w5Jdg.js",
+      "status": 200
+    },
+    {
+      "requestId": "875.131",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/vendor-pdf-jspdf-8BsbPPvU.js",
+      "status": 200
+    },
+    {
+      "requestId": "875.132",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/vendor-zustand-CKdMj3gx.js",
+      "status": 200
+    },
+    {
+      "requestId": "875.133",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/index-Cczr5PZ0.css",
+      "status": 200
+    },
+    {
+      "requestId": "875.141",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/manifest.json",
+      "status": 200
+    },
+    {
+      "requestId": "875.197",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/assets/LoginPage-BjkyOpcN.js",
+      "status": 200
+    },
+    {
+      "requestId": "875.199",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/meinspect-logo.png?v=3",
+      "status": 200
+    },
+    {
+      "requestId": "875.200",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/meinspect-logo.png?v=3",
+      "status": 200
+    },
+    {
+      "requestId": "875.202",
+      "method": "GET",
+      "url": "http://127.0.0.1:4174/meinspect-logo.png",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "label": "route-25",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/download/photos",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd93dbecfcb73-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.427741+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

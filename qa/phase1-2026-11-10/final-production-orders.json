@@ -1,0 +1,384 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:35:00.945549+00:00",
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/orders",
+  "cfRay": "a58308e1b9c53e6d-PDX",
+  "requestId": null,
+  "body": {
+    "data": [
+      {
+        "id": 12,
+        "inspectionId": "mr3kz8pvyrde5c6p",
+        "amount": 500,
+        "status": "paid",
+        "provider": "dummy"
+      },
+      {
+        "id": 14,
+        "inspectionId": "mr7i8ns08yl6gzg7",
+        "amount": 500,
+        "status": "paid",
+        "provider": "dummy"
+      },
+      {
+        "id": 16,
+        "inspectionId": "mrdlbo0jrsd58tf6",
+        "amount": 500,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 17,
+        "inspectionId": "mrdlbo0jrsd58tf6",
+        "amount": 500,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 19,
+        "inspectionId": "mrdni6k1i2hy0fqg",
+        "amount": 500,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 20,
+        "inspectionId": "mrdo3bn719m071zl",
+        "amount": 500,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 21,
+        "inspectionId": "mrdo3bn719m071zl",
+        "amount": 500,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 22,
+        "inspectionId": "mrdo3bn719m071zl",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 23,
+        "inspectionId": "mrdo3bn719m071zl",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 24,
+        "inspectionId": "mrvput5prbf1sdjo",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 25,
+        "inspectionId": "mrvput5prbf1sdjo",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 26,
+        "inspectionId": "ms1hlymow2hyrnag",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 27,
+        "inspectionId": "ms1iw7axp2snplxa",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 28,
+        "inspectionId": "msbh8qr3lqinirn5",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 29,
+        "inspectionId": "ms5rdkbl627f28k6",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 30,
+        "inspectionId": "ms5rdkbl627f28k6",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 31,
+        "inspectionId": "ms5rdkbl627f28k6",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 32,
+        "inspectionId": "ms5rdkbl627f28k6",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 33,
+        "inspectionId": "msrvc4ke75wve5w2",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 34,
+        "inspectionId": "msx0bouttoo795qn",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 35,
+        "inspectionId": "msykxyfmzsd9pheh",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 36,
+        "inspectionId": "munub90h2bzq6x79",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 37,
+        "inspectionId": "munub90h2bzq6x79",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 38,
+        "inspectionId": "munub90h2bzq6x79",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 39,
+        "inspectionId": "munvkf0k2zabiqcz",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 40,
+        "inspectionId": "mt6rvmpzyql11opw",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 41,
+        "inspectionId": "mt6rvmpzyql11opw",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 42,
+        "inspectionId": "munvkf0k2zabiqcz",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 43,
+        "inspectionId": "mupjufh1uyeey9gk",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 48,
+        "inspectionId": "mvqb1jpfcaqv7g7x",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 49,
+        "inspectionId": "mvqb1jpfcaqv7g7x",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 55,
+        "inspectionId": "mvqcsdp150ycv97e",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 56,
+        "inspectionId": "promo1029e2e001",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 61,
+        "inspectionId": "mvuk8fm2yqiwzd8l",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 62,
+        "inspectionId": "mvuxjr15sp5jlpzt",
+        "amount": 199,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 64,
+        "inspectionId": "qa-a-stripe-20261104-0520",
+        "amount": 199,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 65,
+        "inspectionId": "qa-disc-welcome20-20261104",
+        "amount": 159,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 66,
+        "inspectionId": "qa-disc-launch50-20261104",
+        "amount": 149,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 67,
+        "inspectionId": "qa-disc-meinspect10-20261104",
+        "amount": 179,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 68,
+        "inspectionId": "qa-disc-inspector-20261104",
+        "amount": 99,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 69,
+        "inspectionId": "qa-disc-free-report-20261104",
+        "amount": 0,
+        "status": "paid",
+        "provider": "discount"
+      },
+      {
+        "id": 70,
+        "inspectionId": "qa-disc-invalid-qa-20261104",
+        "amount": 199,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 71,
+        "inspectionId": "qa-credit-1-20261104",
+        "amount": 199,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 72,
+        "inspectionId": "qa-credit-2-20261104",
+        "amount": 199,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 73,
+        "inspectionId": "qa-credit-3-20261104",
+        "amount": 199,
+        "status": "pending",
+        "provider": "stripe"
+      },
+      {
+        "id": 74,
+        "inspectionId": "qa-credit-1-20261104",
+        "amount": 0,
+        "status": "paid",
+        "provider": "admin_credit"
+      },
+      {
+        "id": 75,
+        "inspectionId": "qa-credit-2-20261104",
+        "amount": 0,
+        "status": "paid",
+        "provider": "admin_credit"
+      },
+      {
+        "id": 76,
+        "inspectionId": "qa-credit-3-20261104",
+        "amount": 0,
+        "status": "paid",
+        "provider": "admin_credit"
+      },
+      {
+        "id": 77,
+        "inspectionId": "qa-1793778867-credit",
+        "amount": 0,
+        "status": "paid",
+        "provider": "admin_credit"
+      },
+      {
+        "id": 79,
+        "inspectionId": "qa-phase1-email-20261109",
+        "amount": 0,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 80,
+        "inspectionId": "qa-phase1-paid-prod-20261109",
+        "amount": 0,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 81,
+        "inspectionId": "qa-20261110-production-paid",
+        "amount": 0,
+        "status": "paid",
+        "provider": "tester"
+      },
+      {
+        "id": 82,
+        "inspectionId": "qa-20261110-staging-paid",
+        "amount": 0,
+        "status": "paid",
+        "provider": "tester"
+      }
+    ]
+  }
+}

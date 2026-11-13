@@ -1,0 +1,25 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:53:54.079353+00:00",
+  "date": "Wed, 04 Nov 2026 07:53:54 GMT",
+  "cfRay": "a5520c2c0a184518-PDX",
+  "requestId": null,
+  "body": {
+    "redirect": false,
+    "user": {
+      "name": "Hs Sh",
+      "email": "aalekh.dxb@gmail.com",
+      "emailVerified": true,
+      "image": null,
+      "createdAt": "2026-06-28T18:39:15.487Z",
+      "updatedAt": "2026-11-04T07:52:49.978Z",
+      "role": "esu",
+      "banned": false,
+      "banReason": null,
+      "banExpires": null,
+      "lastLoginAt": "2026-11-04T07:52:49.978Z",
+      "isAnonymous": false,
+      "id": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "route-33",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/webhooks/stripe",
+  "status": 500,
+  "requestId": null,
+  "cfRay": "a59bd93f79f18e12-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.726209+00:00",
+  "response": {
+    "error": "Webhook not configured"
+  }
+}

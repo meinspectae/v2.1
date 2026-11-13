@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.meinspect.app",
+      "sha256_cert_fingerprints": [
+        "2F:73:A7:C1:78:E1:D4:B2:2A:58:F5:0B:86:37:F5:AB:4A:DD:52:BE:CC:5E:C9:2E:46:6E:7A:35:67:6F:B0:B1"
+      ]
+    }
+  }
+]

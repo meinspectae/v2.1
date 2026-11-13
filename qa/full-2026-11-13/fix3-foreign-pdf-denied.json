@@ -1,0 +1,14 @@
+{
+  "label": "fix3-foreign-pdf-denied",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/download/pdf/qa-20261113-pdf-access-probe",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bd880d87a4b48-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:03.802546+00:00",
+  "response": {
+    "error": "Access denied"
+  }
+}

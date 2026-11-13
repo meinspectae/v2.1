@@ -1,0 +1,12 @@
+{
+  "status": 404,
+  "time": "2026-11-10T06:35:32.228310+00:00",
+  "environment": "staging",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261110-final-draft",
+  "cfRay": "a58309a5a8038e12-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Not found"
+  }
+}

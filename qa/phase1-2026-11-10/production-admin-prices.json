@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:19:53.274468+00:00",
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/admin/prices",
+  "cfRay": "a582f2b8f908d82e-PDX",
+  "requestId": null,
+  "body": {
+    "data": []
+  }
+}

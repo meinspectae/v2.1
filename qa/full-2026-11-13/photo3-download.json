@@ -1,0 +1,15 @@
+{
+  "label": "photo3-download",
+  "actor": "N",
+  "method": "GET",
+  "path": "[signed storage URL]",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf9b8d28a11a-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:03.615600+00:00",
+  "response": {
+    "nonJson": true,
+    "bytes": 74
+  }
+}

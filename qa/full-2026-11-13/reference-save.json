@@ -1,0 +1,14 @@
+{
+  "label": "reference-save",
+  "actor": "N",
+  "method": "PUT",
+  "path": "/api/inspections/qa-20261113-main",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be42259c9b7b9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:58:59.875135+00:00",
+  "response": {
+    "success": true
+  }
+}

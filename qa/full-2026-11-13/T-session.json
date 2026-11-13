@@ -1,0 +1,39 @@
+{
+  "label": "T-session",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/_es/auth/get-session",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf438c259b30-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:49.475889+00:00",
+  "response": {
+    "session": {
+      "expiresAt": "2026-11-20T06:31:11.201Z",
+      "token": "[REDACTED]",
+      "createdAt": "2026-11-13T06:31:11.201Z",
+      "updatedAt": "2026-11-13T06:31:11.201Z",
+      "ipAddress": "",
+      "userAgent": "curl/7.88.1",
+      "userId": "ngpPitm0v8x6HZJEtcCNiCz9BqBD7ZcS",
+      "impersonatedBy": null,
+      "id": "NKrtA36hJ6nPs5GVYkReis0HTcYGFO1r"
+    },
+    "user": {
+      "name": "QA Test",
+      "email": "temp@0uob3vijlfvajrckfx3y3h8bvgmxstaz.com",
+      "emailVerified": false,
+      "image": null,
+      "createdAt": "2026-11-13T06:31:11.067Z",
+      "updatedAt": "2026-11-13T06:31:11.724Z",
+      "role": "esu",
+      "banned": false,
+      "banReason": null,
+      "banExpires": null,
+      "lastLoginAt": "2026-11-13T06:31:11.368Z",
+      "isAnonymous": true,
+      "id": "ngpPitm0v8x6HZJEtcCNiCz9BqBD7ZcS"
+    }
+  }
+}

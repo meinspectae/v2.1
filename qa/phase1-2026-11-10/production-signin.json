@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:19:52.977053+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-in/email",
+  "cfRay": "a582f2b358cdc654-PDX",
+  "requestId": null,
+  "body": {
+    "redirect": false,
+    "user": {
+      "id": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "email": "aalekh.dxb@gmail.com",
+      "name": "Hs Sh"
+    }
+  }
+}

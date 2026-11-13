@@ -1,0 +1,21 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:53:15.821683+00:00",
+  "date": "Wed, 04 Nov 2026 07:53:15 GMT",
+  "cfRay": "a5520b408ac47b78-PDX",
+  "requestId": null,
+  "body": {
+    "data": {
+      "id": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "email": "aalekh.dxb@gmail.com",
+      "name": "Aalekh Agarwal",
+      "phone": "0521253379",
+      "location": "",
+      "createdAt": "sql`(datetime('now'))`",
+      "updatedAt": "2026-10-29 08:10:26",
+      "passwordHash": "",
+      "isTester": 0,
+      "freeInspections": 21
+    }
+  }
+}

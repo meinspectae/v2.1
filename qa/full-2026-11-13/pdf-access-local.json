@@ -1,0 +1,47 @@
+{
+  "scope": "actual handlers isolated SQLite; mock signing",
+  "results": [
+    {
+      "id": "foreign",
+      "status": 403,
+      "expected": 403,
+      "signed": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "valid",
+      "status": 200,
+      "expected": 200,
+      "signed": 1,
+      "result": "PASS"
+    },
+    {
+      "id": "nested",
+      "status": 200,
+      "expected": 200,
+      "signed": 1,
+      "result": "PASS"
+    },
+    {
+      "id": "traversal",
+      "status": 403,
+      "expected": 403,
+      "signed": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "encoded",
+      "status": 403,
+      "expected": 403,
+      "signed": 0,
+      "result": "PASS"
+    },
+    {
+      "id": "url",
+      "status": 403,
+      "expected": 403,
+      "signed": 0,
+      "result": "PASS"
+    }
+  ]
+}

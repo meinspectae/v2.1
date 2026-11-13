@@ -1,0 +1,14 @@
+{
+  "label": "route-27",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/checkout/qa-20261113-missing/expire",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd93e6faa9873-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.541708+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

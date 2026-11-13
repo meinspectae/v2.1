@@ -1,0 +1,12 @@
+{
+  "status": 500,
+  "time": "2026-11-10T06:36:34.869911+00:00",
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/webhooks/stripe",
+  "cfRay": "a5830b2d5e6e6192-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Webhook not configured"
+  }
+}

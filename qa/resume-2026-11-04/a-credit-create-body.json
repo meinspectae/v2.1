@@ -1,0 +1,27 @@
+{
+  "data": {
+    "id": "qa-1793778867-credit",
+    "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+    "propertyType": "apartment",
+    "status": "draft",
+    "generalNotes": "QA single credit and paid deletion guard",
+    "propertyData": "{}",
+    "tenantData": "{}",
+    "landlordData": "{}",
+    "agentData": "{}",
+    "tenancyData": "{}",
+    "roomsData": "[]",
+    "propertyItems": "[]",
+    "signatures": "[]",
+    "overallPhotos": "[]",
+    "paymentData": "{\"paid\":false}",
+    "reportGenerated": 0,
+    "createdAt": "2026-11-04T07:55:05.530Z",
+    "updatedAt": "2026-11-04T07:55:05.530Z",
+    "completedAt": null,
+    "pdfUrl": "",
+    "extraData": "{}",
+    "shareToken": null,
+    "shareRevokedAt": null
+  }
+}

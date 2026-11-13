@@ -1,0 +1,202 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/public/mobile-auth/google"
+  },
+  {
+    "method": "POST",
+    "path": "/api/public/mobile-auth/secure-state"
+  },
+  {
+    "method": "GET",
+    "path": "/api/public/mobile-auth/callback"
+  },
+  {
+    "method": "POST",
+    "path": "/api/user/profile"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/user/account"
+  },
+  {
+    "method": "GET",
+    "path": "/api/user/profile"
+  },
+  {
+    "method": "GET",
+    "path": "/api/inspections"
+  },
+  {
+    "method": "GET",
+    "path": "/api/inspections/:id"
+  },
+  {
+    "method": "POST",
+    "path": "/api/inspections"
+  },
+  {
+    "method": "PUT",
+    "path": "/api/inspections/:id"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/inspections/:id"
+  },
+  {
+    "method": "POST",
+    "path": "/api/send-email"
+  },
+  {
+    "method": "GET",
+    "path": "/api/sync/inspections"
+  },
+  {
+    "method": "POST",
+    "path": "/api/sync/push"
+  },
+  {
+    "method": "POST",
+    "path": "/api/public/verify/:id"
+  },
+  {
+    "method": "POST",
+    "path": "/api/inspections/:id/reference/upload"
+  },
+  {
+    "method": "GET",
+    "path": "/api/inspections/:id/reference"
+  },
+  {
+    "method": "POST",
+    "path": "/api/inspections/:id/finalise"
+  },
+  {
+    "method": "POST",
+    "path": "/api/upload/pdf"
+  },
+  {
+    "method": "GET",
+    "path": "/api/download/pdf/:inspectionId"
+  },
+  {
+    "method": "POST",
+    "path": "/api/upload/photo"
+  },
+  {
+    "method": "POST",
+    "path": "/api/inspections/:id/photos/:photoId/confirm"
+  },
+  {
+    "method": "GET",
+    "path": "/api/inspections/:id/photos"
+  },
+  {
+    "method": "GET",
+    "path": "/api/download/photo"
+  },
+  {
+    "method": "POST",
+    "path": "/api/download/photos"
+  },
+  {
+    "method": "POST",
+    "path": "/api/checkout"
+  },
+  {
+    "method": "POST",
+    "path": "/api/checkout/:sessionId/expire"
+  },
+  {
+    "method": "GET",
+    "path": "/api/checkout/:sessionId"
+  },
+  {
+    "method": "POST",
+    "path": "/api/inspections/:id/reconcile-payment"
+  },
+  {
+    "method": "POST",
+    "path": "/api/public/payments/confirm"
+  },
+  {
+    "method": "POST",
+    "path": "/api/public/payments/client-error"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/audit-stripe-unlocks"
+  },
+  {
+    "method": "POST",
+    "path": "/api/webhooks/stripe"
+  },
+  {
+    "method": "POST",
+    "path": "/api/webhooks/revenuecat"
+  },
+  {
+    "method": "POST",
+    "path": "/api/inspections/:id/reconcile-purchase"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders"
+  },
+  {
+    "method": "GET",
+    "path": "/api/orders/:id/invoice"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/access"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/prices"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/prices"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/set-tester"
+  },
+  {
+    "method": "GET",
+    "path": "/api/admin/users"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/grant-credits"
+  },
+  {
+    "method": "POST",
+    "path": "/api/admin/revoke-credits"
+  },
+  {
+    "method": "POST",
+    "path": "/api/public/notifications/welcome"
+  },
+  {
+    "method": "POST",
+    "path": "/api/public/notifications/password-changed"
+  },
+  {
+    "method": "POST",
+    "path": "/api/notifications/welcome"
+  },
+  {
+    "method": "POST",
+    "path": "/api/notifications/report-complete"
+  },
+  {
+    "method": "POST",
+    "path": "/api/notifications/payment-success"
+  },
+  {
+    "method": "POST",
+    "path": "/api/notifications/password-changed"
+  }
+]

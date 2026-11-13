@@ -1,0 +1,176 @@
+export type PropertyType = 'apartment' | 'townhouse' | 'villa' | 'office';
+
+export type ConditionRating = 'very_good' | 'good' | 'fair' | 'poor';
+
+export type InspectionStatus = 'draft' | 'in_progress' | 'completed' | 'archived';
+
+export type InspectionType = 'move_in' | 'move_out' | 'routine' | 'mid_lease';
+
+export interface Photo {
+  id: string;
+  url: string; // In-memory display only; photo bytes are never persisted locally
+  backupStatus?: 'pending' | 'uploading' | 'backed_up' | 'error';
+  backupError?: string;
+  cloudPath?: string; // Cloud storage path for persistence
+  includeInReport?: boolean; // false only after an explicit continue-without decision
+  caption?: string;
+  timestamp: string;
+  gpsLat?: number;
+  gpsLng?: number;
+}
+
+export interface InspectionItem {
+  id: string;
+  name: string;
+  category: string;
+  condition: ConditionRating | null;
+  comments: string;
+  photos: Photo[];
+  checked: boolean;
+  ratingHistory?: ConditionRating[];
+  mergedIds?: string[];
+}
+
+export interface PropertyItem {
+  id: string;
+  name: string;
+  value: string;
+  comments: string;
+  photos: Photo[];
+}
+
+export interface Room {
+  id: string;
+  name: string;
+  type: string;
+  icon: string;
+  items: InspectionItem[];
+  overallComments: string;
+  overallCondition: ConditionRating | null;
+}
+
+export interface Signature {
+  dataUrl: string;
+  signedAt: string;
+  role: 'tenant' | 'landlord' | 'inspector';
+  name: string;
+  ipAddress?: string;
+}
+
+export interface PropertyDetails {
+  type: PropertyType;
+  makaniNumber: string;
+  area: string;
+  city: string;
+  buildingName?: string;
+  unitNumber?: string;
+  totalAreaSqft?: number;
+  bedrooms?: number;
+  bathrooms?: number;
+  furnished: boolean;
+  specialFeatures: string[];
+}
+
+export interface PartyDetails {
+  name: string;
+  phone: string;
+  email: string;
+  tradeLicenseNumber?: string;
+  companyName?: string;
+}
+
+export interface TenancyDetails {
+  leaseStartDate: string;
+  leaseEndDate: string;
+  contractNumber: string;
+}
+
+export interface LocationData {
+  latitude: number;
+  longitude: number;
+  address?: string;
+  accuracy?: number;
+}
+
+export interface MetaData {
+  inspectorId: string;
+  inspectorName: string;
+  inspectorEmail?: string;
+  ipAddress?: string;
+  location?: LocationData;
+  deviceInfo: string;
+  appVersion: string;
+}
+
+export interface Inspection {
+  id: string;
+  propertyType: PropertyType;
+  status: InspectionStatus;
+  property: PropertyDetails;
+  tenant: PartyDetails;
+  landlord: PartyDetails;
+  agent?: PartyDetails;
+  tenancy: TenancyDetails;
+  rooms: Room[];
+  propertyItems: PropertyItem[];
+  generalNotes: string;
+  overallPhotos: Photo[];
+  signatures: Signature[];
+  createdAt: string;
+  updatedAt: string;
+  completedAt?: string;
+  meta: MetaData;
+  reportGenerated: boolean;
+  pdfUrl?: string;
+  payment?: PaymentInfo;
+  deletedRoomIds?: string[];
+  deletedItemIds?: string[];
+  position?: { step: number; roomIndex: number };
+  pdfSize?: number;
+  utilityMeters?: Record<string, { reading: string; photo?: Photo }>;
+  moveInReference?: { keys?: string; cards?: string; defects?: string; newDefects?: string; attachment?: { path: string; name: string } };
+}
+
+export interface PaymentInfo {
+  paid: boolean;
+  amount: number;
+  currency: string;
+  method: 'card' | 'apple_pay' | 'google_pay' | 'samsung_pay';
+  paidAt?: string;
+  transactionId?: string;
+  discountCode?: string;
+  discountAmount?: number;
+  sessionId?: string;
+}
+
+export interface PropertyTemplate {
+  type: PropertyType;
+  label: string;
+  description: string;
+  icon: string;
+  defaultRooms: Omit<Room, 'id'>[];
+}
+
+export interface DashboardStats {
+  totalInspections: number;
+  completedInspections: number;
+  draftInspections: number;
+  thisMonthInspections: number;
+}
+
+export interface Order {
+  id: number;
+  environment: string;
+  userId: string;
+  inspectionId: string | null;
+  amount: number;
+  currency: string;
+  status: 'pending' | 'paid' | 'failed' | 'cancelled';
+  type: string;
+  provider: string;
+  providerSessionId: string | null;
+  discountCode: string | null;
+  discountAmount: number;
+  paidAt: number | null;
+  createdAt: number;
+}

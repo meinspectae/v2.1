@@ -1,0 +1,7 @@
+GET /api/inspections status=401 request_id=a5494cc86f452095-PDX
+GET /api/inspections/qa-test-nonexistent status=401 request_id=a5494cc90960e5c0-PDX
+GET /api/download/pdf/qa-test-nonexistent status=401 request_id=a5494cc9ba6e96ba-PDX
+GET /api/download/photo?path=qa-test-nonexistent status=401 request_id=a5494cca5f06962a-PDX
+GET /api/admin/access status=401 request_id=a5494ccaea770d10-PDX
+GET /api/admin/users status=401 request_id=a5494ccb799d5ee0-PDX
+POST /api/send-email status=401 request_id=a5494ccc29b85ef0-PDX

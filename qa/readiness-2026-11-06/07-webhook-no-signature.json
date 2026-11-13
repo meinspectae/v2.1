@@ -1,0 +1,16 @@
+{
+  "label": "07-webhook-no-signature",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/webhooks/stripe",
+  "timeUTC": "2026-11-06T06:41:35.293709+00:00",
+  "status": 400,
+  "headers": {
+    "date": "Fri, 06 Nov 2026 06:41:35 GMT",
+    "content-type": "application/json",
+    "cf-ray": "a5621d030fbaef6f-PDX"
+  },
+  "responseSummary": {
+    "error": "Invalid Stripe signature"
+  }
+}

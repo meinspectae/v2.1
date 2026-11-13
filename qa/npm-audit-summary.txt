@@ -1,0 +1,2 @@
+frontend {"critical": 5, "high": 74, "info": 0, "low": 13, "moderate": 41}
+backend {"critical": 0, "high": 0, "info": 0, "low": 0, "moderate": 1}

@@ -1,0 +1,14 @@
+{
+  "label": "T-admin-get-prices",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/admin/prices",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf691dd1962a-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:55.473878+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

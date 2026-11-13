@@ -1,0 +1,32 @@
+{
+  "label": "checkout-status-welcome20",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/checkout/cs_live_acS2KrmimKp9lNDCaTNj2H5tJZ7hb7hCrbrEcMwuXmvfw8X41J4YhoG8bs",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be4324c9cd0a0-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:02.446395+00:00",
+  "response": {
+    "data": {
+      "id": 84,
+      "environment": "staging",
+      "userId": "DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry",
+      "inspectionId": "qa-20261113-pay-welcome20",
+      "priceId": null,
+      "amount": 159,
+      "currency": "AED",
+      "status": "pending",
+      "type": "one_time",
+      "provider": "stripe",
+      "providerSessionId": "cs_live_acS2KrmimKp9lNDCaTNj2H5tJZ7hb7hCrbrEcMwuXmvfw8X41J4YhoG8bs",
+      "providerPaymentId": null,
+      "discountCode": "WELCOME20",
+      "discountAmount": 40,
+      "metadata": null,
+      "paidAt": null,
+      "createdAt": 1794551630
+    }
+  }
+}

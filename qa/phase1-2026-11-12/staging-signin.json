@@ -1,0 +1,16 @@
+{
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/_es/auth/sign-in/email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a594908b0cb3c146-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:38:36 GMT",
+  "observedAt": "2026-11-12T09:38:36.481463+00:00",
+  "response": {
+    "authenticated": true,
+    "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+    "cookieRetained": true,
+    "error": null
+  }
+}

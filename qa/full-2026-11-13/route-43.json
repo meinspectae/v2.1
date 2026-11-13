@@ -1,0 +1,14 @@
+{
+  "label": "route-43",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/admin/grant-credits",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd941ddff12b1-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:34.089545+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

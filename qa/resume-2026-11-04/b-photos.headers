@@ -1,0 +1,18 @@
+HTTP/2 404 
+date: Wed, 04 Nov 2026 07:54:33 GMT
+content-type: application/json
+content-length: 21
+access-control-allow-origin: https://olkmxpl1sliijytnc48w.youbase.cloud
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+vary: Origin
+access-control-allow-credentials: true
+content-security-policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https://api.stripe.com https://*.youbase.cloud; frame-src https://js.stripe.com https://hooks.stripe.com; upgrade-insecure-requests
+permissions-policy: camera=(self), geolocation=(self), microphone=(), payment=(self)
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+x-frame-options: DENY
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=QVQwrBnL4jIXANMzwV1NJks%2FLUIWVj8vhE9fdfFkYfh%2BsFMZW%2FRNSSnaBBROYs%2BOu72Z%2BroZxhy%2BPFimuAbr7qRaKgeD0H8PAsJJScUJhquRpy9jWfzAB4xJZUIsXbEbS9Xr7zA1DOBx9Ajzeh61034G5jU%3D"}]}
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+server: cloudflare
+cf-ray: a5520d29aeaeff0f-PDX
+

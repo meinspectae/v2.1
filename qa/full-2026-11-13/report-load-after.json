@@ -1,0 +1,7 @@
+{
+  "id": "qa-20261113-final",
+  "loadingStuck": false,
+  "paymentRequested": false,
+  "result": "PASS",
+  "scope": "real staging bridge; previously absent local report now adopted"
+}

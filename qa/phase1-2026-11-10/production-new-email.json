@@ -1,0 +1,12 @@
+{
+  "status": 400,
+  "time": "2026-11-10T06:25:36.029836+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/send-email",
+  "cfRay": "a582fb17ac05f820-PDX",
+  "requestId": null,
+  "body": {
+    "error": "to, subject, and html are required"
+  }
+}

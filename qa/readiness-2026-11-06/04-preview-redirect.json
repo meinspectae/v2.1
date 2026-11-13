@@ -1,0 +1,176 @@
+{
+  "loginFormVisible": true,
+  "origin": "http://127.0.0.1:5173",
+  "passed": 26,
+  "requestIdNote": "Vite does not emit request IDs; browser resource timing entry identifies the real request",
+  "resource": [
+    {
+      "duration": 3.800000011920929,
+      "name": "http://127.0.0.1:5173/src/utils/safeReturnTo.ts",
+      "startTime": 2664.099999964237
+    }
+  ],
+  "results": [
+    {
+      "expected": "/",
+      "input": null,
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/history",
+      "input": "/history",
+      "output": "/history",
+      "pass": true
+    },
+    {
+      "expected": "/report/qa-1793778867-main?payment=success&session_id=qa#details",
+      "input": "/report/qa-1793778867-main?payment=success&session_id=qa#details",
+      "output": "/report/qa-1793778867-main?payment=success&session_id=qa#details",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "//evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "///evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/\\evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "\\evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/report\\evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "https://evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "http://evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "javascript:alert(1)",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "data:text/html,hello",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/https://evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/\tevil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/\nevil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/\revil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/%2fevil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/%5cevil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/%255cevil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/a/..//evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/a/%2e%2e//evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": " /history",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/",
+      "input": "/history?returnTo=https://evil.invalid",
+      "output": "/",
+      "pass": true
+    },
+    {
+      "expected": "/report/qa-test?tab=photos#room",
+      "input": "/report/qa-test?tab=photos#room",
+      "output": "/report/qa-test?tab=photos#room",
+      "pass": true
+    }
+  ],
+  "serverRequestId": null,
+  "status": 200,
+  "test": "Real preview browser executes the exact returnTo module used by LoginPage; no mocked login or QA session",
+  "timeUTC": "2026-11-06T06:39:30.168Z",
+  "total": 26
+}

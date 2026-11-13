@@ -1,0 +1,15 @@
+{
+  "label": "route-01",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/public/mobile-auth/google",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd934ac5e6c17-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.243138+00:00",
+  "response": {
+    "nonJson": true,
+    "bytes": 2454
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "environment": "production",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261112-production-paid",
+  "status": 409,
+  "requestId": null,
+  "cfRay": "a59493fe88ea9b30-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:56 GMT",
+  "observedAt": "2026-11-12T09:40:56.820888+00:00",
+  "response": {
+    "error": "Paid or finalised inspections cannot be deleted. Keep the report for your records."
+  }
+}

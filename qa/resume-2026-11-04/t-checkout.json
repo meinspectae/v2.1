@@ -1,0 +1,14 @@
+{
+  "status": 200,
+  "time": "2026-11-04T07:55:20.012558+00:00",
+  "date": "Wed, 04 Nov 2026 07:55:19 GMT",
+  "cfRay": "a5520e476faec36d-PDX",
+  "requestId": null,
+  "body": {
+    "success": true,
+    "sessionId": "tester_1793778919666_j3zqx18go4",
+    "orderId": 78,
+    "status": "paid",
+    "message": "Tester payment processed successfully (Free)"
+  }
+}

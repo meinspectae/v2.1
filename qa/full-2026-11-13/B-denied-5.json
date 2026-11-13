@@ -1,0 +1,14 @@
+{
+  "label": "B-denied-5",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/upload/pdf",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf75ca0e12b1-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:57.516110+00:00",
+  "response": {
+    "error": "Inspection not found"
+  }
+}

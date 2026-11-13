@@ -1,0 +1,17 @@
+{
+  "label": "pay-normal-expire",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout/cs_live_acsRMaSnvspIPl6YSSlj1H710cLcQqL8CHL1rnk7FSgxlxjlHzdRwVJbgH/expire",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf441b1b1571-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:49.693032+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acsRMaSnvspIPl6YSSlj1H710cLcQqL8CHL1rnk7FSgxlxjlHzdRwVJbgH",
+    "status": "expired",
+    "stripeRequestId": "req_EJkFMEp2j0VwPl"
+  }
+}

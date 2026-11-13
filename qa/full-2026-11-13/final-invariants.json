@@ -1,0 +1,11 @@
+{
+  "protectedFilesUnchanged": true,
+  "protectedCount": 18,
+  "checkoutAndDiscountCodeByteIdentical": true,
+  "webhookSignatureFallbackByteIdentical": true,
+  "deployedBundleMatches": true,
+  "deployedSourceMatches": true,
+  "localProductionAddressCount": 1,
+  "localStagingCount": 0,
+  "cli": "0.0.12"
+}

@@ -1,0 +1,94 @@
+EdgeSpark CLI
+Project: e1e97b93-d0a5-4010-bf48-f906242007ef
+
+✔ Schema up to date (no changes)
+
+Type checking...
+✔ Type check passed
+
+Building project...
+✔ Build completed
+
+Validating bundle...
+✔ Bundle valid (1.20MB)
+
+Analyzing routes...
+✔ Routes valid (50 routes)
+
+Route Summary:
+──────────────────────────────────────────────────
+
+  Protected (login required, auth.user guaranteed):  40 routes
+  Public (login optional, auth.user if logged in):  8 routes
+  Webhooks (no auth check):                         2 routes
+
+  Protected routes (login required, auth.user guaranteed):
+    POST   /api/user/profile
+    DELETE /api/user/account
+    GET    /api/user/profile
+    GET    /api/inspections
+    GET    /api/inspections/:id
+    POST   /api/inspections
+    PUT    /api/inspections/:id
+    DELETE /api/inspections/:id
+    POST   /api/send-email
+    GET    /api/sync/inspections
+    POST   /api/sync/push
+    POST   /api/inspections/:id/reference/upload
+    GET    /api/inspections/:id/reference
+    POST   /api/inspections/:id/finalise
+    POST   /api/upload/pdf
+    GET    /api/download/pdf/:inspectionId
+    POST   /api/upload/photo
+    POST   /api/inspections/:id/photos/:photoId/confirm
+    GET    /api/inspections/:id/photos
+    GET    /api/download/photo
+    POST   /api/download/photos
+    POST   /api/checkout
+    POST   /api/checkout/:sessionId/expire
+    GET    /api/checkout/:sessionId
+    POST   /api/inspections/:id/reconcile-payment
+    POST   /api/admin/audit-stripe-unlocks
+    POST   /api/inspections/:id/reconcile-purchase
+    GET    /api/orders
+    GET    /api/orders/:id/invoice
+    GET    /api/admin/access
+    POST   /api/admin/prices
+    GET    /api/admin/prices
+    POST   /api/admin/set-tester
+    GET    /api/admin/users
+    POST   /api/admin/grant-credits
+    POST   /api/admin/revoke-credits
+    POST   /api/notifications/welcome
+    POST   /api/notifications/report-complete
+    POST   /api/notifications/payment-success
+    POST   /api/notifications/password-changed
+
+  Public routes (login optional, auth.user if logged in):
+    GET    /api/public/mobile-auth/google
+    POST   /api/public/mobile-auth/secure-state
+    GET    /api/public/mobile-auth/callback
+    POST   /api/public/verify/:id
+    POST   /api/public/payments/confirm
+    POST   /api/public/payments/client-error
+    POST   /api/public/notifications/welcome
+    POST   /api/public/notifications/password-changed
+
+  Webhook routes (no auth check):
+    POST   /api/webhooks/stripe
+    POST   /api/webhooks/revenuecat
+
+⚠ Verify route prefixes match your auth requirements:
+    /api/*          → login required
+    /api/public/*   → login optional
+    /api/webhooks/* → no auth
+
+✔ Dry run complete
+
+│ Schema pulled and validated
+│ Bundle built and routes analyzed
+│ Project: e1e97b93-d0a5-4010-bf48-f906242007ef
+│ Environment: default
+
+Remove --dry-run to deploy.
+

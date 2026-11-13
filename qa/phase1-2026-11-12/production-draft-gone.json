@@ -1,0 +1,21 @@
+{
+  "environment": "production",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261112-production-draft",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59495876d781509-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:41:59 GMT",
+  "observedAt": "2026-11-12T09:41:59.689865+00:00",
+  "response": {
+    "data": {
+      "id": null,
+      "userId": null,
+      "status": null,
+      "reportGenerated": null,
+      "paymentData": null,
+      "createdAt": null,
+      "error": "Not found"
+    }
+  }
+}

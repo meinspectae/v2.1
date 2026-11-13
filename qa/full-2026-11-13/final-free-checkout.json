@@ -1,0 +1,18 @@
+{
+  "label": "final-free-checkout",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bcc1e2b71efa4-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:42:36.740268+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "free_1794552156081_3ntew7c9t2x",
+    "orderId": 92,
+    "status": "paid",
+    "message": "Free report processed successfully"
+  }
+}

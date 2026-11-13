@@ -1,0 +1,27 @@
+{
+  "label": "C-profile",
+  "actor": "C",
+  "method": "GET",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf4798258969-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:50.118520+00:00",
+  "response": {
+    "data": {
+      "id": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB",
+      "email": "temp@wv3emsf0mw87vfbhf5lkmlgrqsflfvds.com",
+      "name": "QA Test",
+      "phone": "",
+      "location": "",
+      "createdAt": "sql`(datetime('now'))`",
+      "updatedAt": "sql`(datetime('now'))`",
+      "passwordHash": "[REDACTED]",
+      "isTester": 0,
+      "freeInspections": 1,
+      "isAdmin": 0,
+      "deletedAt": null
+    }
+  }
+}

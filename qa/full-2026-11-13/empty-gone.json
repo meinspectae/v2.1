@@ -1,0 +1,14 @@
+{
+  "label": "empty-gone",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/inspections/qa-20261113-empty",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf599efffef6-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:52.998861+00:00",
+  "response": {
+    "error": "Not found"
+  }
+}

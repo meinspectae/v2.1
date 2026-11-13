@@ -1,0 +1,10 @@
+{
+  "status": 409,
+  "time": "2026-11-04T07:56:47.357443+00:00",
+  "date": "Wed, 04 Nov 2026 07:56:47 GMT",
+  "cfRay": "a552106b4c96d106-PDX",
+  "requestId": null,
+  "body": {
+    "error": "Paid or finalised inspections cannot be deleted. Keep the report for your records."
+  }
+}

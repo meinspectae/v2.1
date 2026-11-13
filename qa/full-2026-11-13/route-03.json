@@ -1,0 +1,15 @@
+{
+  "label": "route-03",
+  "actor": "unauth",
+  "method": "GET",
+  "path": "/api/public/mobile-auth/callback",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd934bcb91d57-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:32.239352+00:00",
+  "response": {
+    "nonJson": true,
+    "bytes": 952
+  }
+}

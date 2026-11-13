@@ -1,0 +1,14 @@
+{
+  "label": "pay-launch50-checkout",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bbf523b6c150f-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:51.773860+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

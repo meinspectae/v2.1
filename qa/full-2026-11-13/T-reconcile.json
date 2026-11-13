@@ -1,0 +1,16 @@
+{
+  "label": "T-reconcile",
+  "actor": "T",
+  "method": "POST",
+  "path": "/api/inspections/qa-20261113-tester/reconcile-payment",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be428ff45ff03-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:00.810995+00:00",
+  "response": {
+    "paid": true,
+    "reportId": "qa-20261113-tester",
+    "sessionId": "tester_1794551637256_0sk1sbcxkh3"
+  }
+}

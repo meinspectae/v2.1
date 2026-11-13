@@ -1,0 +1,14 @@
+{
+  "label": "tester-order-invoice",
+  "actor": "T",
+  "method": "GET",
+  "path": "/api/orders/89/invoice",
+  "status": 400,
+  "requestId": null,
+  "cfRay": "a59be42c6869ff1a-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:59:01.348309+00:00",
+  "response": {
+    "error": "Invoice not available for this order"
+  }
+}

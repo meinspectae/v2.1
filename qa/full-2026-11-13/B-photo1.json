@@ -1,0 +1,14 @@
+{
+  "label": "B-photo1",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/download/photo?path=photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo1.png",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf86c943ef38-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:00.196318+00:00",
+  "response": {
+    "error": "Access denied"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "label": "email-new",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/send-email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bca8e5d3c23a3-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:41:32.503001+00:00",
+  "response": {
+    "success": true,
+    "sentCount": 2,
+    "failedCount": 0,
+    "results": [
+      {
+        "email": "delivered@resend.dev",
+        "success": true,
+        "id": "01a1d3a3-d68d-78d3-b68b-b3d82b25e55d"
+      },
+      {
+        "email": "temp@j7ytolfxpi8lduhcpfdw0frjerhfpppo.com",
+        "success": true,
+        "id": "01a1d3a3-d707-71ef-b55c-ee090f2d4aef"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "B-denied-8",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/checkout",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf79ac9623a3-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:58.115274+00:00",
+  "response": {
+    "error": "Report not found"
+  }
+}

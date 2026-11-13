@@ -1,0 +1,39 @@
+{
+  "label": "deleted-account-session",
+  "actor": "C",
+  "method": "GET",
+  "path": "/api/_es/auth/get-session",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bdc482fe29b30-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:53:38.093003+00:00",
+  "response": {
+    "session": {
+      "expiresAt": "2026-11-20T06:31:12.599Z",
+      "token": "[REDACTED]",
+      "createdAt": "2026-11-13T06:31:12.599Z",
+      "updatedAt": "2026-11-13T06:31:12.599Z",
+      "ipAddress": "",
+      "userAgent": "curl/7.88.1",
+      "userId": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB",
+      "impersonatedBy": null,
+      "id": "VtLhjoUsFeheW2Bhu8cXnE9hVjFpCxsF"
+    },
+    "user": {
+      "name": "QA Test",
+      "email": "temp@wv3emsf0mw87vfbhf5lkmlgrqsflfvds.com",
+      "emailVerified": false,
+      "image": null,
+      "createdAt": "2026-11-13T06:31:12.458Z",
+      "updatedAt": "2026-11-13T06:31:13.168Z",
+      "role": "esu",
+      "banned": false,
+      "banReason": null,
+      "banExpires": null,
+      "lastLoginAt": "2026-11-13T06:31:12.770Z",
+      "isAnonymous": true,
+      "id": "auHg2A9v5OQElcJJkvIy6gjLTmlTqiQB"
+    }
+  }
+}

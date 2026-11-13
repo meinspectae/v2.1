@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "time": "2026-11-10T06:31:37.144607+00:00",
+  "environment": "production",
+  "method": "DELETE",
+  "path": "/api/inspections/qa-20261110-production-paid",
+  "cfRay": "a58303e758c2ef6f-PDX",
+  "requestId": null,
+  "body": {
+    "success": true
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "label": "sync-push",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/sync/push",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be4161bef2fbe-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:58:57.912803+00:00",
+  "response": {
+    "success": true,
+    "created": 0,
+    "updated": 1
+  }
+}

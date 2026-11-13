@@ -1,0 +1,15 @@
+{
+  "label": "B-foreign-pdf-bytes",
+  "actor": "B",
+  "method": "GET",
+  "path": "[signed storage URL]",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd5776a73afe8-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:48:58.937754+00:00",
+  "response": {
+    "nonJson": true,
+    "bytes": 1147796
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "B-auth-name",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/_es/auth/update-user",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbb60685aef67-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:31:10.444775+00:00",
+  "response": {
+    "status": true
+  }
+}

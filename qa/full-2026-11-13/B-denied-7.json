@@ -1,0 +1,14 @@
+{
+  "label": "B-denied-7",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/inspections/qa-20261113-main/finalise",
+  "status": 404,
+  "requestId": null,
+  "cfRay": "a59bbf78584c7b78-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:57.924987+00:00",
+  "response": {
+    "error": "Not found"
+  }
+}

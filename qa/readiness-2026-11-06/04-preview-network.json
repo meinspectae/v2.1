@@ -1,0 +1,29 @@
+{
+  "scope": "sanitized real preview requests",
+  "requests": [
+    {
+      "requestId": "C3EC58336AA6162D4C7420850BA5A737",
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/login",
+      "status": 200
+    },
+    {
+      "requestId": "875.95",
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/pages/LoginPage.tsx",
+      "status": 200
+    },
+    {
+      "requestId": "875.100",
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/utils/safeReturnTo.ts",
+      "status": 200
+    },
+    {
+      "requestId": "875.108",
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/utils/safeReturnTo.ts",
+      "status": 200
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "status": 201,
+  "time": "2026-11-10T06:29:53.202531+00:00",
+  "environment": "production",
+  "method": "POST",
+  "path": "/api/inspections",
+  "cfRay": "a583015de94a0384-PDX",
+  "requestId": null,
+  "body": {
+    "data": {
+      "id": "qa-20261110-production-paid",
+      "userId": "8k5LgKUmGw7faQY8hcsk19iMV9lwepcv",
+      "propertyType": "apartment",
+      "status": "draft",
+      "generalNotes": "",
+      "propertyData": "{\"buildingName\":\"QA 10 Nov production paid\"}",
+      "tenantData": "{\"name\":\"QA\",\"email\":\"aalekh.dxb@gmail.com\"}",
+      "landlordData": "{}",
+      "agentData": "{}",
+      "tenancyData": "{}",
+      "roomsData": "[]",
+      "propertyItems": "[]",
+      "signatures": "[]",
+      "overallPhotos": "[]",
+      "paymentData": "{\"paid\":false}",
+      "reportGenerated": 0,
+      "createdAt": "2026-11-10T06:30:00.000Z",
+      "updatedAt": "2026-11-10T06:30:00.000Z",
+      "completedAt": null,
+      "pdfUrl": "",
+      "extraData": "{\"meta\":{\"inspectorName\":\"QA\",\"inspectorEmail\":\"aalekh.dxb@gmail.com\"}}",
+      "shareToken": null,
+      "shareRevokedAt": null
+    }
+  }
+}

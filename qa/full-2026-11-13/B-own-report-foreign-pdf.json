@@ -1,0 +1,15 @@
+{
+  "label": "B-own-report-foreign-pdf",
+  "actor": "B",
+  "method": "GET",
+  "path": "/api/download/pdf/qa-20261113-pdf-access-probe",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bd575fa771561-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:48:58.679980+00:00",
+  "response": {
+    "downloadUrl": "[REDACTED]",
+    "expiresAt": "2026-11-13T07:48:58.642Z"
+  }
+}

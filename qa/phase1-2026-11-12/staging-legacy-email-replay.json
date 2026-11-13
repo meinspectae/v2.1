@@ -1,0 +1,22 @@
+{
+  "environment": "staging",
+  "method": "POST",
+  "path": "/api/send-email",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a594932a8c82c895-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:40:23 GMT",
+  "observedAt": "2026-11-12T09:40:23.545640+00:00",
+  "response": {
+    "success": true,
+    "sentCount": 1,
+    "failedCount": 0,
+    "results": [
+      {
+        "email": "aalekh.dxb@gmail.com",
+        "success": true,
+        "id": "01a1cf21-390e-7ab3-9884-c04749f544aa"
+      }
+    ]
+  }
+}

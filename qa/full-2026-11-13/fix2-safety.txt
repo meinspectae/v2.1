@@ -1,0 +1,144 @@
+PASS local: qa-normal denied /api/admin/access {"status":403}
+PASS local: qa-normal denied /api/admin/prices {"status":403}
+PASS local: qa-normal denied /api/admin/set-tester {"status":403}
+PASS local: qa-normal denied /api/admin/audit-stripe-unlocks {"status":403}
+PASS local: qa-normal denied /api/admin/future-route {"status":403}
+PASS local: qa-tester denied /api/admin/access {"status":403}
+PASS local: qa-tester denied /api/admin/prices {"status":403}
+PASS local: qa-tester denied /api/admin/set-tester {"status":403}
+PASS local: qa-tester denied /api/admin/audit-stripe-unlocks {"status":403}
+PASS local: qa-tester denied /api/admin/future-route {"status":403}
+PASS local: tester cannot create another tester {"targetTesterFlag":0}
+PASS local: qa-flag-admin granted admin {"status":200}
+PASS local: qa-allowlisted granted admin {"status":200}
+[CHECKOUT] Used 1 admin credit for user qa-credit-different-reports. Remaining: 0
+PASS local: parallel credits different-reports {"statuses":[200,409],"balance":0,"paidOrders":1,"unlocks":1}
+[CHECKOUT] Used 1 admin credit for user qa-credit-same-report. Remaining: 0
+PASS local: parallel credits same-report {"statuses":[200,200],"balance":0,"paidOrders":1,"unlocks":1}
+[CHECKOUT] Used 1 admin credit for user qa-credit-same-report-two-credits. Remaining: 1
+PASS local: parallel credits same-report-two-credits {"statuses":[200,200],"balance":1,"paidOrders":1,"unlocks":1}
+[API] error: Error: Injected QA write failure
+    at Statement.execute (file:///workspace/scripts/full-safety-20261113.mjs:28:66)
+    at file:///workspace/scripts/full-safety-20261113.mjs:51:77
+    at Array.map (<anonymous>)
+    at Object.batch (file:///workspace/scripts/full-safety-20261113.mjs:51:33)
+    at SQLiteD1Session.batch (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:76:44)
+    at DrizzleD1Database.batch (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/driver.cjs:34:25)
+    at file:///workspace/backend/dist/bundle.js:29937:52
+    at async dispatch (file:///workspace/backend/dist/bundle.js:10133:15)
+    at async file:///workspace/backend/dist/bundle.js:29269:5
+    at async dispatch (file:///workspace/backend/dist/bundle.js:10133:15)
+PASS local: credit order failure rolls debit back {"status":500,"balance":1,"orders":0}
+[WEBHOOK] signature verification failed and no valid event id was supplied
+PASS local: webhook unsigned {"status":400,"databaseQueries":0}
+(node:1855) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+[WEBHOOK] signature verification failed and no valid event id was supplied
+PASS local: webhook wrong-signature {"status":400,"databaseQueries":0}
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_webhook-paid report=webhook-paid action=unlocked
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_webhook-paid report=webhook-paid action=idempotent
+PASS local: signed paid and duplicate {"statuses":[200,200],"unlockTransitions":1}
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_webhook-no_payment_required report=webhook-no_payment_required action=unlocked
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_webhook-no_payment_required report=webhook-no_payment_required action=idempotent
+PASS local: signed no_payment_required and duplicate {"statuses":[200,200],"unlockTransitions":1}
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_parallel report=webhook-parallel action=unlocked
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_parallel report=webhook-parallel action=idempotent
+PASS local: concurrent duplicate signed event {"statuses":[200,200],"paidOrders":1}
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_missing report=report-no-longer-exists action=missing_report_acknowledged
+PASS local: missing report acknowledged and logged {"status":200,"writeRequired":false}
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook session=cs_delayed report=webhook-delayed action=unlocked
+PASS local: 200 waits for database unlock write {"respondedBeforeWrite":false,"statusAfterWrite":200}
+[WEBHOOK] Received event: checkout.session.completed
+[WEBHOOK] processing error: DrizzleQueryError: Failed query: update "inspections" set "payment_data" = ? where ("inspections"."id" = ? and COALESCE(json_extract("inspections"."payment_data", '$.paid'), 0) != 1) returning "id", "user_id", "property_type", "status", "general_notes", "property_data", "tenant_data", "landlord_data", "agent_data", "tenancy_data", "rooms_data", "property_items", "signatures", "overall_photos", "payment_data", "report_generated", "created_at", "updated_at", "completed_at", "pdf_url", "extra_data", "share_token", "share_revoked_at", "deleted_at"
+params: {"paid":true,"provider":"stripe","sessionId":"cs_failed","paymentIntentId":"pi_dummy","amount":199,"currency":"AED","paidAt":1794552256,"confirmedAt":1794552256,"confirmedBy":"webhook"},webhook-failed
+    at D1PreparedQuery.queryWithCache (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/session.cjs:69:15)
+    at async D1PreparedQuery.values (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:205:12)
+    at async D1PreparedQuery.all (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:157:18)
+    at async confirmStripeCheckout (file:///workspace/backend/dist/bundle.js:29220:34)
+    at async file:///workspace/backend/dist/bundle.js:30269:9
+    at async dispatch (file:///workspace/backend/dist/bundle.js:10133:15)
+    at async file:///workspace/backend/dist/bundle.js:29269:5
+    at async dispatch (file:///workspace/backend/dist/bundle.js:10133:15)
+    at async file:///workspace/backend/dist/bundle.js:10443:25
+    at async file:///workspace/scripts/full-safety-20261113.mjs:180:19 {
+  query: `update "inspections" set "payment_data" = ? where ("inspections"."id" = ? and COALESCE(json_extract("inspections"."payment_data", '$.paid'), 0) != 1) returning "id", "user_id", "property_type", "status", "general_notes", "property_data", "tenant_data", "landlord_data", "agent_data", "tenancy_data", "rooms_data", "property_items", "signatures", "overall_photos", "payment_data", "report_generated", "created_at", "updated_at", "completed_at", "pdf_url", "extra_data", "share_token", "share_revoked_at", "deleted_at"`,
+  params: [
+    '{"paid":true,"provider":"stripe","sessionId":"cs_failed","paymentIntentId":"pi_dummy","amount":199,"currency":"AED","paidAt":1794552256,"confirmedAt":1794552256,"confirmedBy":"webhook"}',
+    'webhook-failed'
+  ],
+  cause: Error: Injected QA write failure
+      at Statement.execute (file:///workspace/scripts/full-safety-20261113.mjs:28:66)
+      at Statement.raw (file:///workspace/scripts/full-safety-20261113.mjs:41:17)
+      at /workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:206:40
+      at D1PreparedQuery.queryWithCache (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/session.cjs:67:22)
+      at D1PreparedQuery.values (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:205:23)
+      at D1PreparedQuery.all (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:157:29)
+      at QueryPromise.all (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/query-builders/update.cjs:184:28)
+      at QueryPromise.execute (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/query-builders/update.cjs:193:41)
+      at QueryPromise.then (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/query-promise.cjs:44:17)
+}
+PASS local: failed database write not acknowledged {"status":500}
+[WEBHOOK] signing secret is not configured
+PASS local: staging webhook never reads live signing secret {"status":500,"SANDBOX_STRIPE_WEBHOOK_SECRET":true,"StripeSigningSecret":false}
+PASS local: harness made no external calls {"networkCalls":0}
+[WEBHOOK] signature verification failed and no valid event id was supplied
+[WEBHOOK] signature verification failed and no valid event id was supplied
+[WEBHOOK] signature verification failed and no valid event id was supplied
+[WEBHOOK] signature verification failed and no valid event id was supplied
+[WEBHOOK] signature verification failed and no valid event id was supplied
+PASS local: fallback rejects malformed event IDs without lookup {"cases":5,"status":400}
+[WEBHOOK_FALLBACK] signature verification failed; retrieving event=evt_claimed from Stripe
+[WEBHOOK_FALLBACK] retrieved event=evt_authoritative type=checkout.session.completed
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook_fallback session=cs_authoritative report=fallback-authoritative action=unlocked
+PASS local: fallback uses only Stripe-returned event and waits for write {"status":200,"respondedBeforeWrite":false,"untrustedReportCreated":false}
+[WEBHOOK_FALLBACK] signature verification failed; retrieving event=evt_claimed from Stripe
+[WEBHOOK_FALLBACK] retrieved event=evt_authoritative type=checkout.session.completed
+[WEBHOOK] Received event: checkout.session.completed
+[PAYMENT_CONFIRM] source=webhook_fallback session=cs_authoritative report=fallback-authoritative action=idempotent
+PASS local: unsigned valid event ID uses retrieval and duplicate is idempotent {"status":200}
+[WEBHOOK_FALLBACK] signature verification failed; retrieving event=evt_claimed from Stripe
+[WEBHOOK_FALLBACK] retrieved event=evt_fallbackfail type=checkout.session.completed
+[WEBHOOK] Received event: checkout.session.completed
+[WEBHOOK] processing error: DrizzleQueryError: Failed query: update "inspections" set "payment_data" = ? where ("inspections"."id" = ? and COALESCE(json_extract("inspections"."payment_data", '$.paid'), 0) != 1) returning "id", "user_id", "property_type", "status", "general_notes", "property_data", "tenant_data", "landlord_data", "agent_data", "tenancy_data", "rooms_data", "property_items", "signatures", "overall_photos", "payment_data", "report_generated", "created_at", "updated_at", "completed_at", "pdf_url", "extra_data", "share_token", "share_revoked_at", "deleted_at"
+params: {"paid":true,"provider":"stripe","sessionId":"cs_fallbackfail","paymentIntentId":"pi_dummy","amount":199,"currency":"AED","paidAt":1794552256,"confirmedAt":1794552256,"confirmedBy":"webhook_fallback"},fallback-write-fail
+    at D1PreparedQuery.queryWithCache (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/session.cjs:69:15)
+    at async D1PreparedQuery.values (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:205:12)
+    at async D1PreparedQuery.all (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:157:18)
+    at async confirmStripeCheckout (file:///workspace/backend/dist/bundle.js:29220:34)
+    at async file:///workspace/backend/dist/bundle.js:30269:9
+    at async dispatch (file:///workspace/backend/dist/bundle.js:10133:15)
+    at async file:///workspace/backend/dist/bundle.js:29269:5
+    at async dispatch (file:///workspace/backend/dist/bundle.js:10133:15)
+    at async file:///workspace/backend/dist/bundle.js:10443:25
+    at async file:///workspace/scripts/full-safety-20261113.mjs:222:27 {
+  query: `update "inspections" set "payment_data" = ? where ("inspections"."id" = ? and COALESCE(json_extract("inspections"."payment_data", '$.paid'), 0) != 1) returning "id", "user_id", "property_type", "status", "general_notes", "property_data", "tenant_data", "landlord_data", "agent_data", "tenancy_data", "rooms_data", "property_items", "signatures", "overall_photos", "payment_data", "report_generated", "created_at", "updated_at", "completed_at", "pdf_url", "extra_data", "share_token", "share_revoked_at", "deleted_at"`,
+  params: [
+    '{"paid":true,"provider":"stripe","sessionId":"cs_fallbackfail","paymentIntentId":"pi_dummy","amount":199,"currency":"AED","paidAt":1794552256,"confirmedAt":1794552256,"confirmedBy":"webhook_fallback"}',
+    'fallback-write-fail'
+  ],
+  cause: Error: Injected QA write failure
+      at Statement.execute (file:///workspace/scripts/full-safety-20261113.mjs:28:66)
+      at Statement.raw (file:///workspace/scripts/full-safety-20261113.mjs:41:17)
+      at /workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:206:40
+      at D1PreparedQuery.queryWithCache (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/session.cjs:67:22)
+      at D1PreparedQuery.values (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:205:23)
+      at D1PreparedQuery.all (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/d1/session.cjs:157:29)
+      at QueryPromise.all (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/query-builders/update.cjs:184:28)
+      at QueryPromise.execute (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/sqlite-core/query-builders/update.cjs:193:41)
+      at QueryPromise.then (/workspace/backend/node_modules/.pnpm/drizzle-orm@0.45.4_gel@2.2.0/node_modules/drizzle-orm/query-promise.cjs:44:17)
+}
+PASS local: fallback write failure is not acknowledged {"status":500}
+[WEBHOOK_FALLBACK] signature verification failed; retrieving event=evt_claimed from Stripe
+[WEBHOOK_FALLBACK] Stripe retrieval failed event=evt_claimed requestId=req_local_mock
+PASS local: fallback Stripe retrieval rejection {"status":400}
+PASS local: every fallback lookup is logged {"mockRetrievals":4,"attemptLogs":4,"realExternalCalls":0}
+{"result":"PASS","assertions":33,"scope":"actual bundled handlers, real SQLite via D1 adapter, dummy signing secret; NOT live staging acceptance"}

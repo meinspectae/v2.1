@@ -1,0 +1,10 @@
+{
+  "status": 400,
+  "time": "2026-11-04T07:53:16.254981+00:00",
+  "date": "Wed, 04 Nov 2026 07:53:16 GMT",
+  "cfRay": "a5520b442e76ccd1-PDX",
+  "requestId": null,
+  "body": {
+    "error": "to, subject, and html are required"
+  }
+}

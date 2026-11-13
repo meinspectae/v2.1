@@ -1,0 +1,17 @@
+{
+  "label": "pay-welcome20-expire",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/checkout/cs_live_acS2KrmimKp9lNDCaTNj2H5tJZ7hb7hCrbrEcMwuXmvfw8X41J4YhoG8bs/expire",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf4d1cd1b7b9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:51.132514+00:00",
+  "response": {
+    "success": true,
+    "sessionId": "cs_live_acS2KrmimKp9lNDCaTNj2H5tJZ7hb7hCrbrEcMwuXmvfw8X41J4YhoG8bs",
+    "status": "expired",
+    "stripeRequestId": "req_NFDqdVoMGzmAex"
+  }
+}

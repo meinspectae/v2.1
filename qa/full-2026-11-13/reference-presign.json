@@ -1,0 +1,16 @@
+{
+  "label": "reference-presign",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/inspections/qa-20261113-main/reference/upload",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be41e1bcf3d49-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:58:59.034929+00:00",
+  "response": {
+    "uploadUrl": "[REDACTED]",
+    "path": "references/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/ee32be7c-df6c-4110-acbc-26fed80c1e73.pdf",
+    "expiresAt": "2026-11-13T07:58:58.993Z"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "route-30",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/public/payments/confirm",
+  "status": 400,
+  "requestId": null,
+  "cfRay": "a59bd93ebf4c69d5-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:33.604047+00:00",
+  "response": {
+    "error": "sessionId and reportId are required"
+  }
+}

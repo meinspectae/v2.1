@@ -1,0 +1,14 @@
+{
+  "label": "route-44",
+  "actor": "unauth",
+  "method": "POST",
+  "path": "/api/admin/revoke-credits",
+  "status": 401,
+  "requestId": null,
+  "cfRay": "a59bd941ea79fdb1-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:51:34.101671+00:00",
+  "response": {
+    "error": "UNAUTHENTICATED"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "C-final-profile",
+  "actor": "C",
+  "method": "GET",
+  "path": "/api/user/profile",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be68b49ac5d68-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T07:00:38.441002+00:00",
+  "response": {
+    "data": null
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "label": "N-admin-post-audit-stripe-unlocks",
+  "actor": "N",
+  "method": "POST",
+  "path": "/api/admin/audit-stripe-unlocks",
+  "status": 403,
+  "requestId": null,
+  "cfRay": "a59bbf5aef93ef10-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:33:53.233239+00:00",
+  "response": {
+    "error": "Admin access required"
+  }
+}

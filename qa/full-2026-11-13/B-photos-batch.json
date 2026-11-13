@@ -1,0 +1,30 @@
+{
+  "label": "B-photos-batch",
+  "actor": "B",
+  "method": "POST",
+  "path": "/api/download/photos",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59be41b5d8ae8e9-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:58:58.564400+00:00",
+  "response": {
+    "urls": [
+      {
+        "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo1.png",
+        "ok": false,
+        "error": "Access denied"
+      },
+      {
+        "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo2.png",
+        "ok": false,
+        "error": "Access denied"
+      },
+      {
+        "path": "photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo3.png",
+        "ok": false,
+        "error": "Access denied"
+      }
+    ]
+  }
+}

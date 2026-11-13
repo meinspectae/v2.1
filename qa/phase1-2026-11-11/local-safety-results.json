@@ -1,0 +1,360 @@
+{
+  "evidence": [
+    {
+      "item": "qa-normal denied /api/admin/access",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-normal denied /api/admin/prices",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-normal denied /api/admin/set-tester",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-normal denied /api/admin/audit-stripe-unlocks",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-normal denied /api/admin/future-route",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-tester denied /api/admin/access",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-tester denied /api/admin/prices",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-tester denied /api/admin/set-tester",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-tester denied /api/admin/audit-stripe-unlocks",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "qa-tester denied /api/admin/future-route",
+      "result": "PASS",
+      "evidence": {
+        "status": 403
+      }
+    },
+    {
+      "item": "tester cannot create another tester",
+      "result": "PASS",
+      "evidence": {
+        "targetTesterFlag": 0
+      }
+    },
+    {
+      "item": "qa-flag-admin granted admin",
+      "result": "PASS",
+      "evidence": {
+        "status": 200
+      }
+    },
+    {
+      "item": "qa-allowlisted granted admin",
+      "result": "PASS",
+      "evidence": {
+        "status": 200
+      }
+    },
+    {
+      "item": "parallel credits different-reports",
+      "result": "PASS",
+      "evidence": {
+        "statuses": [
+          200,
+          409
+        ],
+        "balance": 0,
+        "paidOrders": 1,
+        "unlocks": 1
+      }
+    },
+    {
+      "item": "parallel credits same-report",
+      "result": "PASS",
+      "evidence": {
+        "statuses": [
+          200,
+          200
+        ],
+        "balance": 0,
+        "paidOrders": 1,
+        "unlocks": 1
+      }
+    },
+    {
+      "item": "parallel credits same-report-two-credits",
+      "result": "PASS",
+      "evidence": {
+        "statuses": [
+          200,
+          200
+        ],
+        "balance": 1,
+        "paidOrders": 1,
+        "unlocks": 1
+      }
+    },
+    {
+      "item": "credit order failure rolls debit back",
+      "result": "PASS",
+      "evidence": {
+        "status": 500,
+        "balance": 1,
+        "orders": 0
+      }
+    },
+    {
+      "item": "webhook unsigned",
+      "result": "PASS",
+      "evidence": {
+        "status": 400,
+        "databaseQueries": 0
+      }
+    },
+    {
+      "item": "webhook wrong-signature",
+      "result": "PASS",
+      "evidence": {
+        "status": 400,
+        "databaseQueries": 0
+      }
+    },
+    {
+      "item": "signed paid and duplicate",
+      "result": "PASS",
+      "evidence": {
+        "statuses": [
+          200,
+          200
+        ],
+        "unlockTransitions": 1
+      }
+    },
+    {
+      "item": "signed no_payment_required and duplicate",
+      "result": "PASS",
+      "evidence": {
+        "statuses": [
+          200,
+          200
+        ],
+        "unlockTransitions": 1
+      }
+    },
+    {
+      "item": "concurrent duplicate signed event",
+      "result": "PASS",
+      "evidence": {
+        "statuses": [
+          200,
+          200
+        ],
+        "paidOrders": 1
+      }
+    },
+    {
+      "item": "missing report acknowledged and logged",
+      "result": "PASS",
+      "evidence": {
+        "status": 200,
+        "writeRequired": false
+      }
+    },
+    {
+      "item": "200 waits for database unlock write",
+      "result": "PASS",
+      "evidence": {
+        "respondedBeforeWrite": false,
+        "statusAfterWrite": 200
+      }
+    },
+    {
+      "item": "failed database write not acknowledged",
+      "result": "PASS",
+      "evidence": {
+        "status": 500
+      }
+    },
+    {
+      "item": "staging webhook never reads live signing secret",
+      "result": "PASS",
+      "evidence": {
+        "status": 500,
+        "SANDBOX_STRIPE_WEBHOOK_SECRET": true,
+        "StripeSigningSecret": false
+      }
+    },
+    {
+      "item": "harness made no external calls",
+      "result": "PASS",
+      "evidence": {
+        "networkCalls": 0
+      }
+    }
+  ],
+  "created": [
+    {
+      "table": "users",
+      "id": "qa-normal"
+    },
+    {
+      "table": "users",
+      "id": "qa-tester"
+    },
+    {
+      "table": "users",
+      "id": "qa-flag-admin"
+    },
+    {
+      "table": "users",
+      "id": "qa-allowlisted"
+    },
+    {
+      "table": "users",
+      "id": "qa-credit-different-reports"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-different-reports-a"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-different-reports-b"
+    },
+    {
+      "table": "orders",
+      "id": 1
+    },
+    {
+      "table": "users",
+      "id": "qa-credit-same-report"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-same-report-a"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-same-report-b"
+    },
+    {
+      "table": "orders",
+      "id": 2
+    },
+    {
+      "table": "users",
+      "id": "qa-credit-same-report-two-credits"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-same-report-two-credits-a"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-same-report-two-credits-b"
+    },
+    {
+      "table": "orders",
+      "id": 3
+    },
+    {
+      "table": "users",
+      "id": "qa-credit-rollback"
+    },
+    {
+      "table": "inspections",
+      "id": "qa-credit-rollback-report"
+    },
+    {
+      "table": "inspections",
+      "id": "webhook-paid"
+    },
+    {
+      "table": "orders",
+      "id": 4
+    },
+    {
+      "table": "inspections",
+      "id": "webhook-no_payment_required"
+    },
+    {
+      "table": "orders",
+      "id": 5
+    },
+    {
+      "table": "inspections",
+      "id": "webhook-parallel"
+    },
+    {
+      "table": "orders",
+      "id": 6
+    },
+    {
+      "table": "inspections",
+      "id": "webhook-delayed"
+    },
+    {
+      "table": "orders",
+      "id": 7
+    },
+    {
+      "table": "inspections",
+      "id": "webhook-failed"
+    },
+    {
+      "table": "orders",
+      "id": 8
+    }
+  ],
+  "deleted": [
+    {
+      "table": "users",
+      "id": "qa-credit-different-reports"
+    },
+    {
+      "table": "users",
+      "id": "qa-credit-same-report"
+    },
+    {
+      "table": "users",
+      "id": "qa-credit-same-report-two-credits"
+    }
+  ],
+  "scope": "isolated in-memory SQLite; no shared QA records created or changed; orders/payments never deleted"
+}

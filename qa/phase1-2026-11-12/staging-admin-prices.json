@@ -1,0 +1,17 @@
+{
+  "environment": "staging",
+  "method": "GET",
+  "path": "/api/admin/prices",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59490b8ba4612b1-PDX",
+  "serverDate": "Thu, 12 Nov 2026 09:38:42 GMT",
+  "observedAt": "2026-11-12T09:38:42.850278+00:00",
+  "response": {
+    "responseKeys": [
+      "data"
+    ],
+    "rowCount": 0,
+    "error": null
+  }
+}

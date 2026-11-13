@@ -1,0 +1,15 @@
+{
+  "label": "photo2-get-url",
+  "actor": "N",
+  "method": "GET",
+  "path": "/api/download/photo?path=photos/DHlXy1QGQ9N4bNUz84yyUNRWbKCetxry/qa-20261113-main/room1/item1/qa-20261113-photo2.png",
+  "status": 200,
+  "requestId": null,
+  "cfRay": "a59bbf8f3b274598-PDX",
+  "storageRequestId": null,
+  "observedAt": "2026-11-13T06:34:01.543052+00:00",
+  "response": {
+    "downloadUrl": "[REDACTED]",
+    "expiresAt": "2026-11-13T07:34:01.481Z"
+  }
+}
